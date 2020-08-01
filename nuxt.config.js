@@ -67,9 +67,9 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
-    publicPath: 'https://draichi.github.io/draichiboard/'
   },
   generate: {
+    publicPath: 'https://draichi.github.io/draichiboard/',
     dir: 'docs'
   }
 }
