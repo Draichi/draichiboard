@@ -1,27 +1,18 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        draichiboard-v4
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+  <div class="w-screen h-screen bg-blue-600">
+    <div class="grid grid-cols-5 gap-4 p-4 h-full">
+      <div class="bg-white"></div>
+      <div class="col-span-4">
+        <div class="grid grid-rows-3 grid-flow-col gap-4 h-full">
+          <div class="row-span-2 bg-white"></div>
+          <div>
+            <div class="grid grid-cols-3 gap-4 h-full">
+              <div class="bg-white"></div>
+              <div class="bg-white"></div>
+              <div class="bg-white"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -31,11 +22,10 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  async created() {
-    
-    const res = await this.$axios.$get('https://api.github.com/repos/Draichi/T-1000/issues')
-    console.info(res)
-  }
+  // async created() {
+  //   const res = await this.$axios.$get('https://api.github.com/repos/Draichi/T-1000/issues')
+  //   console.info(res)
+  // }
 })
 </script>
 
@@ -55,16 +45,8 @@ export default Vue.extend({
 }
 
 .title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;
