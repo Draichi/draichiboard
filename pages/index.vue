@@ -4,7 +4,11 @@
       <div class="bg-white"></div>
       <div class="col-span-4">
         <div class="grid grid-rows-3 grid-flow-col gap-4 h-full">
-          <div class="row-span-2 bg-white"></div>
+          <div class="row-span-2 bg-white">
+            <div id="chart-wrapper" class="h-full relative">
+              <LineChart/>
+            </div>
+          </div>
           <div>
             <div class="grid grid-cols-3 gap-4 h-full">
               <div class="bg-white"></div>
@@ -19,17 +23,28 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { Component, Vue } from 'vue-property-decorator'
 
-export default Vue.extend({
+@Component({
+  components: {
+    LineChart: () => import('@/components/Charts/Line.js'),
+  },
+})
+export default class IndexPage extends Vue {
   // async created() {
   //   const res = await this.$axios.$get('https://api.github.com/repos/Draichi/T-1000/issues')
   //   console.info(res)
   // }
-})
+}
 </script>
 
 <style>
+#chart-wrapper > div{
+  height: 100% !important;
+}
+#bar-chart {
+  height: 100% !important;
+}
 /* Sample `apply` at-rules with Tailwind CSS
 .container {
 @apply min-h-screen flex justify-center items-center text-center mx-auto;
