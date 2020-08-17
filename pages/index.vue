@@ -1,19 +1,20 @@
 <template>
-  <div class="w-screen h-screen bg-blue-600">
-    <div class="grid grid-cols-5 gap-4 p-4 h-full">
-      <div class="bg-white"></div>
+  <div class="background">
+    <div class="grid grid-cols-5 gap-6 p-6 h-full">
+      <div class="card"></div>
       <div class="col-span-4">
-        <div class="grid grid-rows-3 grid-flow-col gap-4 h-full">
-          <div class="row-span-2 bg-white">
-            <div id="chart-wrapper" class="h-full relative">
-              <LineChart/>
+        <div class="grid grid-rows-3 grid-flow-col gap-6 h-full">
+          <div class="row-span-2 card">
+            <div style="height: 10%;">
+              <h2 class="font-xl text-white p-4">Commits</h2>
             </div>
+            <LineChart class="h-auto" style="height: 90%;"/>
           </div>
           <div>
-            <div class="grid grid-cols-3 gap-4 h-full">
-              <div class="bg-white"></div>
-              <div class="bg-white"></div>
-              <div class="bg-white"></div>
+            <div class="grid grid-cols-3 gap-6 h-full">
+              <div class="card"></div>
+              <div class="card"></div>
+              <div class="card"></div>
             </div>
           </div>
         </div>
@@ -39,6 +40,15 @@ export default class IndexPage extends Vue {
 </script>
 
 <style>
+.background {
+  @apply w-screen h-screen;
+  background-image: linear-gradient(rgb(24, 24, 38), rgb(25, 27, 28));
+}
+.card {
+  @apply shadow-md rounded-md;
+  background: rgb(31, 33, 49);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px 0px;
+}
 #chart-wrapper > div{
   height: 100% !important;
 }

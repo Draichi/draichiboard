@@ -16,6 +16,7 @@ export default {
     }, {
       responsive: true,
       maintainAspectRatio: false,
+      legend: false,
     })
   }
 }
