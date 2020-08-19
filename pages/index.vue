@@ -1,10 +1,18 @@
 <template>
   <div class="background">
     <div class="grid grid-cols-5 gap-6 p-6 h-full">
-      <div class="card"></div>
+      <div class="card">
+        <div class="grid grid-rows-2 h-full">
+          <div class="px-10 flex flex-col justify-evenly">
+            <h3 class="text-white">Contributions distribution</h3>
+            <DoughnutChart></DoughnutChart>
+          </div>
+          <div>2</div>
+        </div>
+      </div>
       <div class="col-span-4">
         <div class="grid grid-rows-3 grid-flow-col gap-6 h-full">
-          <CommitsChart></CommitsChart>
+          <Commits></Commits>
           <div>
             <div class="grid grid-cols-3 gap-6 h-full">
               <div class="card"></div>
@@ -23,7 +31,8 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
   components: {
-    CommitsChart: () => import('@/components/UI/CommitsChart.vue'),
+    Commits: () => import('@/components/UI/Commits.vue'),
+    DoughnutChart: () => import('@/components/Charts/Doughnut.js'),
   },
 })
 export default class IndexPage extends Vue {
@@ -47,8 +56,11 @@ export default class IndexPage extends Vue {
 #chart-wrapper > div{
   height: 100% !important;
 }
-#bar-chart {
+/* #bar-chart {
   height: 100% !important;
+} */
+#doughnut-chart {
+  width: 100% !important;
 }
 /* Sample `apply` at-rules with Tailwind CSS
 .container {
