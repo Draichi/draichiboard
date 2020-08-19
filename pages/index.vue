@@ -4,12 +4,7 @@
       <div class="card"></div>
       <div class="col-span-4">
         <div class="grid grid-rows-3 grid-flow-col gap-6 h-full">
-          <div class="row-span-2 card">
-            <div style="height: 10%;">
-              <h2 class="font-xl text-white p-4">Commits</h2>
-            </div>
-            <LineChart class="h-auto" style="height: 90%;"/>
-          </div>
+          <CommitsChart></CommitsChart>
           <div>
             <div class="grid grid-cols-3 gap-6 h-full">
               <div class="card"></div>
@@ -28,7 +23,7 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
   components: {
-    LineChart: () => import('@/components/Charts/Line.js'),
+    CommitsChart: () => import('@/components/UI/CommitsChart.vue'),
   },
 })
 export default class IndexPage extends Vue {
