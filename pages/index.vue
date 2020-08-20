@@ -9,20 +9,23 @@
           </div>
           <div class="px-10 flex flex-col justify-evenly">
             <h3 class="text-white">Contributions evolution</h3>
-            <BarChart></BarChart>
+            <BarChart id="contributions-evolution"></BarChart>
           </div>
         </div>
       </div>
       <div class="col-span-4">
-        <div class="grid grid-rows-3 grid-flow-col gap-6 h-full">
+        <div class="grid grid-rows-3 grid-flow-col gap-6 h-full max-h-full">
           <Commits></Commits>
           <div>
             <div class="grid grid-cols-3 gap-6 h-full">
-              <div class="card flex flex-col justify-center items-center max-w-full max-h-full">
+              <div class="card flex flex-col justify-evenly items-center max-w-full max-h-full">
                 <h3 class="text-white">Contributions evolution</h3>
                   <DoughnutChart id="all-contributions-distribution"></DoughnutChart>
               </div>
-              <div class="card"></div>
+              <div class="card flex flex-col justify-evenly items-center max-w-full max-h-full">
+                <h3 class="text-white">Contributions evolution</h3>
+                  <HorizontalBarChart id="repositories-created"></HorizontalBarChart>
+              </div>
               <div class="card"></div>
             </div>
           </div>
@@ -40,6 +43,7 @@ import { Component, Vue } from 'vue-property-decorator'
     Commits: () => import('@/components/UI/Commits.vue'),
     DoughnutChart: () => import('@/components/Charts/Doughnut.js'),
     BarChart: () => import('@/components/Charts/Bar.js'),
+    HorizontalBarChart: () => import('@/components/Charts/HorizontalBar.js'),
   },
 })
 export default class IndexPage extends Vue {
@@ -60,10 +64,7 @@ export default class IndexPage extends Vue {
   background: rgb(31, 33, 49);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px 0px;
 }
-/* #chart-wrapper > div {
-  height: 100% !important;
-} */
-#bar-chart {
+#contributions-evolution > #bar-chart {
   width: 100% !important;
 }
 #contributions-distribution > #doughnut-chart {
@@ -72,8 +73,12 @@ export default class IndexPage extends Vue {
 #all-contributions-distribution > #doughnut-chart {
   width: 50% !important;
   margin: auto;
-  /* height: 100% !important; */
-  /* margin: 50px; */
+}
+#repositories-created > #horizontalbar-chart {
+  width: auto !important;
+  max-height: 65% !important;
+  height: auto !important;
+  margin: auto;
 }
 /* Sample `apply` at-rules with Tailwind CSS
 .container {
