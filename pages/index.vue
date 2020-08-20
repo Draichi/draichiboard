@@ -9,7 +9,7 @@
           </div>
           <div class="px-10 flex flex-col justify-evenly">
             <h3 class="text-gray-500 text-center">Contributions evolution</h3>
-            <BarChart id="contributions-evolution"></BarChart>
+            <BarChart :data="contributionsEvolution" id="contributions-evolution"></BarChart>
           </div>
         </div>
       </div>
@@ -20,17 +20,22 @@
             <div class="grid grid-cols-3 gap-6 h-full">
               <div class="card flex flex-col justify-evenly items-center max-w-full max-h-full">
                 <h3 class="text-gray-500">Contributions evolution</h3>
-                  <DoughnutChart id="all-contributions-distribution"></DoughnutChart>
+                <DoughnutChart id="all-contributions-distribution"></DoughnutChart>
               </div>
               <div class="card flex flex-col justify-evenly items-center max-w-full max-h-full">
                 <h3 class="text-gray-500">Contributions evolution</h3>
                 <!-- // ! broken when go back -->
-                  <HorizontalBarChart id="repositories-created" :height="200"></HorizontalBarChart>
+                <HorizontalBarChart id="repositories-created" :height="200"></HorizontalBarChart>
               </div>
               <div class="card flex items-center justify-center flex-col">
-                <h3 class="text-gray-500 text-center tracking-wide text-lg">All time commits: <span class="text-white font-bold">2275</span></h3>
+                <h3 class="text-gray-500 text-center tracking-wide text-lg">
+                  All time commits:
+                  <span class="text-white font-bold">2275</span>
+                </h3>
                 <nuxt-link to="/portfolio">
-                  <button class="border-2 rounded-lg py-2 px-4 mt-10 text-gray-500 border-gray-500">Portfolio</button>
+                  <button
+                    class="border-2 rounded-lg py-2 px-4 mt-10 text-gray-500 border-gray-500"
+                  >Portfolio</button>
                 </nuxt-link>
               </div>
             </div>
@@ -53,6 +58,17 @@ import { Component, Vue } from 'vue-property-decorator'
   },
 })
 export default class IndexPage extends Vue {
+  contributionsEvolution = {
+    labels: ['January', 'February', 'March', 'April'],
+    datasets: [
+      {
+        borderColor: '#1d8cf8', // #fd5d93 pink option
+        borderWidth: 2,
+        label: 'GitHub Commits',
+        data: [40, 20, 12, 39],
+      },
+    ],
+  }
   // async created() {
   //   const res = await this.$axios.$get('https://api.github.com/repos/Draichi/T-1000/issues')
   //   console.info(res)
