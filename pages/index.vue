@@ -1,13 +1,16 @@
 <template>
-  <div class="background">
+  <div class="background max-h-screen">
     <div class="grid grid-cols-5 gap-6 p-6 h-full">
       <div class="card">
         <div class="grid grid-rows-2 h-full">
           <div class="px-10 flex flex-col justify-evenly">
             <h3 class="text-white">Contributions distribution</h3>
-            <DoughnutChart></DoughnutChart>
+            <DoughnutChart id="contributions-distribution"></DoughnutChart>
           </div>
-          <div>2</div>
+          <div class="px-10 flex flex-col justify-evenly">
+            <h3 class="text-white">Contributions evolution</h3>
+            <BarChart></BarChart>
+          </div>
         </div>
       </div>
       <div class="col-span-4">
@@ -15,7 +18,10 @@
           <Commits></Commits>
           <div>
             <div class="grid grid-cols-3 gap-6 h-full">
-              <div class="card"></div>
+              <div class="card flex flex-col justify-center items-center max-w-full max-h-full">
+                <h3 class="text-white">Contributions evolution</h3>
+                  <DoughnutChart id="all-contributions-distribution"></DoughnutChart>
+              </div>
               <div class="card"></div>
               <div class="card"></div>
             </div>
@@ -33,6 +39,7 @@ import { Component, Vue } from 'vue-property-decorator'
   components: {
     Commits: () => import('@/components/UI/Commits.vue'),
     DoughnutChart: () => import('@/components/Charts/Doughnut.js'),
+    BarChart: () => import('@/components/Charts/Bar.js'),
   },
 })
 export default class IndexPage extends Vue {
@@ -53,14 +60,20 @@ export default class IndexPage extends Vue {
   background: rgb(31, 33, 49);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px 0px;
 }
-#chart-wrapper > div{
-  height: 100% !important;
-}
-/* #bar-chart {
+/* #chart-wrapper > div {
   height: 100% !important;
 } */
-#doughnut-chart {
+#bar-chart {
   width: 100% !important;
+}
+#contributions-distribution > #doughnut-chart {
+  width: 100% !important;
+}
+#all-contributions-distribution > #doughnut-chart {
+  width: 50% !important;
+  margin: auto;
+  /* height: 100% !important; */
+  /* margin: 50px; */
 }
 /* Sample `apply` at-rules with Tailwind CSS
 .container {

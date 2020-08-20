@@ -1,7 +1,7 @@
-import { Doughnut } from 'vue-chartjs'
+import { Bar } from 'vue-chartjs'
  
 export default {
-  extends: Doughnut,
+  extends: Bar,
   mounted () {
     // Overwriting base render method with actual data.
     this.renderChart({
@@ -16,7 +16,7 @@ export default {
       ]
     }, {
       responsive: true,
-      // maintainAspectRatio: false,
+      maintainAspectRatio: false,
       legend: false,
     })
   }
