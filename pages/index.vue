@@ -19,13 +19,13 @@
           <div>
             <div class="grid grid-cols-3 gap-6 h-full">
               <div class="card flex flex-col justify-evenly items-center max-w-full max-h-full">
-                <h3 class="text-gray-500">Contributions evolution</h3>
+                <h3 class="text-gray-500">Total repositories with contributions</h3>
                 <DoughnutChart id="all-contributions-distribution"></DoughnutChart>
               </div>
               <div class="card flex flex-col justify-evenly items-center max-w-full max-h-full">
-                <h3 class="text-gray-500">Contributions evolution</h3>
+                <h3 class="text-gray-500">Created repositories</h3>
                 <!-- // ! broken when go back -->
-                <HorizontalBarChart id="repositories-created" :height="200"></HorizontalBarChart>
+                <HorizontalBarChart id="repositories-created" :height="200" :data="repositoriesCreated"></HorizontalBarChart>
               </div>
               <div class="card flex items-center justify-center flex-col">
                 <h3 class="text-gray-500 text-center tracking-wide text-lg">
@@ -66,6 +66,19 @@ export default class IndexPage extends Vue {
         borderWidth: 2,
         label: 'GitHub Commits',
         data: [40, 20, 12, 39],
+      },
+    ],
+  }
+
+  repositoriesCreated = {
+    labels: ['January', 'February', 'March', 'April'],
+    datasets: [
+      {
+        borderColor: '#fd5d93',
+        label: 'GitHub Commits',
+        borderWidth: 2,
+        data: [40, 20, 12, 39],
+        // backgroundColor: ['#e357cd', '#fd5d93', '#cc65fe', '#ffce56'],
       },
     ],
   }
