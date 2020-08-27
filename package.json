@@ -8,7 +8,8 @@
     "start": "nuxt-ts start",
     "export": "nuxt-ts export",
     "serve": "nuxt-ts serve",
-    "test": "jest"
+    "test": "jest",
+    "deploy": "nuxt-ts build && nuxt-ts export && npx push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^0.4.10",
