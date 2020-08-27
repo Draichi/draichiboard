@@ -1,4 +1,6 @@
-# draichiboard-v4
+# Draichiboard
+
+![screenshot](./static/draichi.github.io_draichiboard_(fullhd).png)
 
 ## Build Setup
 
@@ -15,6 +17,7 @@ $ yarn start
 
 # generate static project
 $ yarn generate
-```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+# serve on gh-pages
+$ yarn deploy
+```
