@@ -46,11 +46,11 @@ export default {
           gridLines: {
             drawBorder: false,
             color: 'rgba(0,0,0,0.0)',
-            zeroLineColor: 'transparent',
+            zeroLineColor: 'rgba(225,78,202,0.1)',
           },
           ticks: {
-            suggestedMin: 60,
-            suggestedMax: 125,
+            suggestedMin: 0,
+            // suggestedMax: 125,
             padding: 20,
             fontColor: '#9a9a9a',
           },

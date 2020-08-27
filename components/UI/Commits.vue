@@ -1,5 +1,5 @@
 <template>
-  <div class="row-span-2 card">
+  <div class="row-span-2 card mb-5 md:mb-0">
     <div style="height: 10%;">
       <h2 class="font-xl text-white p-4">Commits</h2>
     </div>

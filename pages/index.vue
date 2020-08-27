@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen w-screen">
-    <div class="grid grid-cols-5 gap-6 p-6 h-full">
-      <div class="card">
+    <div class="md:grid grid-cols-5 gap-6 p-6 h-full">
+      <div class="card mb-5 md:mb-0">
         <div class="grid grid-rows-2 h-full">
           <div class="px-10 flex flex-col justify-evenly">
             <h3 class="text-gray-500 text-center">Contributions distribution</h3>
@@ -13,21 +13,29 @@
           </div>
         </div>
       </div>
-      <div class="col-span-4">
-        <div class="grid grid-rows-3 grid-flow-col gap-6 h-full max-h-full">
+      <div class="md:col-span-4">
+        <div class="md:grid grid-rows-3 grid-flow-col gap-6 h-full max-h-full">
           <Commits></Commits>
           <div>
-            <div class="grid grid-cols-3 gap-6 h-full">
-              <div class="card flex flex-col justify-evenly items-center max-w-full max-h-full">
+            <div class="md:grid grid-cols-3 gap-6 h-full">
+              <div
+                class="card flex flex-col justify-evenly items-center max-w-full max-h-full mb-5 md:mb-0 py-4 md:py-4"
+              >
                 <h3 class="text-gray-500">Total repositories with contributions</h3>
                 <DoughnutChart id="all-contributions-distribution"></DoughnutChart>
               </div>
-              <div class="card flex flex-col justify-evenly items-center max-w-full max-h-full">
+              <div
+                class="card flex flex-col justify-evenly items-center max-w-full max-h-full mb-5 md:mb-0 py-4 md:py-4"
+              >
                 <h3 class="text-gray-500">Created repositories</h3>
                 <!-- // ! broken when go back -->
-                <HorizontalBarChart id="repositories-created" :height="200" :data="repositoriesCreated"></HorizontalBarChart>
+                <HorizontalBarChart
+                  id="repositories-created"
+                  :height="200"
+                  :data="repositoriesCreated"
+                ></HorizontalBarChart>
               </div>
-              <div class="card flex items-center justify-center flex-col">
+              <div class="card flex items-center justify-center flex-col mb-5 md:mb-0 py-4 md:py-4">
                 <h3 class="text-gray-500 text-center tracking-wide text-lg">
                   All time commits:
                   <span class="text-white font-bold">2275</span>
@@ -91,7 +99,10 @@ export default class IndexPage extends Vue {
 
 <style>
 html {
-  @apply background;
+  background: rgb(24, 24, 38);
+  @screen md {
+    @apply background;
+  }
 }
 
 .background {
