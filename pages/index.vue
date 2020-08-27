@@ -1,55 +1,41 @@
 <template>
   <div class="h-screen w-screen">
     <div class="md:grid grid-cols-5 gap-6 p-6 h-full">
-      <div class="card mb-5 md:mb-0">
-        <div class="grid grid-rows-2 h-full">
-          <div class="px-10 flex flex-col justify-evenly">
-            <h3 class="text-gray-500 text-center">Contributions distribution</h3>
-            <DoughnutChart id="contributions-distribution"></DoughnutChart>
-          </div>
-          <div class="px-10 flex flex-col justify-evenly">
-            <h3 class="text-gray-500 text-center">Contributions evolution</h3>
-            <BarChart :data="contributionsEvolution" id="contributions-evolution"></BarChart>
-          </div>
-        </div>
-      </div>
-      <div class="md:col-span-4">
-        <div class="md:grid grid-rows-3 grid-flow-col gap-6 h-full max-h-full">
-          <Commits></Commits>
-          <div>
-            <div class="md:grid grid-cols-3 gap-6 h-full">
-              <div
-                class="card flex flex-col justify-evenly items-center max-w-full max-h-full mb-5 md:mb-0 py-4 md:py-4"
-              >
-                <h3 class="text-gray-500">Total repositories with contributions</h3>
-                <DoughnutChart id="all-contributions-distribution"></DoughnutChart>
-              </div>
-              <div
-                class="card flex flex-col justify-evenly items-center max-w-full max-h-full mb-5 md:mb-0 py-4 md:py-4"
-              >
-                <h3 class="text-gray-500">Created repositories</h3>
-                <!-- // ! broken when go back -->
-                <HorizontalBarChart
-                  id="repositories-created"
-                  :height="200"
-                  :data="repositoriesCreated"
-                ></HorizontalBarChart>
-              </div>
-              <div class="card flex items-center justify-center flex-col mb-5 md:mb-0 py-4 md:py-4">
-                <h3 class="text-gray-500 text-center tracking-wide text-lg">
-                  All time commits:
-                  <span class="text-white font-bold">2275</span>
-                </h3>
-                <nuxt-link to="/portfolio">
-                  <button
-                    class="border-2 rounded-lg py-2 px-4 mt-10 text-gray-500 border-gray-500"
-                  >Portfolio</button>
-                </nuxt-link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Sidebar topTitle="Contributions distribution" bottomTitle="Contributions evolution">
+        <template v-slot:top>
+          <DoughnutChart :data="contributionsDistribution" id="contributions-distribution"></DoughnutChart>
+        </template>
+        <template v-slot:bottom>
+          <BarChart :data="contributionsEvolution" id="contributions-evolution"></BarChart>
+        </template>
+      </Sidebar>
+      <MainContent>
+        <template v-slot:top>
+          <Timeserie :data="commitsTimeserie" class="row-span-2 mb-5 md:mb-0"></Timeserie>
+        </template>
+        <template v-slot:bottom:item-1>
+          <BottomAnalysisItemChart title="Total repositories with contributions">
+            <DoughnutChart
+              :data="totalRepositoriesWithContributions"
+              id="all-contributions-distribution"
+            ></DoughnutChart>
+          </BottomAnalysisItemChart>
+        </template>
+        <template v-slot:bottom:item-2>
+          <BottomAnalysisItemChart title="Created repositories">
+            <HorizontalBarChart id="repositories-created" :height="200" :data="repositoriesCreated"></HorizontalBarChart>
+          </BottomAnalysisItemChart>
+        </template>
+        <template v-slot:bottom:item-3>
+          <BottomAnalysisItemText :commits="2275">
+            <nuxt-link to="/portfolio">
+              <button
+                class="border-2 rounded-lg py-2 px-4 mt-10 text-gray-500 border-gray-500"
+              >Portfolio</button>
+            </nuxt-link>
+          </BottomAnalysisItemText>
+        </template>
+      </MainContent>
     </div>
   </div>
 </template>
@@ -59,13 +45,42 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
   components: {
-    Commits: () => import('@/components/UI/Commits.vue'),
+    Timeserie: () => import('@/components/Dashboard/Timeserie.vue'),
+    MainContent: () => import('@/components/Dashboard/MainContent.vue'),
+    BottomAnalysisItemChart: () =>
+      import('@/components/Dashboard/BottomAnalysisItemChart.vue'),
+    BottomAnalysisItemText: () =>
+      import('@/components/Dashboard/BottomAnalysisItemText.vue'),
+    Sidebar: () => import('@/components/Dashboard/Sidebar.vue'),
     DoughnutChart: () => import('@/components/Charts/Doughnut.js'),
     BarChart: () => import('@/components/Charts/Bar.js'),
     HorizontalBarChart: () => import('@/components/Charts/HorizontalBar.js'),
   },
 })
 export default class IndexPage extends Vue {
+  commitsTimeserie = {
+    labels: [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ],
+    datasets: [
+      {
+        label: 'GitHub Commits',
+        backgroundColor: '#f87979',
+        data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11],
+      },
+    ],
+  }
   contributionsEvolution = {
     labels: ['January', 'February', 'March', 'April'],
     datasets: [
@@ -74,6 +89,42 @@ export default class IndexPage extends Vue {
         borderWidth: 2,
         label: 'GitHub Commits',
         data: [40, 20, 12, 39],
+      },
+    ],
+  }
+
+  contributionsDistribution = {
+    labels: ['January', 'February', 'March', 'April'],
+    datasets: [
+      {
+        label: 'GitHub Commits',
+        data: [40, 20, 12, 39],
+        borderColor: ['#fd5d93', '#36a2eb', '#cc65fe', '#ffce56'], // #fd5d93 pink option
+        borderWidth: 2,
+        backgroundColor: [
+          'rgba(253, 93, 147,0.1)',
+          'rgba(54, 162, 235, 0.1)',
+          'rgba(204, 101, 254, 0.1)',
+          'rgba(255, 206, 86, 0.1)',
+        ],
+      },
+    ],
+  }
+
+  totalRepositoriesWithContributions = {
+    labels: ['January', 'February', 'March', 'April'],
+    datasets: [
+      {
+        label: 'GitHub Commits',
+        data: [40, 20, 12, 39],
+        borderColor: ['#fd5d93', '#36a2eb', '#cc65fe', '#ffce56'], // #fd5d93 pink option
+        borderWidth: 2,
+        backgroundColor: [
+          'rgba(253, 93, 147,0.1)',
+          'rgba(54, 162, 235, 0.1)',
+          'rgba(204, 101, 254, 0.1)',
+          'rgba(255, 206, 86, 0.1)',
+        ],
       },
     ],
   }
@@ -109,11 +160,6 @@ html {
   @apply w-screen h-screen;
   background-image: linear-gradient(rgb(24, 24, 38), rgb(25, 27, 28));
 }
-.card {
-  @apply shadow-md rounded-md;
-  background: rgb(31, 33, 49);
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px 0px;
-}
 #contributions-evolution > #bar-chart {
   width: 100% !important;
 }
@@ -128,47 +174,6 @@ html {
 #repositories-created > #horizontalbar-chart {
   max-width: 100% !important;
   max-height: 100% !important;
-  /* max-height: 50%; */
-  /* max-height: 50% !important; */
   margin: auto;
-  /* width: auto !important;
-  max-height: 65% !important;
-  height: 65% !important;
-  margin: auto; */
-}
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
 }
 </style>
