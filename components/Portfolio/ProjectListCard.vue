@@ -1,16 +1,9 @@
 <template>
   <Card class="max-w-sm rounded overflow-hidden shadow-lg m-4">
-    <img
-      class="w-full"
-      :src="coverImg"
-      :alt="project.entity.name"
-      @click="goToDetailsPage"
-    />
+    <img class="w-full" :src="coverImg" :alt="project.entity.name" @click="goToDetailsPage" />
     <div class="px-6 py-4">
       <div class="font-bold text-xl mb-2 text-white">{{ project.entity.name }}</div>
-      <p
-        class="text-gray-600 text-base"
-      >{{ project.entity.description }}</p>
+      <p class="text-gray-600 text-base">{{ project.entity.description }}</p>
     </div>
     <div class="px-6 pt-4 pb-2">
       <span
@@ -24,30 +17,17 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import { ProjectInterface } from '@/types'
 
-interface Project {
-  entity: {
-    name: string
-    description: string
-    technologies: string[]
-    cover: string
-    screenshots: string[]
-  }
-  company: {
-    name: string
-    logo: string
-    site: string
-  }
-}
 
 @Component({
   components: {
     Card: () => import('@/components/UI/Card.vue'),
-  }
+  },
 })
 export default class ProjectListCard extends Vue {
-  @Prop({ default: Object as () => Project })
-  project!: Project
+  @Prop({ default: Object as () => ProjectInterface })
+  project!: ProjectInterface
 
   get technologies(): string[] {
     return this.project.entity.technologies
@@ -58,9 +38,20 @@ export default class ProjectListCard extends Vue {
   get screenshotsString(): string {
     return JSON.stringify(this.project.entity.screenshots)
   }
+  get projectDetails(): string {
+    return JSON.stringify(this.project)
+  }
 
   goToDetailsPage() {
-    this.$router.push({name: 'project-id', params: {id: 'lucas', screenshotsString: this.screenshotsString}})
+    // open slides modal
+    this.$router.push({
+      name: 'project-id',
+      params: {
+        id: 'lucas',
+        screenshotsString: this.screenshotsString,
+        projectDetails: this.projectDetails,
+      },
+    })
   }
 }
 </script>
