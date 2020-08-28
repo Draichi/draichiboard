@@ -52,7 +52,11 @@ export default class PortfolioPage extends Vue {
           name: 'Flux recruitment dashboard web app',
           description: 'Flux its a...',
           technologies: ['Nuxt.js', 'Vue.js'],
-          cover: 'beta.talentify.io_client_v2_organic-marketing(fullhd).png',
+          cover: 'beta.talentify.io_client_v2_dashboard(fullhd).png',
+          screenshots: [
+            'beta.talentify.io_client_v2_dashboard(fullhd).png',
+            'beta.talentify.io_client_v2_organic-marketing(fullhd).png',
+          ],
         },
         company: {
           name: 'Talentify',

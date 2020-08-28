@@ -4,6 +4,7 @@
       class="w-full"
       :src="coverImg"
       :alt="project.entity.name"
+      @click="goToDetailsPage"
     />
     <div class="px-6 py-4">
       <div class="font-bold text-xl mb-2 text-white">{{ project.entity.name }}</div>
@@ -30,6 +31,7 @@ interface Project {
     description: string
     technologies: string[]
     cover: string
+    screenshots: string[]
   }
   company: {
     name: string
@@ -52,6 +54,13 @@ export default class ProjectListCard extends Vue {
   }
   get coverImg() {
     return require(`assets/img/screenshots/${this.project.entity.cover}`)
+  }
+  get screenshotsString(): string {
+    return JSON.stringify(this.project.entity.screenshots)
+  }
+
+  goToDetailsPage() {
+    this.$router.push({name: 'project-id', params: {id: 'lucas', screenshotsString: this.screenshotsString}})
   }
 }
 </script>
