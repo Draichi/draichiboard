@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+    <nav class="flex items-center justify-between flex-wrap p-6">
       <div class="flex items-center flex-shrink-0 text-white mr-6">
         <svg
           class="fill-current h-8 w-8 mr-2"
@@ -27,11 +27,11 @@
       </div>
     </nav>
     <div class="flex flex-wrap">
-      <ProjectListCard></ProjectListCard>
-      <ProjectListCard></ProjectListCard>
-      <ProjectListCard></ProjectListCard>
-      <ProjectListCard></ProjectListCard>
-      <ProjectListCard></ProjectListCard>
+      <ProjectListCard
+        v-for="(project, index) in projects"
+        :key="`project-${index}`"
+        :project="project"
+      ></ProjectListCard>
     </div>
   </div>
 </template>
@@ -44,8 +44,30 @@ import { Vue, Component } from 'vue-property-decorator'
     ProjectListCard: () => import('@/components/Portfolio/ProjectListCard.vue'),
   },
 })
-export default class PortfolioPage extends Vue {}
+export default class PortfolioPage extends Vue {
+  get projects() {
+    return [
+      {
+        entity: {
+          name: 'Flux recruitment dashboard web app',
+          description: 'Flux its a...',
+          technologies: ['Nuxt.js', 'Vue.js'],
+          cover: 'beta.talentify.io_client_v2_organic-marketing(fullhd).png',
+        },
+        company: {
+          name: 'Talentify',
+          logo: '/path',
+          site: 'https://',
+        },
+      },
+    ]
+  }
+}
 </script>
 
 <style lang="scss" scoped>
+nav {
+  background: rgb(31, 33, 49);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px 0px;
+}
 </style>

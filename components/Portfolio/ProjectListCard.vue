@@ -1,35 +1,59 @@
 <template>
-  <div class="max-w-sm rounded overflow-hidden shadow-lg m-4 bg-gray-400">
+  <Card class="max-w-sm rounded overflow-hidden shadow-lg m-4">
     <img
       class="w-full"
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT9BNOsdUwviKyK2X_UVV4-nU3pmPyuWSvuJA&usqp=CAU"
-      alt="Sunset in the mountains"
+      :src="coverImg"
+      :alt="project.entity.name"
     />
     <div class="px-6 py-4">
-      <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+      <div class="font-bold text-xl mb-2 text-white">{{ project.entity.name }}</div>
       <p
-        class="text-gray-700 text-base"
-      >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
+        class="text-gray-600 text-base"
+      >{{ project.entity.description }}</p>
     </div>
     <div class="px-6 pt-4 pb-2">
       <span
+        v-for="technology in technologies"
+        :key="technology"
         class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-      >#photography</span>
-      <span
-        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-      >#travel</span>
-      <span
-        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-      >#winter</span>
+      >#{{ technology }}</span>
     </div>
-  </div>
+  </Card>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 
-@Component
-export default class ProjectListCard extends Vue {}
+interface Project {
+  entity: {
+    name: string
+    description: string
+    technologies: string[]
+    cover: string
+  }
+  company: {
+    name: string
+    logo: string
+    site: string
+  }
+}
+
+@Component({
+  components: {
+    Card: () => import('@/components/UI/Card.vue'),
+  }
+})
+export default class ProjectListCard extends Vue {
+  @Prop({ default: Object as () => Project })
+  project!: Project
+
+  get technologies(): string[] {
+    return this.project.entity.technologies
+  }
+  get coverImg() {
+    return require(`assets/img/screenshots/${this.project.entity.cover}`)
+  }
+}
 </script>
 
 <style lang="scss" scoped>
