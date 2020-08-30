@@ -5,7 +5,13 @@
 ** Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
 */
 module.exports = {
-  theme: {},
+  theme: {
+    extend: {
+      spacing: {
+        '78': '24rem'
+      }
+    }
+  },
   variants: {},
   plugins: [],
   purge: {

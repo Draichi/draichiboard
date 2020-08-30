@@ -1,9 +1,18 @@
 <template>
-  <Card class="max-w-sm rounded overflow-hidden shadow-lg m-4">
-    <img class="w-full" :src="coverImg" :alt="project.entity.name" @click="forwardClick" />
-    <div class="px-6 py-4">
-      <div class="font-bold text-xl mb-2 text-white">{{ project.entity.name }}</div>
-      <p class="text-gray-600 text-base">{{ project.entity.description }}</p>
+  <Card class="max-w-sm rounded flex flex-col justify-between overflow-hidden shadow-lg m-4">
+    <div>
+      <img
+        class="w-full object-contain h-78 cursor-pointer"
+        :src="coverImg"
+        :alt="project.entity.name"
+        @click="forwardClick"
+      />
+      <div class="px-6 py-4">
+        <div @click="forwardClick" class="cursor-pointer font-bold text-xl mb-2 text-white">
+          <h2>{{ project.entity.name }}</h2>
+        </div>
+        <p class="text-gray-600 text-base">{{ project.entity.description }}</p>
+      </div>
     </div>
     <div class="px-6 pt-4 pb-2">
       <span
@@ -19,7 +28,6 @@
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
 import { ProjectInterface } from '@/types'
 
-
 @Component({
   components: {
     Card: () => import('@/components/UI/Card.vue'),
@@ -34,12 +42,6 @@ export default class ProjectListCard extends Vue {
   }
   get coverImg() {
     return require(`assets/img/screenshots/${this.project.entity.cover}`)
-  }
-  get screenshotsString(): string {
-    return JSON.stringify(this.project.entity.screenshots)
-  }
-  get projectDetails(): string {
-    return JSON.stringify(this.project)
   }
 
   @Emit('click')
