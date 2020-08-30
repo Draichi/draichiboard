@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <SlideShow
+    v-if="showSlideShow"
+    :projectDetails="slideShowDetails"
+    @close-button:click="closeSlideShow"
+  ></SlideShow>
+  <div v-else>
     <nav class="flex items-center justify-between flex-wrap p-6">
       <div class="flex items-center flex-shrink-0 text-white mr-6">
         <svg
@@ -31,6 +36,7 @@
         v-for="(project, index) in projects"
         :key="`project-${index}`"
         :project="project"
+        @click="openSlideShow(project)"
       ></ProjectListCard>
     </div>
   </div>
@@ -38,13 +44,17 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import { ProjectInterface } from '@/types'
 
 @Component({
   components: {
     ProjectListCard: () => import('@/components/Portfolio/ProjectListCard.vue'),
+    SlideShow: () => import('@/components/Portfolio/SlideShow.vue'),
   },
 })
 export default class PortfolioPage extends Vue {
+  showSlideShow = false
+  slideShowDetails: ProjectInterface | null = null
   get projects() {
     return [
       {
@@ -56,6 +66,9 @@ export default class PortfolioPage extends Vue {
           screenshots: [
             'beta.talentify.io_client_v2_dashboard(fullhd).png',
             'beta.talentify.io_client_v2_organic-marketing(fullhd).png',
+            'beta.talentify.io_client_v2_mobile_converter(fullhd).png',
+            'beta.talentify.io_client_v2_ats_job_feed(fullhd).png',
+            'beta.talentify.io_client_v2_ats-connections(fullhd).png',
           ],
         },
         company: {
@@ -65,6 +78,15 @@ export default class PortfolioPage extends Vue {
         },
       },
     ]
+  }
+
+  openSlideShow(project: ProjectInterface) {
+    this.showSlideShow = true
+    this.slideShowDetails = project
+  }
+  closeSlideShow() {
+    this.showSlideShow = false
+    this.slideShowDetails = null
   }
 }
 </script>

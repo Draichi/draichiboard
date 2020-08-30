@@ -1,6 +1,6 @@
 <template>
   <Card class="text-white flex-col flex justify-evenly h-screen w-screen relative">
-    <div class="absolute right-0 top-0 m-20">X</div>
+    <button @click="closeButtonClick" class="absolute right-0 top-0 m-20">X</button>
     <div class="relative">
       <div v-for="(slide, index) in screenshotsFiles" :key="`slide-${index}`" v-show="slideIndex == index + 1" class="fade">
         <img :src="slide" class="m-auto" />
@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
 import { ProjectInterface } from '@/types'
 
 @Component({
@@ -29,9 +29,12 @@ import { ProjectInterface } from '@/types'
   },
 })
 export default class Project extends Vue {
-  slides = ['lucas', 'draichi', 'oooi', 'carlos']
+  @Prop({ default: Object as () => ProjectInterface })
+  projectDetails!: ProjectInterface
+
   slideIndex = 1
   created() {
+    console.log({projectDetails: this.projectDetails})
     this.showSlides(this.slideIndex)
   }
   plusSlides(n: number) {
@@ -48,11 +51,9 @@ export default class Project extends Vue {
       this.slideIndex = this.projectDetails.entity.screenshots.length
     }
   }
-  get id() {
-    return this.$route.params.id
-  }
-  get projectDetails(): ProjectInterface {
-    return JSON.parse(this.$route.params.projectDetails)
+  @Emit('close-button:click')
+  closeButtonClick() {
+    console.log('oioii');
   }
   get screenshotsFiles(): object {
     return this.projectDetails.entity.screenshots.map((i) =>
@@ -63,9 +64,15 @@ export default class Project extends Vue {
 </script>
 
 <style lang="scss" scoped>
+button {
+  z-index: 299;
+}
 img {
-  height: 90vh;
-  max-width: 80%;
+  height: auto;
+  @screen md {
+    height: 90vh;
+    max-width: 80%;
+  }
 }
 .prev,
 .next {
