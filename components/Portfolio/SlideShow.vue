@@ -2,7 +2,12 @@
   <Card class="text-white flex-col flex justify-evenly h-screen w-screen relative">
     <button @click="closeButtonClick" class="absolute right-0 top-0 m-20">X</button>
     <div class="relative">
-      <div v-for="(slide, index) in screenshotsFiles" :key="`slide-${index}`" v-show="slideIndex == index + 1" class="fade">
+      <div
+        v-for="(slide, index) in screenshotsFiles"
+        :key="`slide-${index}`"
+        v-show="slideIndex == index + 1"
+        class="fade"
+      >
         <img :src="slide" class="m-auto" />
       </div>
       <a class="prev" @click="plusSlides(-1)">&#10094;</a>
@@ -34,7 +39,6 @@ export default class Project extends Vue {
 
   slideIndex = 1
   created() {
-    console.log({projectDetails: this.projectDetails})
     this.showSlides(this.slideIndex)
   }
   plusSlides(n: number) {
@@ -52,9 +56,7 @@ export default class Project extends Vue {
     }
   }
   @Emit('close-button:click')
-  closeButtonClick() {
-    console.log('oioii');
-  }
+  closeButtonClick() {}
   get screenshotsFiles(): object {
     return this.projectDetails.entity.screenshots.map((i) =>
       require(`assets/img/screenshots/${i}`)

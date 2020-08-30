@@ -1,4 +1,5 @@
-- [carroussel](https://code.sololearn.com/Wr8nSyZlk7Um/?ref=app#html)
+- [x] [carroussel](https://code.sololearn.com/Wr8nSyZlk7Um/?ref=app#html)
+- lazy load imgs
 
 - [apollo](https://github.com/nuxt-community/apollo-module)
 - [apollo](https://github.com/nuxt/nuxt.js/blob/dev/examples/vue-apollo/nuxt.config.js)
