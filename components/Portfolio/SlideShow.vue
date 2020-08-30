@@ -1,6 +1,6 @@
 <template>
   <Card class="text-white flex-col flex justify-evenly h-screen w-screen relative">
-    <button @click="closeButtonClick" class="absolute right-0 top-0 m-20">X</button>
+    <button @click="closeButtonClick" class="absolute right-0 top-0 md:m-20 m-4">X</button>
     <div class="relative">
       <div
         v-for="(slide, index) in screenshotsFiles"
@@ -18,7 +18,7 @@
         v-for="(slide, index) in screenshotsFiles"
         :key="`dot-${index}`"
         :class="['dot', { 'active': slideIndex == index + 1 }]"
-        @click="currentSlide(index)"
+        @click="currentSlide(index + 1)"
       ></span>
     </div>
   </Card>
@@ -78,34 +78,34 @@ img {
 }
 .prev,
 .next {
+  @apply text-blue-900 bg-white;
   cursor: pointer;
   position: absolute;
   top: 50%;
   width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: green;
+  margin-top: -2em;
+  padding: .5em;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 1em;
   transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
+  border-radius: 0 1em 1em 0;
   user-select: none;
 }
 .next {
   right: 0;
-  border-radius: 3px 0 0 3px;
+  border-radius: 1em 0 0 1em;
 }
 
 .prev:hover,
 .next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  @apply bg-blue-900 text-white;
 }
 
 .dot {
   cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
+  height: .7em;
+  width: .7em;
+  margin: 0 .5em;
   background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
@@ -114,7 +114,7 @@ img {
 
 .active,
 .dot:hover {
-  background-color: green;
+  @apply bg-blue-900;
 }
 
 .fade {
