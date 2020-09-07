@@ -20,7 +20,7 @@
         </div>
       </div>
     </nav>
-    <div class="flex flex-wrap">
+    <div class="flex flex-wrap justify-evenly">
       <ProjectListCard
         v-for="(project, index) in projects"
         :key="`project-${index}`"
@@ -81,6 +81,74 @@ export default class PortfolioPage extends Vue {
             'Jobquiz/jobquiz-4(Pixel 2).png',
             'Jobquiz/jobquiz-5(Pixel 2).png',
             'Jobquiz/jobquiz-6(Pixel 2).png',
+          ],
+        },
+        company: {
+          name: 'Talentify',
+          logo:
+            'https://res-3.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/izo8611kxbziew6eagef',
+          site: 'https://app.talentify.io/jobs',
+        },
+      },
+      {
+        entity: {
+          name: 'IBM',
+          description: 'DSG pages',
+          technologies: ['HTML', 'IBM Bootstrap'],
+          cover: 'IBM/ibm20.png',
+          screenshots: [
+            'IBM/ibm20.png',
+          ],
+        },
+        company: {
+          name: 'Talentify',
+          logo:
+            'https://res-3.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/izo8611kxbziew6eagef',
+          site: 'https://app.talentify.io/jobs',
+        },
+      },
+      {
+        entity: {
+          name: 'Você Azul',
+          description: 'Brazilian Bank program to easily offer credit',
+          technologies: ['Vue'],
+          cover: 'VoceAzul/voceazul_profile.png',
+          screenshots: [
+            'VoceAzul/voceazul_profile.png',
+          ],
+        },
+        company: {
+          name: 'Talentify',
+          logo:
+            'https://res-3.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/izo8611kxbziew6eagef',
+          site: 'https://app.talentify.io/jobs',
+        },
+      },
+      {
+        entity: {
+          name: 'Mudamos Web',
+          description: 'Brazilian Bank program to easily offer credit',
+          technologies: ['React'],
+          cover: 'Mudamos/mudamos-web1.png',
+          screenshots: [
+            'Mudamos/mudamos-web1.png',
+          ],
+        },
+        company: {
+          name: 'Talentify',
+          logo:
+            'https://res-3.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/izo8611kxbziew6eagef',
+          site: 'https://app.talentify.io/jobs',
+        },
+      },
+      {
+        entity: {
+          name: 'Globo',
+          description: 'Brazilian Bank program to easily offer credit',
+          technologies: ['React'],
+          cover: 'Globo/globo1.png',
+          screenshots: [
+            'Globo/globo1.png',
           ],
         },
         company: {
