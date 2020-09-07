@@ -1,5 +1,5 @@
 <template>
-  <Card class="max-w-sm rounded flex flex-col justify-between overflow-hidden shadow-lg m-4">
+  <Card class="max-w-sm rounded flex flex-col justify-between overflow-hidden shadow-lg my-4">
     <div>
       <img
         class="w-full object-contain h-78 cursor-pointer"

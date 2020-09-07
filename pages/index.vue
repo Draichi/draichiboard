@@ -151,15 +151,8 @@ export default class IndexPage extends Vue {
 <style>
 html {
   background: rgb(24, 24, 38);
-  @screen md {
-    @apply w-screen h-screen;
-  }
 }
 
-/* .background {
-  @apply w-screen h-screen;
-  background-image: linear-gradient(rgb(24, 24, 38), rgb(25, 27, 28));
-} */
 #contributions-evolution > #bar-chart {
   width: 100% !important;
 }
