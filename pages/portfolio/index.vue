@@ -9,6 +9,9 @@
       <div class="flex items-center flex-shrink-0 text-white mr-6">
         <h3 class="font-semibold text-xl tracking-tight">Top projects</h3>
       </div>
+      <client-only>
+        <Get></Get>
+      </client-only>
       <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div class="text-sm lg:flex-grow"></div>
         <div>
@@ -39,6 +42,7 @@ import { ProjectInterface } from '@/types'
   components: {
     ProjectListCard: () => import('@/components/Portfolio/ProjectListCard.vue'),
     SlideShow: () => import('@/components/Portfolio/SlideShow.vue'),
+    Get: () => import('@/components/Dashboard/get.vue'),
   },
 })
 export default class PortfolioPage extends Vue {
@@ -96,9 +100,7 @@ export default class PortfolioPage extends Vue {
           description: 'DSG pages',
           technologies: ['HTML', 'IBM Bootstrap'],
           cover: 'IBM/ibm20.png',
-          screenshots: [
-            'IBM/ibm20.png',
-          ],
+          screenshots: ['IBM/ibm20.png'],
         },
         company: {
           name: 'Talentify',
@@ -113,9 +115,7 @@ export default class PortfolioPage extends Vue {
           description: 'Brazilian Bank program to easily offer credit',
           technologies: ['Vue'],
           cover: 'VoceAzul/voceazul_profile.png',
-          screenshots: [
-            'VoceAzul/voceazul_profile.png',
-          ],
+          screenshots: ['VoceAzul/voceazul_profile.png'],
         },
         company: {
           name: 'Talentify',
@@ -130,9 +130,7 @@ export default class PortfolioPage extends Vue {
           description: 'Brazilian Bank program to easily offer credit',
           technologies: ['React'],
           cover: 'Mudamos/mudamos-web1.png',
-          screenshots: [
-            'Mudamos/mudamos-web1.png',
-          ],
+          screenshots: ['Mudamos/mudamos-web1.png'],
         },
         company: {
           name: 'Talentify',
@@ -147,9 +145,7 @@ export default class PortfolioPage extends Vue {
           description: 'Brazilian Bank program to easily offer credit',
           technologies: ['React'],
           cover: 'Globo/globo1.png',
-          screenshots: [
-            'Globo/globo1.png',
-          ],
+          screenshots: ['Globo/globo1.png'],
         },
         company: {
           name: 'Talentify',

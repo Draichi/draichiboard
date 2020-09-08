@@ -35,6 +35,7 @@
     "prettier": "^2.0.5",
     "sass-loader": "^10.0.1",
     "ts-jest": "^26.1.0",
-    "vue-jest": "^3.0.4"
+    "vue-jest": "^3.0.4",
+    "worker-loader": "^3.0.2"
   }
 }

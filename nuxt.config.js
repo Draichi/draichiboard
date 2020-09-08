@@ -36,6 +36,7 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
+    { src: '~/plugins/inject-worker.js', mode: 'client' }
   ],
   /*
   ** Auto import components
@@ -69,6 +70,14 @@ export default {
   */
   build: {
     target: "static",
+    extend(config, { isDev, isClient }) {
+      if(isClient) {
+        config.module.rules.push({
+          test: /\.worker\.js$/,
+          use: { loader: "worker-loader" }
+        });
+      }
+    }
   },
   router: {
     base: "/draichiboard/",
