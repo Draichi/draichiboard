@@ -58,6 +58,9 @@ import { Component, Vue } from 'vue-property-decorator'
   },
 })
 export default class IndexPage extends Vue {
+  created() {
+    this.$store.dispatch('statistics/fetchData')
+  }
   commitsTimeserie = {
     labels: [
       'January',
