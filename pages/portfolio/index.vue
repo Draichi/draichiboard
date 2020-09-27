@@ -9,9 +9,6 @@
       <div class="flex items-center flex-shrink-0 text-white mr-6">
         <h3 class="font-semibold text-xl tracking-tight">Top projects</h3>
       </div>
-      <client-only>
-        <Get></Get>
-      </client-only>
       <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div class="text-sm lg:flex-grow"></div>
         <div>
@@ -42,7 +39,6 @@ import { ProjectInterface } from '@/types'
   components: {
     ProjectListCard: () => import('@/components/Portfolio/ProjectListCard.vue'),
     SlideShow: () => import('@/components/Portfolio/SlideShow.vue'),
-    Get: () => import('@/components/Dashboard/get.vue'),
   },
 })
 export default class PortfolioPage extends Vue {

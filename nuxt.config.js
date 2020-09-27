@@ -36,7 +36,8 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    { src: '~/plugins/inject-worker.js', mode: 'client' }
+    // * not using worker right now
+    // { src: '~/plugins/inject-worker.js', mode: 'client' }
   ],
   /*
   ** Auto import components
