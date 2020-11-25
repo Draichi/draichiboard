@@ -1,20 +1,34 @@
 <template>
   <div class="h-screen w-screen">
     <div class="md:grid grid-cols-5 gap-6 p-6 h-full">
-      <Sidebar topTitle="Contributions distribution" bottomTitle="Contributions evolution">
+      <Sidebar
+        topTitle="Contributions distribution"
+        bottomTitle="Contributions evolution"
+      >
         <template v-slot:top>
-          <DoughnutChart :data="contributionsDistribution" id="contributions-distribution"></DoughnutChart>
+          <DoughnutChart
+            :data="contributionsDistribution"
+            id="contributions-distribution"
+          ></DoughnutChart>
         </template>
         <template v-slot:bottom>
-          <BarChart :data="contributionsEvolution" id="contributions-evolution"></BarChart>
+          <BarChart
+            :data="contributionsEvolution"
+            id="contributions-evolution"
+          ></BarChart>
         </template>
       </Sidebar>
-      <MainContent>
+      <MainContent v-if="!isLoading">
         <template v-slot:top>
-          <Timeserie :data="commitsTimeserie" class="row-span-2 mb-5 md:mb-0"></Timeserie>
+          <Timeserie
+            :data="commitsTimeserie"
+            class="row-span-2 mb-5 md:mb-0"
+          ></Timeserie>
         </template>
         <template v-slot:bottom:item-1>
-          <BottomAnalysisItemChart title="Total repositories with contributions">
+          <BottomAnalysisItemChart
+            title="Total repositories with contributions"
+          >
             <DoughnutChart
               :data="totalRepositoriesWithContributions"
               id="all-contributions-distribution"
@@ -23,7 +37,11 @@
         </template>
         <template v-slot:bottom:item-2>
           <BottomAnalysisItemChart title="Created repositories">
-            <HorizontalBarChart id="repositories-created" :height="200" :data="repositoriesCreated"></HorizontalBarChart>
+            <HorizontalBarChart
+              id="repositories-created"
+              :height="200"
+              :data="repositoriesCreated"
+            ></HorizontalBarChart>
           </BottomAnalysisItemChart>
         </template>
         <template v-slot:bottom:item-3>
@@ -31,7 +49,9 @@
             <nuxt-link to="/portfolio">
               <button
                 class="leading-none border-2 rounded-lg py-2 px-4 mt-10 text-white hover:border-transparent hover:text-blue-900 hover:bg-white"
-              >Portfolio</button>
+              >
+                Portfolio
+              </button>
             </nuxt-link>
           </BottomAnalysisItemText>
         </template>
@@ -70,7 +90,7 @@ export default class IndexPage extends Vue {
     if (data) {
       let labels: string[] = []
       data.forEach((item: any) => {
-        labels.push(...item.label)
+        labels.unshift(...item.label)
       })
       return labels
     }
@@ -81,21 +101,26 @@ export default class IndexPage extends Vue {
     if (data) {
       let commitsData: number[] = []
       data.forEach((item: any) => {
-        commitsData.push(...item.data)
+        commitsData.unshift(...item.data)
       })
       return commitsData
     }
     return data
   }
-  commitsTimeserie = {
-    labels: this.commitsTimeserieLabels,
-    datasets: [
-      {
-        label: 'GitHub Commits',
-        backgroundColor: '#f87979',
-        data: this.commitsTimeserieData,
-      },
-    ],
+  get commitsTimeserie() {
+    return {
+      labels: this.commitsTimeserieLabels,
+      datasets: [
+        {
+          label: 'GitHub Commits',
+          backgroundColor: '#f87979',
+          data: this.commitsTimeserieData,
+        },
+      ],
+    }
+  }
+  get isLoading(): boolean {
+    return this.$store.getters['statistics/loading']
   }
   contributionsEvolution = {
     labels: ['January', 'February', 'March', 'April'],

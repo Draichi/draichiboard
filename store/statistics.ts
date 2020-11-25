@@ -119,6 +119,7 @@ const getContributions = async (commit: Commit, token: string, username: string,
 }
 
 export const state = () => ({
+    loading: true,
     githubData: {},
     issueContributions: 0,
     PRContributions: 0,
@@ -140,6 +141,7 @@ export const state = () => ({
 export type StatisticsState = ReturnType<typeof state>;
 
 export const getters: GetterTree<StatisticsState, StatisticsState> = {
+    loading: state => state.loading,
     githubData: state => state.githubData,
     issueContributions: state => state.issueContributions,
     PRContributions: state => state.PRContributions,
@@ -177,9 +179,11 @@ export const mutations: MutationTree<StatisticsState> = {
         state.reposPRReviews += batch,
     ADD_COMMITS_TIMESERIES: (state: StatisticsState, data: []) =>
         state.commitsTimeseries = data,
+    SET_LOADING: (state: StatisticsState, data: boolean) =>
+      state.loading = data,
 };
 
-const token = ''
+const token = 'c0e17043ef7763c3f735dfd08c6a3dcb19a06e22'
 const githubProfileName = 'Draichi'
 
 const getWeeklyContributions = (week: any) => {
@@ -247,7 +251,6 @@ const sanitazeData = (contributionCalendarWeeks: any) => {
 
 export const actions: ActionTree<StatisticsState, StatisticsState> = {
     async fetchData({ commit }) {
-        console.log('fetching...')
         let data = []
         for (let year of years) {
             const {
@@ -285,5 +288,6 @@ export const actions: ActionTree<StatisticsState, StatisticsState> = {
             data.push(sanitazedData)
         }
         commit('ADD_COMMITS_TIMESERIES', data)
+        commit('SET_LOADING', false)
     },
 };
