@@ -61,26 +61,39 @@ export default class IndexPage extends Vue {
   created() {
     this.$store.dispatch('statistics/fetchData')
   }
+  get getCommitsTimeserie() {
+    const data = this.$store.getters['statistics/commitsTimeseries']
+    return data
+  }
+  get commitsTimeserieLabels() {
+    const data = this.getCommitsTimeserie
+    if (data) {
+      let labels: string[] = []
+      data.forEach((item: any) => {
+        labels.push(...item.label)
+      })
+      return labels
+    }
+    return data
+  }
+  get commitsTimeserieData() {
+    const data = this.getCommitsTimeserie
+    if (data) {
+      let commitsData: number[] = []
+      data.forEach((item: any) => {
+        commitsData.push(...item.data)
+      })
+      return commitsData
+    }
+    return data
+  }
   commitsTimeserie = {
-    labels: [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ],
+    labels: this.commitsTimeserieLabels,
     datasets: [
       {
         label: 'GitHub Commits',
         backgroundColor: '#f87979',
-        data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11],
+        data: this.commitsTimeserieData,
       },
     ],
   }

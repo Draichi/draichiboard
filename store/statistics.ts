@@ -123,18 +123,39 @@ export const state = () => ({
     issueContributions: 0,
     PRContributions: 0,
     commitContributions: 0,
+    prReviewsContributions: 0,
+    reposCommited: 0,
+    reposIssued: 0,
+    reposPR: 0,
+    reposPRReviews: 0,
     totalCommitContributions: 0,
     totalPullRequestReviewContributions: 0,
     totalRepositoriesWithContributedCommits: 0,
     totalRepositoriesWithContributedIssues: 0,
     tpr: 0,
     tprr: 0,
+    commitsTimeseries: []
 });
 
 export type StatisticsState = ReturnType<typeof state>;
 
 export const getters: GetterTree<StatisticsState, StatisticsState> = {
     githubData: state => state.githubData,
+    issueContributions: state => state.issueContributions,
+    PRContributions: state => state.PRContributions,
+    commitContributions: state => state.commitContributions,
+    prReviewsContributions: state => state.prReviewsContributions,
+    reposCommited: state => state.reposCommited,
+    reposIssued: state => state.reposIssued,
+    reposPR: state => state.reposPR,
+    reposPRReviews: state => state.reposPRReviews,
+    totalCommitContributions: state => state.totalCommitContributions,
+    totalPullRequestReviewContributions: state => state.totalPullRequestReviewContributions,
+    totalRepositoriesWithContributedCommits: state => state.totalRepositoriesWithContributedCommits,
+    totalRepositoriesWithContributedIssues: state => state.totalRepositoriesWithContributedIssues,
+    tpr: state => state.tpr,
+    tprr: state => state.tprr,
+    commitsTimeseries: state => state.commitsTimeseries,
 };
 
 export const mutations: MutationTree<StatisticsState> = {
@@ -144,9 +165,21 @@ export const mutations: MutationTree<StatisticsState> = {
         state.PRContributions += batch,
     ADD_COMMIT_CONTRIBUTIONS: (state: StatisticsState, batch: number) =>
         state.commitContributions += batch,
+    ADD_PR_REVIEWS_CONTRIBUTIONS: (state: StatisticsState, batch: number) =>
+        state.prReviewsContributions += batch,
+    ADD_REPOS_COMMITED: (state: StatisticsState, batch: number) =>
+        state.reposCommited += batch,
+    ADD_REPOS_ISSUED: (state: StatisticsState, batch: number) =>
+        state.reposIssued += batch,
+    ADD_REPOS_PR: (state: StatisticsState, batch: number) =>
+        state.reposPR += batch,
+    ADD_REPOS_PR_REVIEWS: (state: StatisticsState, batch: number) =>
+        state.reposPRReviews += batch,
+    ADD_COMMITS_TIMESERIES: (state: StatisticsState, data: []) =>
+        state.commitsTimeseries = data,
 };
 
-const token = 'ac8e71289e4db8e494521eda7bc5f91e6455dfac'
+const token = ''
 const githubProfileName = 'Draichi'
 
 const getWeeklyContributions = (week: any) => {
@@ -213,14 +246,10 @@ const sanitazeData = (contributionCalendarWeeks: any) => {
   };
 
 export const actions: ActionTree<StatisticsState, StatisticsState> = {
-    // & fetch data for years 2017-2020
-    // sanitize data in each fetch and save it on variable
-    // return data ready for display on chart
     async fetchData({ commit }) {
         console.log('fetching...')
         let data = []
         for (let year of years) {
-            // let sanitazedData = await getContributions(commit, token, githubProfileName, year)
             const {
                 totalIssueContributions,
                 totalPullRequestContributions,
@@ -236,7 +265,6 @@ export const actions: ActionTree<StatisticsState, StatisticsState> = {
             const contributionCalendarWeeks = contributionCalendar.weeks;
             commit('ADD_ISSUE_CONTRIBUTIONS', totalIssueContributions)
             commit('ADD_PR_CONTRIBUTIONS', totalPullRequestContributions)
-            // 
             commit('ADD_COMMIT_CONTRIBUTIONS', totalCommitContributions)
             commit('ADD_PR_REVIEWS_CONTRIBUTIONS', totalPullRequestReviewContributions)
             commit('ADD_REPOS_COMMITED', totalRepositoriesWithContributedCommits)
@@ -256,31 +284,6 @@ export const actions: ActionTree<StatisticsState, StatisticsState> = {
             }
             data.push(sanitazedData)
         }
-        console.log(data)
-        // console.log({
-        //     totalIssueContributions,
-        //     totalPullRequestContributions,
-        //     totalCommitContributions,
-        //     totalPullRequestReviewContributions,
-        //     totalRepositoriesWithContributedCommits,
-        //     totalRepositoriesWithContributedIssues,
-        //     totalRepositoriesWithContributedPullRequests,
-        //     totalRepositoriesWithContributedPullRequestReviews,
-        //     totalRepositoryContributions,
-        //     contributionCalendar
-        // })
-
-        // this.totalIssueContributions += totalIssueContributions;
-        // this.totalPullRequestContributions += totalPullRequestContributions;
-        // this.totalCommitContributions += totalCommitContributions;
-        // this.totalPullRequestReviewContributions += totalPullRequestReviewContributions;
-        // this.totalRepositoriesWithContributedCommits += totalRepositoriesWithContributedCommits;
-        // this.totalRepositoriesWithContributedIssues += totalRepositoriesWithContributedIssues;
-        // this.tpr += totalRepositoriesWithContributedPullRequests;
-        // this.tprr += totalRepositoriesWithContributedPullRequestReviews;
-
-
-        
-
+        commit('ADD_COMMITS_TIMESERIES', data)
     },
 };
