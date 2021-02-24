@@ -59,8 +59,6 @@ const years: Year[] = [
 ]
 
 const getContributions = async (commit: Commit, username: string, year: Year): Promise<APIResponse> => {
-  console.log('username:', username);
-
   const headers = {
     Authorization: `bearer ${process.env.GH_TOKEN}`,
   };
