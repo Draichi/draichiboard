@@ -1,8 +1,14 @@
 # Draichiboard
 
-![screenshot](./static/draichi.github.io_draichiboard_(fullhd).png)
+![screenshot](<./static/draichi.github.io_draichiboard_(fullhd).png>)
 
 ## Build Setup
+
+Create an environment variable on Github and past it on `.env`:
+
+```
+GH_TOKEN=your-token-here
+```
 
 ```bash
 # install dependencies
