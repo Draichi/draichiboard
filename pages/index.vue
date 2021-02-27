@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen w-screen">
-    <div class="md:grid grid-cols-5 gap-6 p-6 h-full">
+    <div class="md:grid grid-cols-5 gap-6 p-6 h-full" v-if="!isLoading">
       <Sidebar
         topTitle="Contributions distribution"
         bottomTitle="Contributions evolution"
@@ -18,7 +18,7 @@
           ></BarChart>
         </template>
       </Sidebar>
-      <MainContent v-if="!isLoading">
+      <MainContent>
         <template v-slot:top>
           <Timeserie
             :data="commitsTimeserie"
@@ -122,19 +122,34 @@ export default class IndexPage extends Vue {
   get isLoading(): boolean {
     return this.$store.getters['statistics/loading']
   }
-  contributionsEvolution = {
-    labels: ['January', 'February', 'March', 'April'],
-    datasets: [
-      {
-        borderColor: '#1d8cf8', // #fd5d93 pink option
-        borderWidth: 2,
-        label: 'GitHub Commits',
-        data: [40, 20, 12, 39],
-      },
-    ],
+  get contributionsDistributionsData() {
+    return [
+      this.$store.getters['statistics/issueContributions'],
+      this.$store.getters['statistics/PRContributions'],
+      this.$store.getters['statistics/prReviewsContributions'],
+    ]
+  }
+  get contributionsDistribution() {
+    return {
+      labels: ['Issues', 'PRs', 'Reviews'],
+      datasets: [
+        {
+          borderColor: ['#fd5d93', '#36a2eb', '#cc65fe', '#ffce56'], // #fd5d93 pink option
+          backgroundColor: [
+            'rgba(253, 93, 147,0.1)',
+            'rgba(54, 162, 235, 0.1)',
+            'rgba(204, 101, 254, 0.1)',
+            'rgba(255, 206, 86, 0.1)',
+          ],
+          borderWidth: 2,
+          label: 'GitHub Commits',
+          data: this.contributionsDistributionsData,
+        },
+      ],
+    }
   }
 
-  contributionsDistribution = {
+  contributionsEvolution = {
     labels: ['January', 'February', 'March', 'April'],
     datasets: [
       {
@@ -152,12 +167,26 @@ export default class IndexPage extends Vue {
     ],
   }
 
+  get totalReposData() {
+    return [
+      this.$store.getters['statistics/reposCommited'],
+      this.$store.getters['statistics/reposIssued'],
+      this.$store.getters['statistics/reposPR'],
+      this.$store.getters['statistics/reposPRReviews'],
+    ]
+  }
+
   totalRepositoriesWithContributions = {
-    labels: ['January', 'February', 'March', 'April'],
+    labels: [
+      'Repos with commits',
+      'Repos with issues',
+      'Repos with PRs',
+      'Repos with Reviews',
+    ],
     datasets: [
       {
         label: 'GitHub Commits',
-        data: [40, 20, 12, 39],
+        data: this.totalReposData,
         borderColor: ['#fd5d93', '#36a2eb', '#cc65fe', '#ffce56'], // #fd5d93 pink option
         borderWidth: 2,
         backgroundColor: [

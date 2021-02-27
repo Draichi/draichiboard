@@ -126,7 +126,6 @@ const getContributions = async (commit: Commit, username: string, year: Year): P
 
 export const state = () => ({
   loading: true,
-  githubData: {},
   issueContributions: 0,
   PRContributions: 0,
   commitContributions: 0,
@@ -139,8 +138,6 @@ export const state = () => ({
   totalPullRequestReviewContributions: 0,
   totalRepositoriesWithContributedCommits: 0,
   totalRepositoriesWithContributedIssues: 0,
-  tpr: 0,
-  tprr: 0,
   commitsTimeseries: []
 });
 
@@ -148,7 +145,6 @@ export type StatisticsState = ReturnType<typeof state>;
 
 export const getters: GetterTree<StatisticsState, StatisticsState> = {
   loading: state => state.loading,
-  githubData: state => state.githubData,
   issueContributions: state => state.issueContributions,
   PRContributions: state => state.PRContributions,
   commitContributions: state => state.commitContributions,
@@ -161,8 +157,6 @@ export const getters: GetterTree<StatisticsState, StatisticsState> = {
   totalPullRequestReviewContributions: state => state.totalPullRequestReviewContributions,
   totalRepositoriesWithContributedCommits: state => state.totalRepositoriesWithContributedCommits,
   totalRepositoriesWithContributedIssues: state => state.totalRepositoriesWithContributedIssues,
-  tpr: state => state.tpr,
-  tprr: state => state.tprr,
   commitsTimeseries: state => state.commitsTimeseries,
 };
 
