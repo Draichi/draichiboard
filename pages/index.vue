@@ -176,27 +176,29 @@ export default class IndexPage extends Vue {
     ]
   }
 
-  totalRepositoriesWithContributions = {
-    labels: [
-      'Repos with commits',
-      'Repos with issues',
-      'Repos with PRs',
-      'Repos with Reviews',
-    ],
-    datasets: [
-      {
-        label: 'GitHub Commits',
-        data: this.totalReposData,
-        borderColor: ['#fd5d93', '#36a2eb', '#cc65fe', '#ffce56'], // #fd5d93 pink option
-        borderWidth: 2,
-        backgroundColor: [
-          'rgba(253, 93, 147,0.1)',
-          'rgba(54, 162, 235, 0.1)',
-          'rgba(204, 101, 254, 0.1)',
-          'rgba(255, 206, 86, 0.1)',
-        ],
-      },
-    ],
+  get totalRepositoriesWithContributions() {
+    return {
+      labels: [
+        'Repos with commits',
+        'Repos with issues',
+        'Repos with PRs',
+        'Repos with Reviews',
+      ],
+      datasets: [
+        {
+          label: 'GitHub Commits',
+          data: this.totalReposData,
+          borderColor: ['#fd5d93', '#36a2eb', '#cc65fe', '#ffce56'], // #fd5d93 pink option
+          borderWidth: 2,
+          backgroundColor: [
+            'rgba(253, 93, 147,0.1)',
+            'rgba(54, 162, 235, 0.1)',
+            'rgba(204, 101, 254, 0.1)',
+            'rgba(255, 206, 86, 0.1)',
+          ],
+        },
+      ],
+    }
   }
 
   repositoriesCreated = {
