@@ -8,6 +8,10 @@
         <template v-slot:top>
           <DoughnutChart
             :data="contributionsDistribution"
+            :options="{
+              responsive: true,
+              legend: false,
+            }"
             id="contributions-distribution"
           ></DoughnutChart>
         </template>
@@ -31,6 +35,13 @@
           >
             <DoughnutChart
               :data="totalRepositoriesWithContributions"
+              :options="{
+                responsive: true,
+                legend: false,
+                tooltips: {
+                  bodyFontSize: 24,
+                },
+              }"
               id="all-contributions-distribution"
             ></DoughnutChart>
           </BottomAnalysisItemChart>

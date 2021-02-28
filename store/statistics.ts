@@ -34,7 +34,7 @@ const years: Year[] = [
   {
     from: '2021-01-01T00:00:00',
     to: today,
-    label: '20',
+    label: '21',
   },
   {
     from: '2020-01-01T00:00:00',
