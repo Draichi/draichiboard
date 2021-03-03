@@ -9,6 +9,8 @@ interface Year {
   label: string;
 }
 
+interface ICreatedRepos { yearLabel: string, reposCreated: number }
+interface ITotalContributions { yearLabel: string, totalContributions: number }
 interface APIResponse {
   totalIssueContributions: number,
   totalPullRequestContributions: number,
@@ -138,7 +140,9 @@ export const state = () => ({
   totalPullRequestReviewContributions: 0,
   totalRepositoriesWithContributedCommits: 0,
   totalRepositoriesWithContributedIssues: 0,
-  commitsTimeseries: []
+  commitsTimeseries: [],
+  createdReposByYear: [] as ICreatedRepos[],
+  totalContributionsByYear: [] as ITotalContributions[]
 });
 
 export type StatisticsState = ReturnType<typeof state>;
@@ -158,6 +162,8 @@ export const getters: GetterTree<StatisticsState, StatisticsState> = {
   totalRepositoriesWithContributedCommits: state => state.totalRepositoriesWithContributedCommits,
   totalRepositoriesWithContributedIssues: state => state.totalRepositoriesWithContributedIssues,
   commitsTimeseries: state => state.commitsTimeseries,
+  createdReposByYear: state => state.createdReposByYear,
+  totalContributionsByYear: state => state.totalContributionsByYear,
 };
 
 export const mutations: MutationTree<StatisticsState> = {
@@ -181,6 +187,10 @@ export const mutations: MutationTree<StatisticsState> = {
     state.commitsTimeseries = data,
   SET_LOADING: (state: StatisticsState, data: boolean) =>
     state.loading = data,
+  ADD_CREATED_REPOS_BY_YEAR: (state: StatisticsState, data: ICreatedRepos) =>
+    state.createdReposByYear.push(data),
+  ADD_TOTAL_CONTRIBUTIONS_BY_YEAR: (state: StatisticsState, data: ITotalContributions) =>
+    state.totalContributionsByYear.push(data)
 };
 
 const getWeeklyContributions = (week: any) => {
@@ -271,16 +281,18 @@ export const actions: ActionTree<StatisticsState, StatisticsState> = {
       commit('ADD_REPOS_ISSUED', totalRepositoriesWithContributedIssues)
       commit('ADD_REPOS_PR', totalRepositoriesWithContributedPullRequests)
       commit('ADD_REPOS_PR_REVIEWS', totalRepositoriesWithContributedPullRequestReviews)
+      commit('ADD_CREATED_REPOS_BY_YEAR', { yearLabel: year.label, reposCreated: totalRepositoryContributions })
+      commit('ADD_TOTAL_CONTRIBUTIONS_BY_YEAR', { yearLabel: year.label, totalContributions: contributionCalendar.totalContributions })
       const sanitazedData = {
         data: await sanitazeData(contributionCalendarWeeks),
         label: await sanitazeLabels(contributionCalendarWeeks, year.label),
-        totalIssueContributions,
-        totalCommitContributions,
-        totalPullRequestContributions,
-        totalPullRequestReviewContributions,
-        totalRepositoriesWithContributedCommits,
-        totalRepositoriesWithContributedIssues,
-        totalRepositoryContributions,
+        // totalIssueContributions,
+        // totalCommitContributions,
+        // totalPullRequestContributions,
+        // totalPullRequestReviewContributions,
+        // totalRepositoriesWithContributedCommits,
+        // totalRepositoriesWithContributedIssues,
+        // totalRepositoryContributions,
       }
       data.push(sanitazedData)
     }
