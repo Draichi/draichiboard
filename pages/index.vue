@@ -160,22 +160,36 @@ export default class IndexPage extends Vue {
     }
   }
 
-  contributionsEvolution = {
-    labels: ['January', 'February', 'March', 'April'],
-    datasets: [
-      {
-        label: 'GitHub Commits',
-        data: [40, 20, 12, 39],
-        borderColor: ['#fd5d93', '#36a2eb', '#cc65fe', '#ffce56'], // #fd5d93 pink option
-        borderWidth: 2,
-        backgroundColor: [
-          'rgba(253, 93, 147,0.1)',
-          'rgba(54, 162, 235, 0.1)',
-          'rgba(204, 101, 254, 0.1)',
-          'rgba(255, 206, 86, 0.1)',
-        ],
-      },
-    ],
+  get totalContributionsByYear(): {
+    totalContributions: number
+    yearLabel: string
+  }[] {
+    return this.$store.getters['statistics/totalContributionsByYear']
+  }
+
+  get contributionsEvolution() {
+    return {
+      labels: this.totalContributionsByYear
+        .map((item) => `20${item.yearLabel}`)
+        .reverse(),
+      datasets: [
+        {
+          label: 'Total Contributions',
+          data: this.totalContributionsByYear
+            .map((item) => item.totalContributions)
+            .reverse(),
+          borderColor: ['#fd5d93', '#36a2eb', '#cc65fe', '#ffce56', '#42b883'], // #fd5d93 pink option
+          borderWidth: 2,
+          backgroundColor: [
+            'rgba(253, 93, 147,0.1)',
+            'rgba(54, 162, 235, 0.1)',
+            'rgba(204, 101, 254, 0.1)',
+            'rgba(255, 206, 86, 0.1)',
+            'rgba(76, 211, 150, 0.3)',
+          ],
+        },
+      ],
+    }
   }
 
   get totalReposData() {
@@ -212,17 +226,30 @@ export default class IndexPage extends Vue {
     }
   }
 
-  repositoriesCreated = {
-    labels: ['January', 'February', 'March', 'April'],
-    datasets: [
-      {
-        borderColor: '#fd5d93',
-        label: 'GitHub Commits',
-        borderWidth: 2,
-        data: [40, 20, 12, 39],
-        // backgroundColor: ['#e357cd', '#fd5d93', '#cc65fe', '#ffce56'],
-      },
-    ],
+  get createdReposByYear(): {
+    reposCreated: number
+    yearLabel: string
+  }[] {
+    return this.$store.getters['statistics/createdReposByYear']
+  }
+
+  get repositoriesCreated() {
+    return {
+      labels: this.createdReposByYear
+        .map((item) => `20${item.yearLabel}`)
+        .reverse(),
+      datasets: [
+        {
+          borderColor: '#fd5d93',
+          label: 'Created Repos',
+          borderWidth: 2,
+          data: this.createdReposByYear
+            .map((item) => item.reposCreated)
+            .reverse(),
+          // backgroundColor: ['#e357cd', '#fd5d93', '#cc65fe', '#ffce56'],
+        },
+      ],
+    }
   }
   // async created() {
   //   const res = await this.$axios.$get('https://api.github.com/repos/Draichi/T-1000/issues')
