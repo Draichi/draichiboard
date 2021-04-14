@@ -15,7 +15,9 @@
           <nuxt-link to="/">
             <button
               class="leading-none border-2 rounded-lg py-2 px-4 text-white hover:border-transparent hover:text-blue-900 hover:bg-white mt-4 lg:mt-0"
-            >Draichiboard</button>
+            >
+              Draichiboard
+            </button>
           </nuxt-link>
         </div>
       </div>
@@ -48,10 +50,95 @@ export default class PortfolioPage extends Vue {
     return [
       {
         entity: {
-          name: 'Flux recruitment dashboard web app',
+          name: 'Sabido',
+          description: 'Microlearning social network',
+          technologies: [
+            'React',
+            'GraphQL',
+            'Typescript',
+            'Jest',
+            'Cypress',
+            'Storybook',
+            'TailwindCSS',
+          ],
+          cover: 'Flux/beta.talentify.io_client_v2_dashboard(fullhd).png',
+          screenshots: [
+            'Flux/beta.talentify.io_client_v2_dashboard(fullhd).png',
+            'Flux/beta.talentify.io_client_v2_organic-marketing(fullhd).png',
+            'Flux/beta.talentify.io_client_v2_mobile_converter(fullhd).png',
+            'Flux/beta.talentify.io_client_v2_ats_job_feed(fullhd).png',
+            'Flux/beta.talentify.io_client_v2_ats-connections(fullhd).png',
+          ],
+        },
+        company: {
+          name: 'Talentify',
+          logo:
+            'https://res-3.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/izo8611kxbziew6eagef',
+          site: 'https://app.talentify.io/client',
+        },
+      },
+      {
+        entity: {
+          name: 'Flux',
+          description: 'Recruitment marketing dashboard',
+          technologies: [
+            'React',
+            'Typescript',
+            'Jest',
+            'Cypress',
+            'SCSS',
+            'REST',
+            'Material UI',
+          ],
+          cover: 'Flux/beta.talentify.io_client_v2_dashboard(fullhd).png',
+          screenshots: [
+            'Flux/beta.talentify.io_client_v2_dashboard(fullhd).png',
+            'Flux/beta.talentify.io_client_v2_organic-marketing(fullhd).png',
+            'Flux/beta.talentify.io_client_v2_mobile_converter(fullhd).png',
+            'Flux/beta.talentify.io_client_v2_ats_job_feed(fullhd).png',
+            'Flux/beta.talentify.io_client_v2_ats-connections(fullhd).png',
+          ],
+        },
+        company: {
+          name: 'Talentify',
+          logo:
+            'https://res-3.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/izo8611kxbziew6eagef',
+          site: 'https://app.talentify.io/client',
+        },
+      },
+      {
+        entity: {
+          name: 'Lucrum',
           description:
-            'Flux its a.. lorem ipsum dolor flest menn dorime aque  lorem ipsum dolor flest menn dorime aque  lorem.',
-          technologies: ['Vue.js'],
+            'Decentralized exchange integrated with lending protocol',
+          technologies: ['Vue.js', 'Web3.js', 'Ethers.js', 'Solidity'],
+          cover: 'Flux/beta.talentify.io_client_v2_dashboard(fullhd).png',
+          screenshots: [
+            'Flux/beta.talentify.io_client_v2_dashboard(fullhd).png',
+            'Flux/beta.talentify.io_client_v2_organic-marketing(fullhd).png',
+            'Flux/beta.talentify.io_client_v2_mobile_converter(fullhd).png',
+            'Flux/beta.talentify.io_client_v2_ats_job_feed(fullhd).png',
+            'Flux/beta.talentify.io_client_v2_ats-connections(fullhd).png',
+          ],
+        },
+        company: {
+          name: 'Talentify',
+          logo:
+            'https://res-3.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/izo8611kxbziew6eagef',
+          site: 'https://app.talentify.io/client',
+        },
+      },
+      {
+        entity: {
+          name: 'Bud Fox',
+          description: 'Cryptocurrency price forecaster',
+          technologies: [
+            'Vue.js',
+            'Machine Learning',
+            'Material UI',
+            'Heroku',
+            'Python',
+          ],
           cover: 'Flux/beta.talentify.io_client_v2_dashboard(fullhd).png',
           screenshots: [
             'Flux/beta.talentify.io_client_v2_dashboard(fullhd).png',
@@ -71,8 +158,9 @@ export default class PortfolioPage extends Vue {
       {
         entity: {
           name: 'Jobquiz',
-          description: 'Candidate aquisition',
-          technologies: ['Vue.js', 'Quasar'],
+          description:
+            'Candidate aquisition platform responsible for an increase of over 30% on convertions',
+          technologies: ['Vue.js', 'Quasar.js', 'Cypress', 'Jest', 'Docker'],
           cover: 'Jobquiz/jobquiz-1(Pixel 2).png',
           screenshots: [
             'Jobquiz/jobquiz-1(Pixel 2).png',
@@ -94,7 +182,7 @@ export default class PortfolioPage extends Vue {
         entity: {
           name: 'IBM',
           description: 'DSG pages',
-          technologies: ['HTML', 'IBM Bootstrap'],
+          technologies: ['Javascript', 'SCSS', 'IBM Bootstrap'],
           cover: 'IBM/ibm20.png',
           screenshots: ['IBM/ibm20.png'],
         },
@@ -109,7 +197,7 @@ export default class PortfolioPage extends Vue {
         entity: {
           name: 'Você Azul',
           description: 'Brazilian Bank program to easily offer credit',
-          technologies: ['Vue'],
+          technologies: ['React', 'REST'],
           cover: 'VoceAzul/voceazul_profile.png',
           screenshots: ['VoceAzul/voceazul_profile.png'],
         },
@@ -133,6 +221,22 @@ export default class PortfolioPage extends Vue {
           logo:
             'https://res-3.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/izo8611kxbziew6eagef',
           site: 'https://app.talentify.io/jobs',
+        },
+      },
+      {
+        entity: {
+          name: 'Age of Learning API',
+          description: 'Class streaming with exercices for students world-wide',
+          liveLink: 'https://www.ageoflearning.com/',
+          technologies: ['PHP', 'MySQL'],
+          cover: 'AgeOfLearning/cover-example.png',
+          screenshots: ['AgeOfLearning/cover-example.png'],
+        },
+        company: {
+          name: '2 Mundos',
+          logo:
+            'https://res-3.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/izo8611kxbziew6eagef',
+          site: 'https://www.ageoflearning.com/',
         },
       },
       {

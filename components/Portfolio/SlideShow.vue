@@ -1,6 +1,13 @@
 <template>
-  <Card class="text-white flex-col flex justify-evenly h-screen w-screen relative">
-    <button @click="closeButtonClick" class="absolute right-0 top-0 md:m-20 m-4">X</button>
+  <Card
+    class="text-white flex-col flex justify-evenly h-screen w-screen relative"
+  >
+    <button
+      @click="closeButtonClick"
+      class="absolute right-0 top-0 md:m-20 m-4"
+    >
+      X
+    </button>
     <div class="relative">
       <div
         v-for="(slide, index) in screenshotsFiles"
@@ -8,7 +15,7 @@
         v-show="slideIndex == index + 1"
         class="fade"
       >
-        <img :src="slide" class="m-auto" />
+        <img :src="slide" class="m-auto" loading="lazy" />
       </div>
       <a class="prev" @click="plusSlides(-1)">&#10094;</a>
       <a class="next" @click="plusSlides(1)">&#10095;</a>
@@ -17,7 +24,7 @@
       <span
         v-for="(slide, index) in screenshotsFiles"
         :key="`dot-${index}`"
-        :class="['dot', { 'active': slideIndex == index + 1 }]"
+        :class="['dot', { active: slideIndex == index + 1 }]"
         @click="currentSlide(index + 1)"
       ></span>
     </div>
@@ -84,7 +91,7 @@ img {
   top: 50%;
   width: auto;
   margin-top: -2em;
-  padding: .5em;
+  padding: 0.5em;
   font-weight: bold;
   font-size: 1em;
   transition: 0.6s ease;
@@ -103,9 +110,9 @@ img {
 
 .dot {
   cursor: pointer;
-  height: .7em;
-  width: .7em;
-  margin: 0 .5em;
+  height: 0.7em;
+  width: 0.7em;
+  margin: 0 0.5em;
   background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
