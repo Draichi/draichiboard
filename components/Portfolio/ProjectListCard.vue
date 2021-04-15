@@ -18,7 +18,10 @@
           <h2>{{ project.entity.name }}</h2>
         </div>
         <p class="text-gray-600 text-base">{{ project.entity.description }}</p>
-        <a :href="project.entity.liveLink" v-if="project.entity.liveLink"
+        <a
+          target="_blanck"
+          :href="project.entity.liveLink"
+          v-if="project.entity.liveLink"
           >Live project</a
         >
       </div>

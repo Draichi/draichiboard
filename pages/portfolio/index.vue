@@ -54,6 +54,8 @@ export default class PortfolioPage extends Vue {
           description: 'Microlearning social network',
           technologies: [
             'React',
+            'Next',
+            'Vercel',
             'GraphQL',
             'Typescript',
             'Jest',
@@ -80,9 +82,11 @@ export default class PortfolioPage extends Vue {
       {
         entity: {
           name: 'Flux',
-          description: 'Recruitment marketing dashboard',
+          description: 'Recruitment marketing platform and analytics dashboard',
           technologies: [
             'React',
+            'Next',
+            'Vercel',
             'Typescript',
             'Jest',
             'Cypress',
@@ -90,7 +94,7 @@ export default class PortfolioPage extends Vue {
             'REST',
             'Material UI',
           ],
-          cover: 'Flux/beta.talentify.io_client_v2_dashboard(fullhd).png',
+          cover: 'Flux/talentify.io_(iPhone 6_7_8 Plus).png',
           liveLink: 'https://www.talentify.io/',
           screenshots: [
             'Flux/beta.talentify.io_client_v2_dashboard(fullhd).png',
@@ -111,8 +115,16 @@ export default class PortfolioPage extends Vue {
         entity: {
           name: 'Lucrum',
           description:
-            'Decentralized exchange integrated with lending protocol',
-          technologies: ['Vue.js', 'Web3.js', 'Ethers.js', 'Solidity'],
+            'Decentralized exchange integrated with lending protocol. Created at 2020 HackMoney hackathon',
+          technologies: [
+            'Vue.js',
+            'Web3.js',
+            'Ethers.js',
+            'Solidity',
+            'Chainlink',
+            'Aave',
+            'KyberSwap',
+          ],
           cover: 'Lucrum/Screenshot.png',
           liveLink:
             'https://hack.ethglobal.co/showcase/lucrum-rec6770m95rAPGCoC',
@@ -135,6 +147,7 @@ export default class PortfolioPage extends Vue {
             'Material UI',
             'Heroku',
             'Python',
+            'Mathplotlib',
           ],
           cover: 'BudFox/plot.png',
           liveLink: 'https://bud-fox.github.io/live/',
@@ -177,10 +190,23 @@ export default class PortfolioPage extends Vue {
       {
         entity: {
           name: 'IBM',
-          description: 'DSG pages',
-          technologies: ['Javascript', 'SCSS', 'IBM Bootstrap'],
+          description:
+            'Digital platform for sales, blogs and institutional pages',
+          technologies: ['HTML', 'Javascript', 'SCSS'],
           cover: 'IBM/ibm20.png',
-          screenshots: ['IBM/ibm20.png'],
+          screenshots: [
+            'IBM/ibm5.png',
+            'IBM/ibm9.png',
+            'IBM/ibm10.png',
+            'IBM/ibm12.png',
+            'IBM/ibm14.png',
+            'IBM/ibm15.png',
+            'IBM/ibm16.png',
+            'IBM/ibm18.png',
+            'IBM/ibm19.png',
+            'IBM/ibm20.png',
+            'IBM/ibm21.png',
+          ],
         },
         company: {
           name: 'Talentify',
@@ -192,13 +218,16 @@ export default class PortfolioPage extends Vue {
       {
         entity: {
           name: 'Você Azul',
-          description: 'Brazilian Bank program to easily offer credit',
-          technologies: ['React', 'REST'],
+          description: 'Personal dashboard for spending and credit analytics',
+          technologies: ['React', 'REST', 'Bootstrap', 'SCSS'],
           cover: 'VoceAzul/voceazul_profile.png',
-          screenshots: ['VoceAzul/voceazul_profile.png'],
+          screenshots: [
+            'VoceAzul/voceazul_profile.png',
+            'VoceAzul/voceazul_dash.png',
+          ],
         },
         company: {
-          name: 'Talentify',
+          name: 'Banco do Brasil',
           logo:
             'https://res-3.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/izo8611kxbziew6eagef',
           site: 'https://app.talentify.io/jobs',
@@ -207,13 +236,17 @@ export default class PortfolioPage extends Vue {
       {
         entity: {
           name: 'Mudamos Web',
-          description: 'Brazilian Bank program to easily offer credit',
-          technologies: ['React'],
-          cover: 'Mudamos/mudamos-web1.png',
-          screenshots: ['Mudamos/mudamos-web1.png'],
+          description: 'Platform to easily make a petition of a new law',
+          technologies: ['React', 'Ruby on Rails', 'SCSS', 'BEM'],
+          cover: 'Mudamos/www.mudamos.org_.png',
+          liveLink: 'https://www.mudamos.org/',
+          screenshots: [
+            'Mudamos/www.mudamos.org_.png',
+            'Mudamos/mudamos-web1.png',
+          ],
         },
         company: {
-          name: 'Talentify',
+          name: 'Tagview',
           logo:
             'https://res-3.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/izo8611kxbziew6eagef',
           site: 'https://app.talentify.io/jobs',
@@ -238,13 +271,15 @@ export default class PortfolioPage extends Vue {
       {
         entity: {
           name: 'Globo',
-          description: 'Brazilian Bank program to easily offer credit',
-          technologies: ['React'],
+          description:
+            'Web app produced to internally help biggest brazilian media to navigate over the produced shows',
+          technologies: ['React', 'SCSS'],
+          liveLink: 'https://www.globopalm.com.br/',
           cover: 'Globo/globo1.png',
           screenshots: ['Globo/globo1.png'],
         },
         company: {
-          name: 'Talentify',
+          name: 'Tagview',
           logo:
             'https://res-3.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/izo8611kxbziew6eagef',
           site: 'https://app.talentify.io/jobs',

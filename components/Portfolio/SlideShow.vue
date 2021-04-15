@@ -12,7 +12,7 @@
       <div
         v-for="(slide, index) in screenshotsFiles"
         :key="`slide-${index}`"
-        v-show="slideIndex == index + 1"
+        v-show="slideIndex == +index + 1"
         class="fade"
       >
         <img :src="slide" class="m-auto" loading="lazy" />
@@ -24,8 +24,8 @@
       <span
         v-for="(slide, index) in screenshotsFiles"
         :key="`dot-${index}`"
-        :class="['dot', { active: slideIndex == index + 1 }]"
-        @click="currentSlide(index + 1)"
+        :class="['dot', { active: slideIndex == +index + 1 }]"
+        @click="currentSlide(+index + 1)"
       ></span>
     </div>
   </Card>
