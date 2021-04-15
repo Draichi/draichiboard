@@ -61,13 +61,13 @@ export default class PortfolioPage extends Vue {
             'Storybook',
             'TailwindCSS',
           ],
-          cover: 'Flux/beta.talentify.io_client_v2_dashboard(fullhd).png',
+          cover: 'Sabido/dev.sabido.com_(iPhone 6_7_8 Plus) (1).png',
+          liveLink: 'https://sabido.com/',
           screenshots: [
-            'Flux/beta.talentify.io_client_v2_dashboard(fullhd).png',
-            'Flux/beta.talentify.io_client_v2_organic-marketing(fullhd).png',
-            'Flux/beta.talentify.io_client_v2_mobile_converter(fullhd).png',
-            'Flux/beta.talentify.io_client_v2_ats_job_feed(fullhd).png',
-            'Flux/beta.talentify.io_client_v2_ats-connections(fullhd).png',
+            'Sabido/dev.sabido.com_(iPhone 6_7_8 Plus) (2).png',
+            'Sabido/dev.sabido.com_(iPhone 6_7_8 Plus) (3).png',
+            'Sabido/dev.sabido.com_(iPhone 6_7_8 Plus) (4).png',
+            'Sabido/dev.sabido.com_(iPhone 6_7_8 Plus) (5).png',
           ],
         },
         company: {
@@ -91,6 +91,7 @@ export default class PortfolioPage extends Vue {
             'Material UI',
           ],
           cover: 'Flux/beta.talentify.io_client_v2_dashboard(fullhd).png',
+          liveLink: 'https://www.talentify.io/',
           screenshots: [
             'Flux/beta.talentify.io_client_v2_dashboard(fullhd).png',
             'Flux/beta.talentify.io_client_v2_organic-marketing(fullhd).png',
@@ -112,14 +113,10 @@ export default class PortfolioPage extends Vue {
           description:
             'Decentralized exchange integrated with lending protocol',
           technologies: ['Vue.js', 'Web3.js', 'Ethers.js', 'Solidity'],
-          cover: 'Flux/beta.talentify.io_client_v2_dashboard(fullhd).png',
-          screenshots: [
-            'Flux/beta.talentify.io_client_v2_dashboard(fullhd).png',
-            'Flux/beta.talentify.io_client_v2_organic-marketing(fullhd).png',
-            'Flux/beta.talentify.io_client_v2_mobile_converter(fullhd).png',
-            'Flux/beta.talentify.io_client_v2_ats_job_feed(fullhd).png',
-            'Flux/beta.talentify.io_client_v2_ats-connections(fullhd).png',
-          ],
+          cover: 'Lucrum/Screenshot.png',
+          liveLink:
+            'https://hack.ethglobal.co/showcase/lucrum-rec6770m95rAPGCoC',
+          screenshots: ['Lucrum/Screenshot.png'],
         },
         company: {
           name: 'Talentify',
@@ -139,13 +136,11 @@ export default class PortfolioPage extends Vue {
             'Heroku',
             'Python',
           ],
-          cover: 'Flux/beta.talentify.io_client_v2_dashboard(fullhd).png',
+          cover: 'BudFox/plot.png',
+          liveLink: 'https://bud-fox.github.io/live/',
           screenshots: [
-            'Flux/beta.talentify.io_client_v2_dashboard(fullhd).png',
-            'Flux/beta.talentify.io_client_v2_organic-marketing(fullhd).png',
-            'Flux/beta.talentify.io_client_v2_mobile_converter(fullhd).png',
-            'Flux/beta.talentify.io_client_v2_ats_job_feed(fullhd).png',
-            'Flux/beta.talentify.io_client_v2_ats-connections(fullhd).png',
+            'BudFox/bud-fox.github.io_live_.png',
+            'BudFox/bud-fox.github.io_live_ (1).png',
           ],
         },
         company: {
@@ -161,7 +156,8 @@ export default class PortfolioPage extends Vue {
           description:
             'Candidate aquisition platform responsible for an increase of over 30% on convertions',
           technologies: ['Vue.js', 'Quasar.js', 'Cypress', 'Jest', 'Docker'],
-          cover: 'Jobquiz/jobquiz-1(Pixel 2).png',
+          cover: 'Jobquiz/app.talentify.io_companies_(iPhone 6_7_8 Plus).png',
+          liveLink: 'https://app.talentify.io/companies/',
           screenshots: [
             'Jobquiz/jobquiz-1(Pixel 2).png',
             'Jobquiz/jobquiz-2(Pixel 2).png',
