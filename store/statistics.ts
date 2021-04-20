@@ -142,6 +142,7 @@ export const state = () => ({
   totalRepositoriesWithContributedIssues: 0,
   commitsTimeseries: [],
   createdReposByYear: [] as ICreatedRepos[],
+  totalContributions: 0,
   totalContributionsByYear: [] as ITotalContributions[]
 });
 
@@ -163,6 +164,7 @@ export const getters: GetterTree<StatisticsState, StatisticsState> = {
   totalRepositoriesWithContributedIssues: state => state.totalRepositoriesWithContributedIssues,
   commitsTimeseries: state => state.commitsTimeseries,
   createdReposByYear: state => state.createdReposByYear,
+  totalContributions: state => state.totalContributions,
   totalContributionsByYear: state => state.totalContributionsByYear,
 };
 
@@ -189,6 +191,8 @@ export const mutations: MutationTree<StatisticsState> = {
     state.loading = data,
   ADD_CREATED_REPOS_BY_YEAR: (state: StatisticsState, data: ICreatedRepos) =>
     state.createdReposByYear.push(data),
+  ADD_TOTAL_CONTRIBUTIONS: (state: StatisticsState, data: number) =>
+    state.totalContributions += +data,
   ADD_TOTAL_CONTRIBUTIONS_BY_YEAR: (state: StatisticsState, data: ITotalContributions) =>
     state.totalContributionsByYear.push(data)
 };
@@ -282,17 +286,11 @@ export const actions: ActionTree<StatisticsState, StatisticsState> = {
       commit('ADD_REPOS_PR', totalRepositoriesWithContributedPullRequests)
       commit('ADD_REPOS_PR_REVIEWS', totalRepositoriesWithContributedPullRequestReviews)
       commit('ADD_CREATED_REPOS_BY_YEAR', { yearLabel: year.label, reposCreated: totalRepositoryContributions })
+      commit('ADD_TOTAL_CONTRIBUTIONS', contributionCalendar.totalContributions)
       commit('ADD_TOTAL_CONTRIBUTIONS_BY_YEAR', { yearLabel: year.label, totalContributions: contributionCalendar.totalContributions })
       const sanitazedData = {
         data: await sanitazeData(contributionCalendarWeeks),
         label: await sanitazeLabels(contributionCalendarWeeks, year.label),
-        // totalIssueContributions,
-        // totalCommitContributions,
-        // totalPullRequestContributions,
-        // totalPullRequestReviewContributions,
-        // totalRepositoriesWithContributedCommits,
-        // totalRepositoriesWithContributedIssues,
-        // totalRepositoryContributions,
       }
       data.push(sanitazedData)
     }

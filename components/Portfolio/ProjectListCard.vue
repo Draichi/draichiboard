@@ -4,7 +4,7 @@
   >
     <div>
       <img
-        class="w-full object-contain h-78 cursor-pointer"
+        class="w-full object-contain h-78 cursor-pointer mt-2"
         loading="lazy"
         :src="coverImg"
         :alt="project.entity.name"

@@ -5,9 +5,11 @@
     @close-button:click="closeSlideShow"
   ></SlideShow>
   <div v-else>
-    <nav class="flex items-center justify-between flex-wrap p-6">
+    <!-- <nav class="flex items-center justify-between flex-wrap p-6">
       <div class="flex items-center flex-shrink-0 text-white mr-6">
-        <h3 class="font-semibold text-xl tracking-tight">Top projects</h3>
+        <h3 class="font-semibold text-xl tracking-wide font-sans">
+          Top projects
+        </h3>
       </div>
       <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div class="text-sm lg:flex-grow"></div>
@@ -21,7 +23,7 @@
           </nuxt-link>
         </div>
       </div>
-    </nav>
+    </nav> -->
     <div class="flex flex-wrap justify-evenly">
       <ProjectListCard
         v-for="(project, index) in projects"

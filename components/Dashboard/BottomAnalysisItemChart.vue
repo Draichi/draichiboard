@@ -1,6 +1,6 @@
 <template>
   <Card class="analysis-chart-item">
-    <h3 class="text-gray-500">{{ title }}</h3>
+    <h3 class="text-gray-500 font-sans text-lg">{{ title }}</h3>
     <slot></slot>
   </Card>
 </template>

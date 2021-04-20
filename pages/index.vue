@@ -10,7 +10,12 @@
             :data="contributionsDistribution"
             :options="{
               responsive: true,
-              legend: false,
+              legend: {
+                position: 'right',
+                labels: {
+                  boxWidth: 15,
+                },
+              },
             }"
             id="contributions-distribution"
           ></DoughnutChart>
@@ -37,7 +42,13 @@
               :data="totalRepositoriesWithContributions"
               :options="{
                 responsive: true,
-                legend: false,
+                legend: {
+                  position: 'right',
+                  labels: {
+                    boxWidth: 20,
+                    fontSize: 30,
+                  },
+                },
                 tooltips: {
                   bodyFontSize: 24,
                 },
@@ -56,18 +67,12 @@
           </BottomAnalysisItemChart>
         </template>
         <template v-slot:bottom:item-3>
-          <BottomAnalysisItemText :commits="2275">
-            <nuxt-link to="/portfolio">
-              <button
-                class="leading-none border-2 rounded-lg py-2 px-4 mt-10 text-white hover:border-transparent hover:text-blue-900 hover:bg-white"
-              >
-                Portfolio
-              </button>
-            </nuxt-link>
+          <BottomAnalysisItemText :commits="totalContributions">
           </BottomAnalysisItemText>
         </template>
       </MainContent>
     </div>
+    <Spinner v-else />
   </div>
 </template>
 
@@ -76,6 +81,7 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
   components: {
+    Spinner: () => import('@/components/UI/Spinner.vue'),
     Timeserie: () => import('@/components/Dashboard/Timeserie.vue'),
     MainContent: () => import('@/components/Dashboard/MainContent.vue'),
     BottomAnalysisItemChart: () =>
@@ -160,6 +166,10 @@ export default class IndexPage extends Vue {
     }
   }
 
+  get totalContributions(): number {
+    return this.$store.getters['statistics/totalContributions']
+  }
+
   get totalContributionsByYear(): {
     totalContributions: number
     yearLabel: string
@@ -203,12 +213,7 @@ export default class IndexPage extends Vue {
 
   get totalRepositoriesWithContributions() {
     return {
-      labels: [
-        'Repos with commits',
-        'Repos with issues',
-        'Repos with PRs',
-        'Repos with Reviews',
-      ],
+      labels: ['Commits', 'Issues', 'PRs', 'Reviews'],
       datasets: [
         {
           label: 'GitHub Commits',
@@ -246,15 +251,10 @@ export default class IndexPage extends Vue {
           data: this.createdReposByYear
             .map((item) => item.reposCreated)
             .reverse(),
-          // backgroundColor: ['#e357cd', '#fd5d93', '#cc65fe', '#ffce56'],
         },
       ],
     }
   }
-  // async created() {
-  //   const res = await this.$axios.$get('https://api.github.com/repos/Draichi/T-1000/issues')
-  //   console.info(res)
-  // }
 }
 </script>
 

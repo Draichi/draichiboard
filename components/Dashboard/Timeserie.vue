@@ -1,9 +1,9 @@
 <template>
   <Card>
-    <div style="height: 10%;">
-      <h3 class="font-xl text-gray-500 p-4">Commits</h3>
+    <div style="height: 10%">
+      <h3 class="font-xl text-gray-500 p-4 font-sans text-lg">Commits</h3>
     </div>
-    <LineChart :data="data" class="h-auto" style="height: 90%;" />
+    <LineChart :data="data" class="h-auto" style="height: 90%" />
   </Card>
 </template>
 
@@ -18,7 +18,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 })
 export default class Timeserie extends Vue {
   @Prop({ default: null })
-  data!: object | null;
+  data!: object | null
 }
 </script>
 

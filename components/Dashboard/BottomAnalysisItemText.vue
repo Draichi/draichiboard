@@ -1,10 +1,18 @@
 <template>
-  <Card class="flex items-center justify-center flex-col mb-5 md:mb-0 py-4 md:py-4">
+  <Card
+    class="flex items-center justify-center flex-col mb-5 md:mb-0 py-4 md:py-4"
+  >
     <h3 class="text-gray-500 text-center tracking-wide text-lg">
-      All time commits:
-      <span class="text-white font-bold">{{ commits }}</span>
+      Total contributions:
+      <span class="text-white font-bold font-sans text-lg">{{ commits }}</span>
     </h3>
-    <slot></slot>
+    <div class="w-full px-5">
+      <nuxt-link to="/portfolio">
+        <button class="border-transparent text-blue-900 antialiased">
+          See top projects
+        </button>
+      </nuxt-link>
+    </div>
   </Card>
 </template>
 
@@ -23,4 +31,11 @@ export default class BottomAnalysisItemText extends Vue {
 </script>
 
 <style lang="scss" scoped>
+button {
+  @apply w-full block font-sans leading-none rounded-lg py-10 px-4 mt-10 tracking-wider;
+  background: rgb(24, 24, 38);
+  &:hover {
+    @apply text-white;
+  }
+}
 </style>
