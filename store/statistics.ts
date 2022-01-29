@@ -34,8 +34,13 @@ interface APIResponse {
 
 const years: Year[] = [
   {
-    from: '2021-01-01T00:00:00',
+    from: '2022-01-01T00:00:00',
     to: today,
+    label: '22',
+  },
+  {
+    from: '2021-01-01T00:00:00',
+    to: '2021-12-01T00:00:00',
     label: '21',
   },
   {

@@ -97,6 +97,7 @@ import { Component, Vue } from 'vue-property-decorator'
 export default class IndexPage extends Vue {
   created() {
     this.$store.dispatch('statistics/fetchData')
+    this.$store.dispatch('commits/fetchCommits')
   }
   get getCommitsTimeserie() {
     const data = this.$store.getters['statistics/commitsTimeseries']
