@@ -27,7 +27,7 @@ const body = {
 }
 
 const headers = {
-  Authorization: 'bearer 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',
+  Authorization: `bearer ${process.env.GH_TOKEN}`,
 }
 
 export const state = () => ({
