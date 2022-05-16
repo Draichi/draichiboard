@@ -7,3 +7,7 @@
 - [apollo](https://www.codegram.com/blog/nuxt-typescript-apollo-a-bumpy-road/)
 
 - [api project list](https://vercel.com/docs/serverless-functions/introduction)
+
+- [] create services folder
+- [] use @nuxtjs/apollo, @graphql-codegen/typescript
+- [] creates navbar
