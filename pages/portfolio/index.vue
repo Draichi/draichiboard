@@ -37,7 +37,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { ProjectInterface } from '@/types'
+import { ProjectInterface } from '@/types/project'
 
 @Component({
   components: {

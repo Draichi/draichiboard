@@ -1,15 +1,4 @@
-export interface ProjectInterface {
-  entity: {
-    name: string
-    description: string
-    liveLink?: string
-    technologies: string[]
-    cover: string
-    screenshots: string[]
-  }
-  company: {
-    name: string
-    logo: string
-    site: string
-  }
+declare module '*.gql' {
+  const content: any;
+  export default content;
 }

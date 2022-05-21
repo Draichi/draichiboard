@@ -9,10 +9,12 @@
     "generate": "nuxt-ts generate",
     "serve": "nuxt-ts serve",
     "test": "jest",
-    "deploy": "nuxt-ts build && nuxt-ts export && npx push-dir --dir=dist --branch=gh-pages --cleanup"
+    "deploy": "nuxt-ts build && nuxt-ts export && npx push-dir --dir=dist --branch=gh-pages --cleanup",
+    "generate-graphql-types": "graphql-codegen --config codegen.yml -r dotenv/config"
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^0.4.10",
+    "@nuxtjs/apollo": "^4.0.1-rc.5",
     "@nuxtjs/axios": "^5.11.0",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
@@ -24,6 +26,10 @@
     "vue-property-decorator": "^9.0.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/typescript": "^2.4.11",
+    "@graphql-codegen/typescript-graphql-files-modules": "^2.1.1",
+    "@graphql-codegen/typescript-operations": "^2.4.0",
     "@nuxt/typescript-build": "^1.0.3",
     "@nuxtjs/tailwindcss": "^2.0.0",
     "@vue/test-utils": "^1.0.3",
