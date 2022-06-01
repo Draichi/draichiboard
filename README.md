@@ -1,6 +1,6 @@
 # Draichiboard
 
-![screenshot](<./static/draichi.github.io_draichiboard_(fullhd).png>)
+![screenshot](./assets/img/screenshots/Draichiboard/draichi.github.io_draichiboard_(fullhd).png)
 
 ## Build Setup
 
@@ -23,7 +23,4 @@ $ yarn start
 
 # generate static project
 $ yarn generate
-
-# serve on gh-pages
-$ yarn deploy
 ```
