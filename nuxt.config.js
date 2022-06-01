@@ -51,8 +51,8 @@ export default {
    */
   buildModules: [
     '@nuxt/typescript-build',
-    // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/google-analytics'
   ],
   /*
    ** Nuxt.js modules
@@ -92,4 +92,7 @@ export default {
   env: {
     GH_TOKEN: process.env.GH_TOKEN,
   },
+  googleAnalytics: {
+    id: process.env.ANALYTICS_ID,
+  }
 }
