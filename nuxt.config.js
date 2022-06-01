@@ -94,5 +94,10 @@ export default {
   },
   googleAnalytics: {
     id: process.env.ANALYTICS_ID,
+  },
+  publicRuntimeConfig: {
+    googleAnalytics: {
+      id: process.env.ANALYTICS_ID
+    }
   }
 }
