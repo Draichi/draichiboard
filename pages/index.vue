@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen w-screen">
+  <div class="h-screen">
     <div class="md:grid grid-cols-5 gap-6 p-6 h-full" v-if="!isLoading">
       <Sidebar
         topTitle="Contributions distribution"
