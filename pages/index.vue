@@ -78,8 +78,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import ContributionCollection from '@/apollo/queries/contributionsCollection.gql'
-
+import { asyncData } from '@/services/statistcs'
 @Component({
   components: {
     Spinner: () => import('@/components/UI/Spinner.vue'),
@@ -94,27 +93,7 @@ import ContributionCollection from '@/apollo/queries/contributionsCollection.gql
     BarChart: () => import('@/components/Charts/Bar.js'),
     HorizontalBarChart: () => import('@/components/Charts/HorizontalBar.js'),
   },
-  async asyncData({ app }) {
-    try {
-      const contributionsCollection = await app.apolloProvider?.defaultClient
-        .query({
-          query: ContributionCollection,
-          variables: {
-            login: 'Draichi',
-            from: '2018-01-01T00:00:00',
-            to: '2018-12-01T00:00:00'
-          }
-        })
-        .then(
-          ({ data }: any) =>
-            data && data.user
-        )
-        console.table(contributionsCollection.contributionsCollection)
-      return { contributionsCollection }
-    } catch (error) {
-      return { companies: [] }
-    }
-  },
+  asyncData,
 })
 export default class IndexPage extends Vue {
   created() {
