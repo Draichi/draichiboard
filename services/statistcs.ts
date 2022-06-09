@@ -29,21 +29,12 @@ export const asyncData = async ({ app, store }: Context) => {
             return { thisYearContributions }
         }
 
-        console.log(
-            '%c thisYearContributions:',
-            'color: snow; background: slategray; font-size: 32px; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; padding: 50px'
-        )
-
-
         const oneYearContributionCalendar = thisYearContributions.contributionCalendar.weeks.flatMap(contributionCalendarWeek => contributionCalendarWeek.contributionDays.flat())
-        console.table(thisYearContributions)
 
         store.commit('statistics/setCommitsTimeserie', oneYearContributionCalendar)
 
         store.commit('statistics/setConstributionsCollection', {...thisYearContributions, contributionCalendar: false})
 
-
-        // commitar ao store
         return { oneYearContributionCalendar }
     } catch (error) {
         return { oneYearContributionCalendar: {} as User }
