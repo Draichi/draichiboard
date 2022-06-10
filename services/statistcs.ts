@@ -1,5 +1,5 @@
 import { Context } from '@nuxt/types'
-import { ContributionsCollection, User } from '@/types/graphql-types'
+import { ContributionCalendarDay, ContributionsCollection, User } from '@/types/graphql-types'
 import ContributionCollection from '@/apollo/queries/contributionsCollection.gql'
 
 interface ContributionsCollectionResponse {
@@ -9,34 +9,36 @@ interface ContributionsCollectionResponse {
 export const asyncData = async ({ app, store }: Context) => {
     try {
         const today = new Date()
-        let lastYear = new Date()
-        lastYear.setFullYear(today.getFullYear() - 1)
+        let lastMonth = new Date()
+        lastMonth.setMonth(today.getMonth() - 1)
 
         const thisYearContributions = await app.apolloProvider?.defaultClient
             .query({
                 query: ContributionCollection,
                 variables: {
                     login: 'Draichi',
-                    from: lastYear,
+                    from: lastMonth,
                     to: today,
                 },
             })
             .then(
-                ({ data }: ContributionsCollectionResponse) => data && data.user && data.user.contributionsCollection
+                ({ data }: ContributionsCollectionResponse) => data && data.user
             )
 
         if (!thisYearContributions) {
             return { thisYearContributions }
         }
 
-        const oneYearContributionCalendar = thisYearContributions.contributionCalendar.weeks.flatMap(contributionCalendarWeek => contributionCalendarWeek.contributionDays.flat())
+        const oneYearContributionCalendar = thisYearContributions.contributionsCollection.contributionCalendar.weeks.flatMap(
+            (contributionCalendarWeek) =>
+                contributionCalendarWeek.contributionDays.flat()
+        )
 
-        store.commit('statistics/setCommitsTimeserie', oneYearContributionCalendar)
+        const comittsTimeserieData = oneYearContributionCalendar.map(item => item.contributionCount)
+        const comittsTimeserieLabels = oneYearContributionCalendar.map(item => item.date as string)
 
-        store.commit('statistics/setConstributionsCollection', {...thisYearContributions, contributionCalendar: false})
-
-        return { oneYearContributionCalendar }
+        return { oneYearContributionCalendar, thisYearContributions, comittsTimeserieData, comittsTimeserieLabels }
     } catch (error) {
-        return { oneYearContributionCalendar: {} as User }
+        return { oneYearContributionCalendar: {} as ContributionCalendarDay[], thisYearContributions: {} as User}
     }
 }

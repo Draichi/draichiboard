@@ -79,6 +79,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { asyncData } from '@/services/statistcs'
+import { User, ContributionCalendarDay } from '~/types/graphql-types'
+
 @Component({
   components: {
     Spinner: () => import('@/components/UI/Spinner.vue'),
@@ -96,6 +98,10 @@ import { asyncData } from '@/services/statistcs'
   asyncData,
 })
 export default class IndexPage extends Vue {
+  oneYearContributionCalendar: ContributionCalendarDay[] = [] as ContributionCalendarDay[];
+  thisYearContributions: User = {} as User;
+  comittsTimeserieData: number[] = []
+  comittsTimeserieLabels: string[] = []
   created() {
     this.$store.dispatch('statistics/fetchData')
     this.$store.dispatch('commits/fetchCommits')
@@ -128,12 +134,12 @@ export default class IndexPage extends Vue {
   }
   get commitsTimeserie() {
     return {
-      labels: this.commitsTimeserieLabels,
+      labels: this.comittsTimeserieLabels,
       datasets: [
         {
           label: 'GitHub Commits',
           backgroundColor: '#f87979',
-          data: this.commitsTimeserieData,
+          data: this.comittsTimeserieData,
         },
       ],
     }
@@ -141,11 +147,11 @@ export default class IndexPage extends Vue {
   get isLoading(): boolean {
     return this.$store.getters['statistics/loading']
   }
-  get contributionsDistributionsData(): [number, number, number] {
+  get contributionsDistributionsData() {
     return [
-      this.$store.getters['statistics/contributionsCollection'].totalIssueContributions || 0,
-      this.$store.getters['statistics/contributionsCollection'].totalPullRequestContributions || 0,
-      this.$store.getters['statistics/contributionsCollection'].totalPullRequestReviewContributions || 0,
+      this.thisYearContributions.contributionsCollection.totalIssueContributions || 0,
+      this.thisYearContributions.contributionsCollection.totalPullRequestContributions || 0,
+      this.thisYearContributions.contributionsCollection.totalPullRequestReviewContributions || 0,
     ]
   }
   get contributionsDistribution() {
@@ -206,10 +212,11 @@ export default class IndexPage extends Vue {
 
   get totalReposData() {
     return [
-      this.$store.getters['statistics/reposCommited'],
-      this.$store.getters['statistics/reposIssued'],
-      this.$store.getters['statistics/reposPR'],
-      this.$store.getters['statistics/reposPRReviews'],
+      this.thisYearContributions.contributionsCollection.totalRepositoriesWithContributedCommits || 0,
+      this.thisYearContributions.contributionsCollection.totalRepositoriesWithContributedIssues || 0,
+      this.thisYearContributions.contributionsCollection.totalRepositoriesWithContributedPullRequests || 0,
+      this.thisYearContributions.contributionsCollection.totalRepositoriesWithContributedPullRequestReviews || 0,
+
     ]
   }
 

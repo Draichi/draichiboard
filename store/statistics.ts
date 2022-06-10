@@ -1,8 +1,4 @@
 import { ActionTree, MutationTree, GetterTree, Commit } from 'vuex'
-import {
-    ContributionCalendarDay,
-    ContributionsCollection,
-} from '~/types/graphql-types'
 
 const today = new Date().toISOString()
 const githubProfileName = 'Draichi'
@@ -146,9 +142,7 @@ const getContributions = async (
 }
 
 export const state = () => ({
-    commitsTimeserie: [] as ContributionCalendarDay[],
-    contributionsCollection: {} as ContributionsCollection,
-    loading: true,
+    loading: false,
     issueContributions: 0,
     PRContributions: 0,
     commitContributions: 0,
@@ -170,7 +164,6 @@ export const state = () => ({
 export type StatisticsState = ReturnType<typeof state>
 
 export const getters: GetterTree<StatisticsState, StatisticsState> = {
-    contributionsCollection: (state) => state.contributionsCollection,
     loading: (state) => state.loading,
     issueContributions: (state) => state.issueContributions,
     PRContributions: (state) => state.PRContributions,
@@ -194,14 +187,6 @@ export const getters: GetterTree<StatisticsState, StatisticsState> = {
 }
 
 export const mutations: MutationTree<StatisticsState> = {
-    setCommitsTimeserie: (
-        state: StatisticsState,
-        payload: ContributionCalendarDay[]
-    ) => (state.commitsTimeserie = payload),
-    setConstributionsCollection: (
-        state: StatisticsState,
-        payload: ContributionsCollection
-    ) => (state.contributionsCollection = payload),
     ADD_ISSUE_CONTRIBUTIONS: (state: StatisticsState, batch: number) =>
         (state.issueContributions += batch),
     ADD_PR_CONTRIBUTIONS: (state: StatisticsState, batch: number) =>
