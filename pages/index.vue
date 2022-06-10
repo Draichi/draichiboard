@@ -141,11 +141,11 @@ export default class IndexPage extends Vue {
   get isLoading(): boolean {
     return this.$store.getters['statistics/loading']
   }
-  get contributionsDistributionsData() {
+  get contributionsDistributionsData(): [number, number, number] {
     return [
-      this.$store.getters['statistics/issueContributions'],
-      this.$store.getters['statistics/PRContributions'],
-      this.$store.getters['statistics/prReviewsContributions'],
+      this.$store.getters['statistics/contributionsCollection'].totalIssueContributions || 0,
+      this.$store.getters['statistics/contributionsCollection'].totalPullRequestContributions || 0,
+      this.$store.getters['statistics/contributionsCollection'].totalPullRequestReviewContributions || 0,
     ]
   }
   get contributionsDistribution() {

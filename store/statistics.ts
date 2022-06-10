@@ -170,6 +170,7 @@ export const state = () => ({
 export type StatisticsState = ReturnType<typeof state>
 
 export const getters: GetterTree<StatisticsState, StatisticsState> = {
+    contributionsCollection: (state) => state.contributionsCollection,
     loading: (state) => state.loading,
     issueContributions: (state) => state.issueContributions,
     PRContributions: (state) => state.PRContributions,
