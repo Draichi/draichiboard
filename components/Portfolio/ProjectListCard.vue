@@ -47,7 +47,7 @@ import { ProjectInterface } from '@/types/project'
   },
 })
 export default class ProjectListCard extends Vue {
-  @Prop({ default: Object as () => ProjectInterface })
+  @Prop({ default: {} as ProjectInterface })
   project!: ProjectInterface
 
   get technologies(): string[] {
