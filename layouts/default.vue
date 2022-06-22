@@ -26,13 +26,13 @@ export default class DefaultLayout extends Vue {}
     Roboto, 'Helvetica Neue', Arial, sans-serif;
   --text-primary: #383737;
   --text-secondary: #ececec;
-  --bg-primary: rgb(24, 24, 38);
+  --bg-primary: #11111a;
   --bg-secondary: rgb(31, 33, 49);
   --transition-speed: 600ms;
 }
 
 html {
-  background: rgb(24, 24, 38);
+  background: var(--bg-primary);
   
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
