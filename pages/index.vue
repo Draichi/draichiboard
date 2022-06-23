@@ -1,6 +1,6 @@
 <template>
-  <div class="h-screen w-screen">
-    <div class="md:grid grid-cols-5 gap-6 p-6 h-full" v-if="!isLoading">
+  <div class="h-screen">
+    <div class="md:grid grid-cols-5 gap-6 p-6 md:pl-0 h-full" v-if="!isLoading">
       <Sidebar
         topTitle="Contributions distribution"
         bottomTitle="Contributions evolution"
@@ -268,10 +268,6 @@ export default class IndexPage extends Vue {
 </script>
 
 <style>
-html {
-  background: rgb(24, 24, 38);
-}
-
 #contributions-evolution > #bar-chart {
   width: 100% !important;
 }
