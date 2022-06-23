@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen">
-    <div class="md:grid grid-cols-5 gap-6 p-6 pl-0 h-full" v-if="!isLoading">
+    <div class="md:grid grid-cols-5 gap-6 p-6 md:pl-0 h-full" v-if="!isLoading">
       <Sidebar
         topTitle="Contributions distribution"
         bottomTitle="Contributions evolution"
