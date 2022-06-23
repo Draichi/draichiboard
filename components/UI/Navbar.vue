@@ -311,7 +311,7 @@ export default class Navbar extends Vue {}
   .Navbar {
     bottom: 0;
     width: 100%;
-    height: 5rem;
+    height: 3.5rem;
 
     &__container {
       flex-direction: row;
@@ -319,6 +319,10 @@ export default class Navbar extends Vue {}
 
     &__item {
       justify-content: center;
+
+      svg {
+        height: 2rem;
+      }
     }
   }
 }
