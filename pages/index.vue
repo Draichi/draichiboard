@@ -21,10 +21,10 @@
           ></DoughnutChart>
         </template>
         <template v-slot:bottom>
-          <BarChart
-            :data="contributionsEvolution"
+          <RadarChart
+            :data="totalRepositoriesWithContributions"
             id="contributions-evolution"
-          ></BarChart>
+          ></RadarChart>
         </template>
       </Sidebar>
       <MainContent>
@@ -92,14 +92,15 @@ import { User, ContributionCalendarDay } from '~/types/graphql-types'
       import('@/components/Dashboard/BottomAnalysisItemText.vue'),
     Sidebar: () => import('@/components/Dashboard/Sidebar.vue'),
     DoughnutChart: () => import('@/components/Charts/Doughnut.js'),
+    RadarChart: () => import('@/components/Charts/Radar'),
     BarChart: () => import('@/components/Charts/Bar.js'),
     HorizontalBarChart: () => import('@/components/Charts/HorizontalBar.js'),
   },
   asyncData,
 })
 export default class IndexPage extends Vue {
-  oneYearContributionCalendar: ContributionCalendarDay[] = [] as ContributionCalendarDay[];
-  thisYearContributions: User = {} as User;
+  oneYearContributionCalendar: ContributionCalendarDay[] = [] as ContributionCalendarDay[]
+  thisYearContributions: User = {} as User
   comittsTimeserieData: number[] = []
   comittsTimeserieLabels: string[] = []
   created() {
@@ -149,9 +150,12 @@ export default class IndexPage extends Vue {
   }
   get contributionsDistributionsData() {
     return [
-      this.thisYearContributions.contributionsCollection.totalIssueContributions || 0,
-      this.thisYearContributions.contributionsCollection.totalPullRequestContributions || 0,
-      this.thisYearContributions.contributionsCollection.totalPullRequestReviewContributions || 0,
+      this.thisYearContributions.contributionsCollection
+        .totalIssueContributions || 0,
+      this.thisYearContributions.contributionsCollection
+        .totalPullRequestContributions || 0,
+      this.thisYearContributions.contributionsCollection
+        .totalPullRequestReviewContributions || 0,
     ]
   }
   get contributionsDistribution() {
@@ -212,11 +216,14 @@ export default class IndexPage extends Vue {
 
   get totalReposData() {
     return [
-      this.thisYearContributions.contributionsCollection.totalRepositoriesWithContributedCommits || 0,
-      this.thisYearContributions.contributionsCollection.totalRepositoriesWithContributedIssues || 0,
-      this.thisYearContributions.contributionsCollection.totalRepositoriesWithContributedPullRequests || 0,
-      this.thisYearContributions.contributionsCollection.totalRepositoriesWithContributedPullRequestReviews || 0,
-
+      this.thisYearContributions.contributionsCollection
+        .totalRepositoriesWithContributedCommits || 0,
+      this.thisYearContributions.contributionsCollection
+        .totalRepositoriesWithContributedIssues || 0,
+      this.thisYearContributions.contributionsCollection
+        .totalRepositoriesWithContributedPullRequests || 0,
+      this.thisYearContributions.contributionsCollection
+        .totalRepositoriesWithContributedPullRequestReviews || 0,
     ]
   }
 
@@ -225,16 +232,11 @@ export default class IndexPage extends Vue {
       labels: ['Commits', 'Issues', 'PRs', 'Reviews'],
       datasets: [
         {
-          label: 'GitHub Commits',
+          label: 'Repositories with contributions',
           data: this.totalReposData,
-          borderColor: ['#fd5d93', '#36a2eb', '#cc65fe', '#ffce56'], // #fd5d93 pink option
+          borderColor: '#fd5d93',
           borderWidth: 2,
-          backgroundColor: [
-            'rgba(253, 93, 147,0.1)',
-            'rgba(54, 162, 235, 0.1)',
-            'rgba(204, 101, 254, 0.1)',
-            'rgba(255, 206, 86, 0.1)',
-          ],
+          backgroundColor: 'rgba(253, 93, 147,0.1)',
         },
       ],
     }
@@ -268,7 +270,7 @@ export default class IndexPage extends Vue {
 </script>
 
 <style>
-#contributions-evolution > #bar-chart {
+#contributions-evolution > #radar-chart {
   width: 100% !important;
 }
 #contributions-distribution > #doughnut-chart {
