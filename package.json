@@ -39,9 +39,9 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "jest": "^26.0.1",
-    "node-sass": "^4.14.1",
     "prettier": "^2.0.5",
-    "sass-loader": "^10.0.1",
+    "sass": "^1.54.0",
+    "sass-loader": "10.0.1",
     "ts-jest": "^26.1.0",
     "vue-jest": "^3.0.4",
     "worker-loader": "^3.0.2"
