@@ -1,9 +1,9 @@
 <template>
   <Card>
-    <div style="height: 10%">
+    <!-- <div>
       <h3 class="font-xl text-gray-500 p-4 font-sans text-lg">Commits</h3>
-    </div>
-    <LineChart :data="data" class="h-auto" style="height: 90%" />
+    </div> -->
+    <LineChart :data="data" class="" style="height: 100%" />
   </Card>
 </template>
 

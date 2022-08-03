@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen">
-    <div class="md:grid grid-cols-5 gap-6 p-6 md:pl-0 h-full" v-if="!isLoading">
+    <div class="md:grid grid-cols-8 gap-6 p-6 md:pl-0 h-full">
       <Sidebar
         topTitle="Contributions distribution"
         bottomTitle="Contributions evolution"
@@ -36,43 +36,22 @@
         </template>
         <template v-slot:bottom:item-1>
           <BottomAnalysisItemChart
-            title="Total repositories with contributions"
+            title="Followers"
           >
-            <DoughnutChart
-              :data="totalRepositoriesWithContributions"
-              :options="{
-                responsive: true,
-                legend: {
-                  position: 'right',
-                  labels: {
-                    boxWidth: 20,
-                    fontSize: 30,
-                  },
-                },
-                tooltips: {
-                  bodyFontSize: 24,
-                },
-              }"
-              id="all-contributions-distribution"
-            ></DoughnutChart>
+            3
           </BottomAnalysisItemChart>
         </template>
         <template v-slot:bottom:item-2>
-          <BottomAnalysisItemChart title="Created repositories">
-            <HorizontalBarChart
-              id="repositories-created"
-              :height="200"
-              :data="repositoriesCreated"
-            ></HorizontalBarChart>
+          <BottomAnalysisItemChart title="Repos created">
+            4
           </BottomAnalysisItemChart>
         </template>
         <template v-slot:bottom:item-3>
-          <BottomAnalysisItemText :commits="totalContributions">
+          <BottomAnalysisItemText :commits="13">
           </BottomAnalysisItemText>
         </template>
       </MainContent>
     </div>
-    <Spinner v-else />
   </div>
 </template>
 
@@ -83,7 +62,6 @@ import { User, ContributionCalendarDay } from '~/types/graphql-types'
 
 @Component({
   components: {
-    Spinner: () => import('@/components/UI/Spinner.vue'),
     Timeserie: () => import('@/components/Dashboard/Timeserie.vue'),
     MainContent: () => import('@/components/Dashboard/MainContent.vue'),
     BottomAnalysisItemChart: () =>
@@ -103,36 +81,6 @@ export default class IndexPage extends Vue {
   thisYearContributions: User = {} as User
   comittsTimeserieData: number[] = []
   comittsTimeserieLabels: string[] = []
-  created() {
-    this.$store.dispatch('statistics/fetchData')
-    this.$store.dispatch('commits/fetchCommits')
-  }
-  get getCommitsTimeserie() {
-    const data = this.$store.getters['statistics/commitsTimeseries']
-    return data
-  }
-  get commitsTimeserieLabels() {
-    const data = this.getCommitsTimeserie
-    if (data) {
-      let labels: string[] = []
-      data.forEach((item: any) => {
-        labels.unshift(...item.label)
-      })
-      return labels
-    }
-    return data
-  }
-  get commitsTimeserieData() {
-    const data = this.getCommitsTimeserie
-    if (data) {
-      let commitsData: number[] = []
-      data.forEach((item: any) => {
-        commitsData.unshift(...item.data)
-      })
-      return commitsData
-    }
-    return data
-  }
   get commitsTimeserie() {
     return {
       labels: this.comittsTimeserieLabels,
@@ -144,9 +92,6 @@ export default class IndexPage extends Vue {
         },
       ],
     }
-  }
-  get isLoading(): boolean {
-    return this.$store.getters['statistics/loading']
   }
   get contributionsDistributionsData() {
     return [
@@ -178,42 +123,6 @@ export default class IndexPage extends Vue {
     }
   }
 
-  get totalContributions(): number {
-    return this.$store.getters['statistics/totalContributions']
-  }
-
-  get totalContributionsByYear(): {
-    totalContributions: number
-    yearLabel: string
-  }[] {
-    return this.$store.getters['statistics/totalContributionsByYear']
-  }
-
-  get contributionsEvolution() {
-    return {
-      labels: this.totalContributionsByYear
-        .map((item) => `20${item.yearLabel}`)
-        .reverse(),
-      datasets: [
-        {
-          label: 'Total Contributions',
-          data: this.totalContributionsByYear
-            .map((item) => item.totalContributions)
-            .reverse(),
-          borderColor: ['#fd5d93', '#36a2eb', '#cc65fe', '#ffce56', '#42b883'], // #fd5d93 pink option
-          borderWidth: 2,
-          backgroundColor: [
-            'rgba(253, 93, 147,0.1)',
-            'rgba(54, 162, 235, 0.1)',
-            'rgba(204, 101, 254, 0.1)',
-            'rgba(255, 206, 86, 0.1)',
-            'rgba(76, 211, 150, 0.3)',
-          ],
-        },
-      ],
-    }
-  }
-
   get totalReposData() {
     return [
       this.thisYearContributions.contributionsCollection
@@ -237,31 +146,6 @@ export default class IndexPage extends Vue {
           borderColor: '#fd5d93',
           borderWidth: 2,
           backgroundColor: 'rgba(253, 93, 147,0.1)',
-        },
-      ],
-    }
-  }
-
-  get createdReposByYear(): {
-    reposCreated: number
-    yearLabel: string
-  }[] {
-    return this.$store.getters['statistics/createdReposByYear']
-  }
-
-  get repositoriesCreated() {
-    return {
-      labels: this.createdReposByYear
-        .map((item) => `20${item.yearLabel}`)
-        .reverse(),
-      datasets: [
-        {
-          borderColor: '#fd5d93',
-          label: 'Created Repos',
-          borderWidth: 2,
-          data: this.createdReposByYear
-            .map((item) => item.reposCreated)
-            .reverse(),
         },
       ],
     }

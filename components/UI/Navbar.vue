@@ -301,8 +301,7 @@ export default class Navbar extends Vue {}
     }
 
     svg {
-      min-width: 2rem;
-      margin: 0 1.5rem;
+      margin: 0 0.75rem;
     }
   }
 }
@@ -330,7 +329,7 @@ export default class Navbar extends Vue {}
 @media (min-width: 640px) {
   .Navbar {
     top: 0;
-    width: 5rem;
+    width: 4rem;
     height: 100vh;
 
     &:hover {
