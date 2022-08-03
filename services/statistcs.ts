@@ -9,15 +9,15 @@ interface ContributionsCollectionResponse {
 export const asyncData = async ({ app, store }: Context) => {
     try {
         const today = new Date()
-        let lastMonth = new Date()
-        lastMonth.setMonth(today.getMonth() - 1)
+        let lastWeek = new Date()
+        lastWeek.setDate(today.getDate() - 7)
 
         const thisYearContributions = await app.apolloProvider?.defaultClient
             .query({
                 query: ContributionCollection,
                 variables: {
                     login: 'Draichi',
-                    from: lastMonth,
+                    from: lastWeek,
                     to: today,
                 },
             })
