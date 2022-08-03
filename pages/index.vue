@@ -38,12 +38,12 @@
           <BottomAnalysisItemChart
             title="Followers"
           >
-            3
+            {{ thisYearContributions.followers.totalCount }}
           </BottomAnalysisItemChart>
         </template>
         <template v-slot:bottom:item-2>
           <BottomAnalysisItemChart title="Repos created">
-            4
+            {{ thisYearContributions.contributionsCollection.totalRepositoryContributions }}
           </BottomAnalysisItemChart>
         </template>
         <template v-slot:bottom:item-3>
