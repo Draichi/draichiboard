@@ -38,12 +38,16 @@
           <BottomAnalysisItemChart
             title="Followers"
           >
-            {{ thisYearContributions.followers.totalCount }}
+            <p class="text-xl text-white">
+              {{ thisYearContributions.followers.totalCount }}
+            </p>
           </BottomAnalysisItemChart>
         </template>
         <template v-slot:bottom:item-2>
           <BottomAnalysisItemChart title="Repos created">
-            {{ thisYearContributions.contributionsCollection.totalRepositoryContributions }}
+            <p class="text-xl text-white">
+              {{ thisYearContributions.contributionsCollection.totalRepositoryContributions }}
+            </p>
           </BottomAnalysisItemChart>
         </template>
         <template v-slot:bottom:item-3>
@@ -128,9 +132,9 @@ export default class IndexPage extends Vue {
       this.thisYearContributions.contributionsCollection
         .totalRepositoriesWithContributedCommits || 0,
       this.thisYearContributions.contributionsCollection
-        .totalRepositoriesWithContributedIssues || 0,
-      this.thisYearContributions.contributionsCollection
         .totalRepositoriesWithContributedPullRequests || 0,
+      this.thisYearContributions.contributionsCollection
+        .totalRepositoriesWithContributedIssues || 0,
       this.thisYearContributions.contributionsCollection
         .totalRepositoriesWithContributedPullRequestReviews || 0,
     ]
@@ -138,7 +142,7 @@ export default class IndexPage extends Vue {
 
   get totalRepositoriesWithContributions() {
     return {
-      labels: ['Commits', 'Issues', 'PRs', 'Reviews'],
+      labels: ['Commits', 'PRs', 'Issues', 'Reviews'],
       datasets: [
         {
           label: 'Repositories with contributions',
