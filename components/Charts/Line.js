@@ -20,10 +20,8 @@ export default {
     this.data.datasets[0].pointBackgroundColor = '#42b883';
     this.data.datasets[0].pointBorderColor = 'rgba(255,255,255,0)';
     this.data.datasets[0].pointHoverBackgroundColor = '#42b883';
-    this.data.datasets[0].pointBorderWidth = 20;
-    this.data.datasets[0].pointHoverRadius = 4;
-    this.data.datasets[0].pointHoverBorderWidth = 15;
-    this.data.datasets[0].pointRadius = 4;
+    this.data.datasets[0].tension = 0.65;
+    this.data.datasets[0].pointRadius = 0;
     this.renderChart(this.data, {
       responsive: true,
       maintainAspectRatio: false,

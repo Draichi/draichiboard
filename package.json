@@ -13,17 +13,11 @@
     "generate-graphql-types": "graphql-codegen --config codegen.yml -r dotenv/config"
   },
   "dependencies": {
-    "@nuxt/typescript-runtime": "^0.4.10",
     "@nuxtjs/apollo": "^4.0.1-rc.5",
     "@nuxtjs/axios": "^5.11.0",
-    "@nuxtjs/dotenv": "^1.4.1",
-    "@nuxtjs/pwa": "^3.0.0-beta.20",
-    "@types/chart.js": "^2.9.23",
     "chart.js": "^2.9.3",
     "nuxt": "^2.13.0",
-    "vue-chartjs": "^3.5.0",
-    "vue-class-component": "^7.2.5",
-    "vue-property-decorator": "^9.0.0"
+    "vue-chartjs": "^3.5.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.6.2",
@@ -31,19 +25,17 @@
     "@graphql-codegen/typescript-graphql-files-modules": "^2.1.1",
     "@graphql-codegen/typescript-operations": "^2.4.0",
     "@nuxt/typescript-build": "^1.0.3",
+    "@nuxt/typescript-runtime": "^2.1.0",
+    "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/tailwindcss": "^2.0.0",
-    "@vue/test-utils": "^1.0.3",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "^26.0.1",
+    "@types/chart.js": "^2.9.37",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "jest": "^26.0.1",
+    "nuxt-property-decorator": "^2.9.1",
     "prettier": "^2.0.5",
     "sass": "^1.54.0",
     "sass-loader": "10.0.1",
-    "ts-jest": "^26.1.0",
-    "vue-jest": "^3.0.4",
-    "worker-loader": "^3.0.2"
+    "vue-class-component": "^7.2.6"
   }
 }

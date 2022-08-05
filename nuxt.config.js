@@ -24,7 +24,6 @@ export default {
   ],
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
     '@nuxtjs/apollo'
   ],
@@ -35,14 +34,6 @@ export default {
   },
   build: {
     target: 'static',
-    extend(config, { isDev, isClient }) {
-      if (isClient) {
-        config.module.rules.push({
-          test: /\.worker\.js$/,
-          use: { loader: 'worker-loader' },
-        })
-      }
-    },
   },
   env: {
     GH_TOKEN: process.env.GH_TOKEN,

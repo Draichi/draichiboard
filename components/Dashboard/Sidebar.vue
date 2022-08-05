@@ -1,5 +1,5 @@
 <template>
-  <Card class="mb-5 md:mb-0">
+  <Card class="mb-5 md:mb-0 md:col-span-2">
     <div class="grid grid-rows-2 h-full">
       <div class="px-10 flex flex-col justify-evenly">
         <h3 class="text-gray-500 text-center text-lg font-sans">
@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'nuxt-property-decorator'
 
 @Component({
   components: {
