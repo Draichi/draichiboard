@@ -1,6 +1,7 @@
 <template>
   <div class="h-screen">
-    <div class="md:grid grid-cols-8 gap-6 p-6 md:pl-0 h-full">
+    <Spinner v-if="isLoading" />
+    <div v-else class="md:grid grid-cols-8 gap-6 p-6 md:pl-0 h-full">
       <Sidebar
         topTitle="Contributions distribution"
         bottomTitle="Contributions evolution"
@@ -35,9 +36,7 @@
           ></Timeserie>
         </template>
         <template v-slot:bottom:item-1>
-          <BottomAnalysisItemChart
-            title="Followers"
-          >
+          <BottomAnalysisItemChart title="Followers">
             <p class="text-xl text-white">
               {{ thisYearContributions.followers.totalCount }}
             </p>
@@ -46,13 +45,15 @@
         <template v-slot:bottom:item-2>
           <BottomAnalysisItemChart title="Repos created">
             <p class="text-xl text-white">
-              {{ thisYearContributions.contributionsCollection.totalRepositoryContributions }}
+              {{
+                thisYearContributions.contributionsCollection
+                  .totalRepositoryContributions
+              }}
             </p>
           </BottomAnalysisItemChart>
         </template>
         <template v-slot:bottom:item-3>
-          <BottomAnalysisItemText :commits="13">
-          </BottomAnalysisItemText>
+          <BottomAnalysisItemText :commits="13"> </BottomAnalysisItemText>
         </template>
       </MainContent>
     </div>
@@ -61,8 +62,17 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { asyncData } from '@/services/statistcs'
-import { User, ContributionCalendarDay } from '~/types/graphql-types'
+import {
+  ContributionCalendarDay,
+  ContributionsCollection,
+  User,
+} from '@/types/graphql-types'
+import ContributionCollection from '@/apollo/queries/contributionsCollection.gql'
+import Spinner from '@/components/UI/Spinner.vue'
+
+interface ContributionsCollectionResponse {
+  data?: ContributionsCollection
+}
 
 @Component({
   components: {
@@ -77,14 +87,60 @@ import { User, ContributionCalendarDay } from '~/types/graphql-types'
     RadarChart: () => import('@/components/Charts/Radar'),
     BarChart: () => import('@/components/Charts/Bar.js'),
     HorizontalBarChart: () => import('@/components/Charts/HorizontalBar.js'),
+    Spinner,
   },
-  asyncData,
 })
 export default class IndexPage extends Vue {
   oneYearContributionCalendar: ContributionCalendarDay[] = [] as ContributionCalendarDay[]
   thisYearContributions: User = {} as User
   comittsTimeserieData: number[] = []
   comittsTimeserieLabels: string[] = []
+  isLoading: boolean = true
+
+  async created() {
+    try {
+      const today = new Date()
+      let lastWeek = new Date()
+      lastWeek.setDate(today.getDate() - 7)
+
+      const thisYearContributions = await this.$apolloProvider?.defaultClient
+        .query({
+          query: ContributionCollection,
+          variables: {
+            login: 'Draichi',
+            from: lastWeek,
+            to: today,
+          },
+        })
+        .then(({ data }: ContributionsCollectionResponse) => data && data.user)
+
+      if (!thisYearContributions) {
+        return { thisYearContributions }
+      }
+
+      const oneYearContributionCalendar = thisYearContributions.contributionsCollection.contributionCalendar.weeks.flatMap(
+        (contributionCalendarWeek) =>
+          contributionCalendarWeek.contributionDays.flat()
+      )
+
+      const comittsTimeserieData = oneYearContributionCalendar.map(
+        (item) => item.contributionCount
+      )
+      const comittsTimeserieLabels = oneYearContributionCalendar.map(
+        (item) => item.date as string
+      )
+
+      this.oneYearContributionCalendar = oneYearContributionCalendar
+      this.thisYearContributions = thisYearContributions
+      this.comittsTimeserieData = comittsTimeserieData
+      this.comittsTimeserieLabels = comittsTimeserieLabels
+      this.isLoading = false
+    } catch (error) {
+      this.oneYearContributionCalendar = {} as ContributionCalendarDay[]
+      this.thisYearContributions = {} as User
+      this.isLoading = false
+    }
+  }
   get commitsTimeserie() {
     return {
       labels: this.comittsTimeserieLabels,
