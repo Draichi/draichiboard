@@ -11,6 +11,11 @@
     "generate-graphql-types": "npx graphql-codegen --config codegen.yml -r dotenv/config"
   },
   "devDependencies": {
-    "nuxt": "3.0.0"
+    "@nuxt/eslint-config": "^0.1.1",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "nuxt": "3.0.0",
+    "prettier": "2.8.1",
+    "vite-plugin-eslint": "^1.8.1"
   }
 }
