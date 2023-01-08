@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+
 import foo from '@/src/3d-models/laptop/scene.gltf'
 
 onMounted(() => {
@@ -15,18 +16,21 @@ onMounted(() => {
 
   const fov = 35
   const aspect = sizes.width / sizes.height
-  const near = 0.9
+  const near = 0.1
   const far = 1000
 
   const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
+
+  camera.position.set(0, -1.5, 0)
 
   const gltfLoader = new GLTFLoader()
 
   gltfLoader.load(foo, ({ scene: modelScene }) => {
     modelScene.name = 'laptop_computer_low_poly'
-    // modelScene.scale.set(2, 2, 2)
-    modelScene.position.set(0, 2, 0)
-    modelScene.rotation.x = 2
+    modelScene.position.set(0.03, 0, 0.06)
+    modelScene.rotation.x = -Math.PI / 2.6
+    modelScene.rotation.y = -Math.PI / 5.5
+    modelScene.rotation.z = Math.PI / 6
     scene.add(modelScene)
     camera.lookAt(modelScene.position)
   })
@@ -57,7 +61,7 @@ onMounted(() => {
 
 <template>
   <div :class="$style.container">
-    <canvas id="webgl-renderer" :style="$style.container__canvas"></canvas>
+    <canvas id="webgl-renderer" :class="$style.container__canvas"></canvas>
   </div>
 </template>
 
