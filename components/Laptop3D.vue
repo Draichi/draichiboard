@@ -71,6 +71,8 @@ onMounted(() => {
   border-radius: 15px;
   width: 100%;
   height: 230px;
+  position: sticky;
+  top: 0;
 }
 
 .container__canvas {

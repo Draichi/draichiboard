@@ -14,6 +14,7 @@
 .hero-card__text {
   color: #36a2eb;
   text-align: center;
-  font-family: fantasy;
+  font-family: 'Lacquer', fantasy;
+  letter-spacing: -0.045em;
 }
 </style>

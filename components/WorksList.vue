@@ -18,5 +18,7 @@
   gap: 3.75rem;
   flex-direction: column;
   padding: 3.875rem 0.8125rem;
+  list-style: none;
+  margin-top: calc(100vh - 230px);
 }
 </style>

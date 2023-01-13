@@ -13,17 +13,15 @@ const styleObject = {
 
 <template>
   <div :class="$style.tile" :style="styleObject">
-    <p>
+    <p :class="$style.tile__title">
       {{ title }}
     </p>
-    <div>
-      <h3 :class="$style.tile__content">
-        <slot />
-        <span :class="$style.tile__icon">
-          <slot name="icon" />
-        </span>
-      </h3>
-    </div>
+    <h3 :class="$style.tile__content">
+      <slot />
+      <span :class="$style.tile__icon">
+        <slot name="icon" />
+      </span>
+    </h3>
   </div>
 </template>
 
@@ -36,14 +34,21 @@ const styleObject = {
   justify-content: space-between;
   align-items: flex-start;
   flex-direction: column;
-  padding: 20px 29px;
+  padding: 20px 15px;
+  font-weight: 500;
+}
+
+.tile__title {
+  font-size: 1.25rem;
 }
 
 .tile__content {
+  width: 100%;
+  display: flex;
   font-size: 3.125rem;
 }
 
 .tile__icon {
-  margin-left: 30px;
+  margin-left: 1.5rem;
 }
 </style>
