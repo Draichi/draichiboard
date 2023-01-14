@@ -16,6 +16,59 @@ export default defineNuxtConfig({
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/css2?family=Lacquer&family=Poppins:wght@400;500&display=swap',
         },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          sizes: '16x16',
+          href: '/favicon/favicon-16x16.png',
+        },
+        {
+          rel: 'icon',
+          type: 'image/x-icon',
+          href: '/favicon/favicon.ico',
+        },
+      ],
+      meta: [
+        {
+          name: 'theme-color',
+          content: '#36A2EB',
+        },
+        {
+          property: 'og:title',
+          content: 'Draichiboard',
+        },
+        {
+          property: 'og:description',
+          content: 'I make people buy your stuff',
+        },
+        {
+          property: 'og:type',
+          content: 'profile',
+        },
+        {
+          property: 'og:profile:first_name',
+          content: 'Lucas',
+        },
+        {
+          property: 'og:profile:last_name',
+          content: 'Draichi',
+        },
+        {
+          property: 'og:profile:username',
+          content: '@Draichi',
+        },
+        {
+          property: 'og:image',
+          content: '/imgs/site-cover.png',
+        },
+        {
+          property: 'og:image:height',
+          content: '700',
+        },
+        {
+          property: 'og:image:width',
+          content: '1152',
+        },
       ],
     },
   },
