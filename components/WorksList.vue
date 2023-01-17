@@ -1,7 +1,7 @@
 <template>
-  <ul :class="$style.works">
-    <li>IBM</li>
-    <li>Sabido</li>
+  <ul id="works-list" :class="$style.works">
+    <li id="ibm">IBM</li>
+    <li id="sabido">Sabido</li>
     <li>Globo</li>
     <li>Talentify</li>
     <li>Age of Learning</li>
@@ -19,6 +19,6 @@
   flex-direction: column;
   padding: 3.875rem 0.8125rem;
   list-style: none;
-  margin-top: calc(100vh - 230px);
+  margin-top: calc(100vh - 230px - 208px);
 }
 </style>

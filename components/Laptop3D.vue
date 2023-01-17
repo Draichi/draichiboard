@@ -60,19 +60,26 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="$style.container">
-    <canvas id="webgl-renderer" :class="$style.container__canvas"></canvas>
+  <div id="laptop-3d" :class="$style['laptop3d-container']">
+    <div :class="$style.container">
+      <canvas id="webgl-renderer" :class="$style.container__canvas"></canvas>
+    </div>
   </div>
 </template>
 
 <style module>
+.laptop3d-container {
+  background-color: #0b0f0f;
+  padding-top: 8px;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+}
 .container {
   background: #e3d45a;
   border-radius: 15px;
-  width: 100%;
   height: 230px;
-  position: sticky;
-  top: 0;
 }
 
 .container__canvas {

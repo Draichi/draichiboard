@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style['hero-card']">
+  <div id="lucas-draichi" :class="$style['hero-card']">
     <h1 :class="$style['hero-card__text']">Lucas Draichi</h1>
   </div>
 </template>
@@ -9,6 +9,7 @@
   background-color: #111518;
   border-radius: 20px;
   padding: 1.625rem 0;
+  margin-top: calc(100vh - 230px);
 }
 
 .hero-card__text {

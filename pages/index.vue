@@ -1,4 +1,165 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+ScrollTrigger.defaults({
+  immediateRender: false,
+  scrub: true,
+})
+
+gsap.registerPlugin(ScrollTrigger)
+
+onMounted(() => {
+  const introParallax = gsap.timeline()
+
+  introParallax.fromTo(
+    '#laptop-3d',
+    {
+      yPercent: -100,
+    },
+    {
+      yPercent: 0,
+    }
+  )
+  introParallax.fromTo(
+    '#works-list',
+    {
+      xPercent: -100,
+    },
+    {
+      xPercent: 0,
+    }
+  )
+
+  const contactParallax = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#works-list',
+      start: 'bottom center',
+      end: '+=230',
+      scrub: true,
+      // markers: true,
+    },
+    defaults: {
+      ease: 'Power1.easeIn',
+    },
+  })
+
+  contactParallax.fromTo(
+    '#laptop-3d',
+    {
+      y: 0,
+    },
+    {
+      y: '-238',
+    }
+  )
+
+  contactParallax.fromTo(
+    '#works-list',
+    {
+      opacity: 1,
+    },
+    {
+      opacity: 0,
+    },
+    '<'
+  )
+
+  const foo = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#lucas-draichi',
+      start: 'top bottom',
+      end: 'bottom bottom',
+      scrub: true,
+      // markers: true,
+    },
+    defaults: {
+      ease: 'Power3.easeIn',
+    },
+  })
+
+  foo.fromTo(
+    '#lucas-draichi',
+    {
+      opacity: 0,
+    },
+    {
+      opacity: 1,
+    }
+  )
+
+  const bar = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#CTA',
+      start: 'top bottom',
+      end: 'bottom bottom',
+      scrub: true,
+      // markers: true,
+    },
+    defaults: {
+      ease: 'Power3.easeIn',
+    },
+  })
+
+  bar.fromTo(
+    '#CTA',
+    {
+      opacity: 0,
+      xPercent: -50,
+    },
+    {
+      opacity: 1,
+      xPercent: 0,
+    }
+  )
+
+  const baz = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#profile-photo',
+      start: 'top bottom',
+      end: 'bottom bottom',
+      scrub: true,
+      // markers: true,
+    },
+    defaults: {
+      ease: 'Power3.easeIn',
+    },
+  })
+
+  baz.fromTo(
+    '#profile-photo',
+    {
+      opacity: 0,
+      xPercent: -30,
+    },
+    {
+      opacity: 1,
+      xPercent: 0,
+    }
+  )
+
+  gsap.timeline({
+    scrollTrigger: {
+      trigger: '#ibm',
+      start: 'top 80%',
+      end: 'bottom 80%',
+      markers: true,
+      onEnter: () => console.log('ibm'),
+    },
+  })
+
+  gsap.timeline({
+    scrollTrigger: {
+      trigger: '#sabido',
+      start: 'top 80%',
+      end: 'bottom 80%',
+      markers: true,
+      onEnter: () => console.log('sabido'),
+      onEnterBack: () => console.log('leaveback'),
+    },
+  })
+})
+</script>
 
 <template>
   <main :class="$style.index">
@@ -104,7 +265,7 @@
 
 <style module>
 .index {
-  margin: 0.5rem;
+  margin: 0 0.5rem;
   display: flex;
   flex-direction: column;
   gap: 8px;

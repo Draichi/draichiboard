@@ -1,5 +1,10 @@
 <template>
-  <img alt="" :class="$style.profilePhoto" src="/imgs/profile-photo.png" />
+  <img
+    id="profile-photo"
+    alt=""
+    :class="$style.profilePhoto"
+    src="/imgs/profile-photo.png"
+  />
 </template>
 
 <style module>
