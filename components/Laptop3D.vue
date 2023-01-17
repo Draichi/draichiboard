@@ -4,6 +4,16 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 import foo from '@/src/3d-models/laptop/scene.gltf'
 
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+ScrollTrigger.defaults({
+  immediateRender: false,
+  scrub: true,
+})
+
+gsap.registerPlugin(ScrollTrigger)
+
 onMounted(() => {
   const canvas = document.getElementById('webgl-renderer') as HTMLCanvasElement
 
@@ -33,6 +43,40 @@ onMounted(() => {
     modelScene.rotation.z = Math.PI / 6
     scene.add(modelScene)
     camera.lookAt(modelScene.position)
+
+    function onEnter() {
+      gsap.to(modelScene.rotation, {
+        x: -Math.PI / 4,
+        y: -Math.PI / 4,
+        z: Math.PI / 4,
+      })
+      camera.lookAt(modelScene.position)
+    }
+
+    function onEnterBack() {
+      gsap.to(modelScene.rotation, {
+        x: -Math.PI / 4,
+        y: Math.PI / 2,
+        z: -Math.PI / 4,
+      })
+      camera.lookAt(modelScene.position)
+    }
+
+    function useScrollTriggerAnimation(trigger: string) {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger,
+          start: 'top 80%',
+          end: 'bottom 80%',
+          onEnter: onEnter,
+          onEnterBack: onEnterBack,
+        },
+      })
+    }
+
+    useScrollTriggerAnimation('#ibm')
+    useScrollTriggerAnimation('#sabido')
+    useScrollTriggerAnimation('#globo')
   })
 
   const renderer = new THREE.WebGLRenderer({

@@ -2,7 +2,7 @@
   <ul id="works-list" :class="$style.works">
     <li id="ibm">IBM</li>
     <li id="sabido">Sabido</li>
-    <li>Globo</li>
+    <li id="globo">Globo</li>
     <li>Talentify</li>
     <li>Age of Learning</li>
   </ul>

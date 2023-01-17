@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.container">
+  <div id="about" :class="$style.container">
     <h3 :class="$style.title">About</h3>
     <p :class="$style.text">
       I'm a software engineer since 2015, front-end developer and web designer.

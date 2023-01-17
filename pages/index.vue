@@ -9,6 +9,32 @@ ScrollTrigger.defaults({
 
 gsap.registerPlugin(ScrollTrigger)
 
+function useScrollAnimation(trigger: string, xPercent: number) {
+  const timeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: trigger,
+      start: 'top bottom',
+      end: 'bottom bottom',
+      scrub: true,
+    },
+    defaults: {
+      ease: 'Power3.easeIn',
+    },
+  })
+
+  timeline.fromTo(
+    trigger,
+    {
+      opacity: 0,
+      xPercent: xPercent,
+    },
+    {
+      opacity: 1,
+      xPercent: 0,
+    }
+  )
+}
+
 onMounted(() => {
   const introParallax = gsap.timeline()
 
@@ -31,20 +57,19 @@ onMounted(() => {
     }
   )
 
-  const contactParallax = gsap.timeline({
+  const worksAndLaptopInteraction = gsap.timeline({
     scrollTrigger: {
       trigger: '#works-list',
       start: 'bottom center',
       end: '+=230',
       scrub: true,
-      // markers: true,
     },
     defaults: {
       ease: 'Power1.easeIn',
     },
   })
 
-  contactParallax.fromTo(
+  worksAndLaptopInteraction.fromTo(
     '#laptop-3d',
     {
       y: 0,
@@ -54,7 +79,7 @@ onMounted(() => {
     }
   )
 
-  contactParallax.fromTo(
+  worksAndLaptopInteraction.fromTo(
     '#works-list',
     {
       opacity: 1,
@@ -65,99 +90,15 @@ onMounted(() => {
     '<'
   )
 
-  const foo = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#lucas-draichi',
-      start: 'top bottom',
-      end: 'bottom bottom',
-      scrub: true,
-      // markers: true,
-    },
-    defaults: {
-      ease: 'Power3.easeIn',
-    },
-  })
-
-  foo.fromTo(
-    '#lucas-draichi',
-    {
-      opacity: 0,
-    },
-    {
-      opacity: 1,
-    }
-  )
-
-  const bar = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#CTA',
-      start: 'top bottom',
-      end: 'bottom bottom',
-      scrub: true,
-      // markers: true,
-    },
-    defaults: {
-      ease: 'Power3.easeIn',
-    },
-  })
-
-  bar.fromTo(
-    '#CTA',
-    {
-      opacity: 0,
-      xPercent: -50,
-    },
-    {
-      opacity: 1,
-      xPercent: 0,
-    }
-  )
-
-  const baz = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#profile-photo',
-      start: 'top bottom',
-      end: 'bottom bottom',
-      scrub: true,
-      // markers: true,
-    },
-    defaults: {
-      ease: 'Power3.easeIn',
-    },
-  })
-
-  baz.fromTo(
-    '#profile-photo',
-    {
-      opacity: 0,
-      xPercent: -30,
-    },
-    {
-      opacity: 1,
-      xPercent: 0,
-    }
-  )
-
-  gsap.timeline({
-    scrollTrigger: {
-      trigger: '#ibm',
-      start: 'top 80%',
-      end: 'bottom 80%',
-      markers: true,
-      onEnter: () => console.log('ibm'),
-    },
-  })
-
-  gsap.timeline({
-    scrollTrigger: {
-      trigger: '#sabido',
-      start: 'top 80%',
-      end: 'bottom 80%',
-      markers: true,
-      onEnter: () => console.log('sabido'),
-      onEnterBack: () => console.log('leaveback'),
-    },
-  })
+  useScrollAnimation('#lucas-draichi', 0)
+  useScrollAnimation('#CTA', -40)
+  useScrollAnimation('#profile-photo', -30)
+  useScrollAnimation('#about', -20)
+  useScrollAnimation('#email-tile', -5)
+  useScrollAnimation('#github-tile', -5)
+  useScrollAnimation('#resume-tile', -5)
+  useScrollAnimation('#dashboard-tile', -5)
+  useScrollAnimation('#blog-tile', -5)
 })
 </script>
 
@@ -175,14 +116,15 @@ onMounted(() => {
 
     <AboutCard />
 
-    <TileCard title="lucasdraichi@gmail.com">
+    <TileCard id="email-tile" title="lucasdraichi@gmail.com">
       <template #default>Email</template>
       <template #icon>
         <img alt="" src="/icons/copy.svg" />
       </template>
     </TileCard>
 
-    <TileCard background-color="#4FD1C5" color="#122120" title="Social Network">
+    <!-- Use Linkedin later? -->
+    <!-- <TileCard background-color="#4FD1C5" color="#122120" title="Social Network">
       <template #default>Linkedin</template>
       <template #icon>
         <svg
@@ -198,9 +140,14 @@ onMounted(() => {
           />
         </svg>
       </template>
-    </TileCard>
+    </TileCard> -->
 
-    <TileCard background-color="#1D1D1D" color="#E3D45A" title="Social Network">
+    <TileCard
+      id="github-tile"
+      background-color="#1D1D1D"
+      color="#E3D45A"
+      title="Social Network"
+    >
       <template #default>Github</template>
       <template #icon>
         <svg
@@ -218,14 +165,24 @@ onMounted(() => {
       </template>
     </TileCard>
 
-    <TileCard background-color="#8F9A9D" color="#122120" title="125kb">
+    <TileCard
+      id="resume-tile"
+      background-color="#8F9A9D"
+      color="#122120"
+      title="125kb"
+    >
       <template #default>Resume</template>
       <template #icon>
         <img alt="" src="/icons/cloud-download.svg" />
       </template>
     </TileCard>
 
-    <TileCard background-color="#E3D45A" color="#302408" title="Draichiboard">
+    <TileCard
+      id="dashboard-tile"
+      background-color="#E3D45A"
+      color="#302408"
+      title="Draichiboard"
+    >
       <template #default>Dashboard</template>
       <template #icon>
         <svg
@@ -243,7 +200,12 @@ onMounted(() => {
       </template>
     </TileCard>
 
-    <TileCard background-color="#CC65FE" color="#230830" title="Draichiboard">
+    <TileCard
+      id="blog-tile"
+      background-color="#CC65FE"
+      color="#230830"
+      title="Draichiboard"
+    >
       <template #default>Blog</template>
       <template #icon>
         <svg
@@ -265,7 +227,7 @@ onMounted(() => {
 
 <style module>
 .index {
-  margin: 0 0.5rem;
+  margin: 0 0.5rem 0.5rem 0.5rem;
   display: flex;
   flex-direction: column;
   gap: 8px;
