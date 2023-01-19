@@ -16,7 +16,16 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 button {
   border: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 </style>
