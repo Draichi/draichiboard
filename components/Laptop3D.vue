@@ -2,7 +2,7 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
-import foo from '@/src/3d-models/laptop/scene.gltf'
+import laptopModelPath from '@/src/3d-models/laptop-rotate/scene.glb'
 
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -35,12 +35,9 @@ onMounted(() => {
 
   const gltfLoader = new GLTFLoader()
 
-  gltfLoader.load(foo, ({ scene: modelScene }) => {
+  gltfLoader.load(laptopModelPath, ({ scene: modelScene }) => {
     modelScene.name = 'laptop_computer_low_poly'
-    modelScene.position.set(0.03, 0, 0.06)
-    modelScene.rotation.x = -Math.PI / 2.6
-    modelScene.rotation.y = -Math.PI / 5.5
-    modelScene.rotation.z = Math.PI / 6
+    modelScene.rotation.z = Math.PI
     scene.add(modelScene)
     camera.lookAt(modelScene.position)
 

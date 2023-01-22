@@ -83,6 +83,6 @@ export default defineNuxtConfig({
         apply: 'serve',
       },
     ],
-    assetsInclude: ['**/*.gltf'],
+    assetsInclude: ['**/*.gltf', '**/*.glb'],
   },
 })
