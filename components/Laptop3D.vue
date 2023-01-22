@@ -77,6 +77,44 @@ onMounted(() => {
     useScrollTriggerAnimation('#ibm')
     useScrollTriggerAnimation('#sabido')
     useScrollTriggerAnimation('#globo')
+
+    const rotationAnimation = gsap.fromTo(
+      modelScene.rotation,
+      {
+        z: Math.PI - Math.PI / 6,
+      },
+      {
+        z: Math.PI - -Math.PI / 6,
+        yoyo: true,
+        repeat: -1,
+        duration: 10,
+        ease: 'Power1.easeInOut',
+      }
+    )
+
+    const worksListItems = document.querySelectorAll('#works-list > li')
+
+    worksListItems.forEach((item) => {
+      item.addEventListener('click', () => {
+        rotationAnimation.pause()
+        gsap.to(modelScene.rotation, {
+          z: Math.PI,
+        })
+        gsap.to(modelScene.position, {
+          y: -1,
+        })
+      })
+
+      item.addEventListener('contextmenu', () => {
+        gsap.to(modelScene.position, {
+          y: 0,
+        })
+        gsap.to(modelScene.rotation, {
+          z: Math.PI - Math.PI / 6,
+        })
+        rotationAnimation.restart()
+      })
+    })
   })
 
   const renderer = new THREE.WebGLRenderer({
