@@ -2,10 +2,10 @@
   <div id="CTA" :class="$style['CTA-card']">
     <h2 :class="$style['CTA-card__text']">I make people buy your stuff</h2>
     <div :class="$style['CTA-card__button-wrapper']">
-      <button :class="$style['CTA-card__button']">
+      <a :class="$style['CTA-card__button']" href="#email-tile">
         <img alt="" src="/icons/mail.svg" />
         <span :class="$style['CTA-card__button-text']">Contact</span>
-      </button>
+      </a>
     </div>
   </div>
 </template>

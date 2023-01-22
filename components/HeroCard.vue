@@ -8,7 +8,7 @@
 .hero-card {
   background-color: #111518;
   border-radius: 20px;
-  padding: 1.625rem 0;
+  padding: 2.5rem 0;
   margin-top: calc(100vh - 230px);
 }
 

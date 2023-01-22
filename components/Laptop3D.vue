@@ -31,7 +31,7 @@ onMounted(() => {
 
   const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
 
-  camera.position.set(0, -1.5, 0)
+  camera.position.set(0, -1, 0)
 
   const gltfLoader = new GLTFLoader()
 
@@ -41,32 +41,28 @@ onMounted(() => {
     scene.add(modelScene)
     camera.lookAt(modelScene.position)
 
-    function onEnter() {
-      gsap.to(modelScene.rotation, {
-        x: -Math.PI / 4,
-        y: -Math.PI / 4,
-        z: Math.PI / 4,
-      })
-      camera.lookAt(modelScene.position)
+    function addTextDecoration(trigger: string) {
+      const liElement = document.querySelector(trigger) as HTMLLIElement
+
+      liElement.style.textDecorationLine = 'underline'
     }
 
-    function onEnterBack() {
-      gsap.to(modelScene.rotation, {
-        x: -Math.PI / 4,
-        y: Math.PI / 2,
-        z: -Math.PI / 4,
-      })
-      camera.lookAt(modelScene.position)
+    function removeTextDecoration(trigger: string) {
+      const liElement = document.querySelector(trigger) as HTMLLIElement
+
+      liElement.style.textDecorationLine = 'none'
     }
 
     function useScrollTriggerAnimation(trigger: string) {
       gsap.timeline({
         scrollTrigger: {
           trigger,
-          start: 'top 80%',
-          end: 'bottom 80%',
-          onEnter: onEnter,
-          onEnterBack: onEnterBack,
+          start: 'top bottom-=208px',
+          end: 'bottom bottom-=208px',
+          onEnter: () => addTextDecoration(trigger),
+          onLeave: () => removeTextDecoration(trigger),
+          onLeaveBack: () => removeTextDecoration(trigger),
+          onEnterBack: () => addTextDecoration(trigger),
         },
       })
     }
