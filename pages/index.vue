@@ -56,6 +56,17 @@ onMounted(() => {
       xPercent: 0,
     }
   )
+  introParallax.fromTo(
+    '#works-title',
+    {
+      yPercent: 100,
+      opacity: 0,
+    },
+    {
+      yPercent: 0,
+      opacity: 1,
+    }
+  )
 
   const worksAndLaptopInteraction = gsap.timeline({
     scrollTrigger: {
@@ -105,6 +116,8 @@ onMounted(() => {
 <template>
   <main :class="$style.index">
     <Laptop3D />
+
+    <p id="works-title" :class="$style.subtitle">Selected Works 2015 - 2023</p>
 
     <WorksList />
 
@@ -235,5 +248,12 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.subtitle {
+  font-weight: 400;
+  font-size: 16px;
+  margin-top: calc(100vh - 230px - 208px);
+  color: #919f96;
 }
 </style>

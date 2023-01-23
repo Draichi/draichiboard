@@ -70,6 +70,8 @@ onMounted(() => {
     useScrollTriggerAnimation('#ibm')
     useScrollTriggerAnimation('#sabido')
     useScrollTriggerAnimation('#globo')
+    useScrollTriggerAnimation('#talentify')
+    useScrollTriggerAnimation('#age-of-learning')
 
     const rotationAnimation = gsap.fromTo(
       modelScene.rotation,
