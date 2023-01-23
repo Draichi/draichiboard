@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 import laptopModelPath from '@/src/3d-models/laptop-rotate/scene.glb'
 
@@ -33,6 +34,10 @@ onMounted(() => {
 
   camera.position.set(0, -1, 0)
 
+  const controls = new OrbitControls(camera, canvas)
+
+  controls.enableDamping = true
+  controls.dampingFactor = 0.02
   const gltfLoader = new GLTFLoader()
 
   gltfLoader.load(laptopModelPath, ({ scene: modelScene }) => {
@@ -128,6 +133,7 @@ onMounted(() => {
   scene.add(light)
 
   function tick() {
+    controls.update()
     renderer.render(scene, camera)
     requestAnimationFrame(tick)
   }
@@ -140,6 +146,7 @@ onMounted(() => {
   <div id="laptop-3d" :class="$style['laptop3d-container']">
     <div :class="$style.container">
       <canvas id="webgl-renderer" :class="$style.container__canvas"></canvas>
+      <p :class="$style.text">drag to orbit</p>
     </div>
   </div>
 </template>
@@ -157,6 +164,16 @@ onMounted(() => {
   background: #e3d45a;
   border-radius: 15px;
   height: 230px;
+  position: relative;
+}
+
+.text {
+  color: #242314;
+  font-weight: 400;
+  font-size: 10px;
+  position: absolute;
+  bottom: 8px;
+  right: 15px;
 }
 
 .container__canvas {
