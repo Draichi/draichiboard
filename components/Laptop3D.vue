@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-import laptopModelPath from '@/src/3d-models/laptop-rotate/scene.glb'
+import laptopModelPath from '@/src/3d-models/laptop-2/scene.glb'
 
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -38,11 +38,29 @@ onMounted(() => {
 
   controls.enableDamping = true
   controls.dampingFactor = 0.02
+
+  const ibmVideo = document.getElementById('ibm-video') as HTMLVideoElement
+
+  ibmVideo.play()
+  ibmVideo.loop = true
+
+  const ibmVideoTexture = new THREE.VideoTexture(ibmVideo)
+
+  ibmVideoTexture.center.set(0.5, 0.5)
+  ibmVideoTexture.rotation = Math.PI
+
   const gltfLoader = new GLTFLoader()
 
   gltfLoader.load(laptopModelPath, ({ scene: modelScene }) => {
-    modelScene.name = 'laptop_computer_low_poly'
     modelScene.rotation.z = Math.PI
+
+    modelScene.traverse((child: any) => {
+      if (child.isMesh && child.name === 'Screen') {
+        child.material = new THREE.MeshBasicMaterial({
+          map: ibmVideoTexture,
+        })
+      }
+    })
     scene.add(modelScene)
     camera.lookAt(modelScene.position)
 
@@ -62,8 +80,8 @@ onMounted(() => {
       gsap.timeline({
         scrollTrigger: {
           trigger,
-          start: 'top bottom-=208px',
-          end: 'bottom bottom-=208px',
+          start: 'top-=29px bottom-=208px',
+          end: 'bottom+=29px bottom-=208px',
           onEnter: () => addTextDecoration(trigger),
           onLeave: () => removeTextDecoration(trigger),
           onLeaveBack: () => removeTextDecoration(trigger),

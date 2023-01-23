@@ -114,6 +114,14 @@ onMounted(() => {
 </script>
 
 <template>
+  <video
+    id="ibm-video"
+    autoplay
+    muted
+    playsinline
+    src="/screenshots/IBM/ibm-preview.mov"
+    style="display: none"
+  ></video>
   <main :class="$style.index">
     <Laptop3D />
 
