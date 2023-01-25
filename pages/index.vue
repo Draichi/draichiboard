@@ -2,6 +2,16 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+const isCopyToclipboardMessageVisible = ref(false)
+
+function onEmailTileClick() {
+  navigator.clipboard.writeText('lucasdraichi@gmail.com')
+  isCopyToclipboardMessageVisible.value = true
+  setTimeout(() => {
+    isCopyToclipboardMessageVisible.value = false
+  }, 3000)
+}
+
 ScrollTrigger.defaults({
   immediateRender: false,
   scrub: true,
@@ -137,10 +147,21 @@ onMounted(() => {
 
     <AboutCard />
 
-    <TileCard id="email-tile" title="lucasdraichi@gmail.com">
+    <TileCard
+      id="email-tile"
+      title="lucasdraichi@gmail.com"
+      @click="onEmailTileClick"
+    >
       <template #default>Email</template>
       <template #icon>
-        <img alt="" src="/icons/copy.svg" />
+        <img
+          v-if="!isCopyToclipboardMessageVisible"
+          alt=""
+          src="/icons/copy.svg"
+        />
+        <p v-else :class="$style['copied-to-clipboard']">
+          Copied<br />to clipboard!
+        </p>
       </template>
     </TileCard>
 
@@ -263,5 +284,9 @@ onMounted(() => {
   font-size: 16px;
   margin-top: calc(100vh - 230px - 208px);
   color: #919f96;
+}
+
+.copied-to-clipboard {
+  font-size: 1rem;
 }
 </style>

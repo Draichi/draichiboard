@@ -36,6 +36,7 @@ const styleObject = {
   flex-direction: column;
   padding: 20px 15px;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .tile__title {
@@ -46,6 +47,7 @@ const styleObject = {
   width: 100%;
   display: flex;
   font-size: 3.125rem;
+  align-items: center;
 }
 
 .tile__icon {
