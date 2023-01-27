@@ -2,8 +2,8 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-
-import laptopModelPath from '@/src/3d-models/laptop-2/scene.glb'
+import GUI from 'lil-gui'
+import laptopModelPath from '@/src/3d-models/mackbook/lucas.glb'
 
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -16,6 +16,8 @@ ScrollTrigger.defaults({
 gsap.registerPlugin(ScrollTrigger)
 
 onMounted(() => {
+  const gui = new GUI()
+
   const canvas = document.getElementById('webgl-renderer') as HTMLCanvasElement
 
   const sizes = {
@@ -47,92 +49,161 @@ onMounted(() => {
   const ibmVideoTexture = new THREE.VideoTexture(ibmVideo)
 
   ibmVideoTexture.center.set(0.5, 0.5)
-  ibmVideoTexture.rotation = Math.PI
+  ibmVideoTexture.rotation = (3 * Math.PI) / 2
 
   const gltfLoader = new GLTFLoader()
 
   gltfLoader.load(laptopModelPath, ({ scene: modelScene }) => {
-    modelScene.rotation.z = Math.PI
+    // modelScene.rotation.x = Math.PI\
 
     modelScene.traverse((child: any) => {
-      if (child.isMesh && child.name === 'Screen') {
+      if (child.isMesh && child.name === 'Display') {
         child.material = new THREE.MeshBasicMaterial({
           map: ibmVideoTexture,
+          side: THREE.DoubleSide,
         })
       }
-    })
-    scene.add(modelScene)
-    camera.lookAt(modelScene.position)
 
-    function addTextDecoration(trigger: string) {
-      const liElement = document.querySelector(trigger) as HTMLLIElement
+      scene.add(modelScene)
+      camera.lookAt(modelScene.position)
 
-      liElement.style.textDecorationLine = 'underline'
-    }
+      function addTextDecoration(trigger: string) {
+        const liElement = document.querySelector(trigger) as HTMLLIElement
 
-    function removeTextDecoration(trigger: string) {
-      const liElement = document.querySelector(trigger) as HTMLLIElement
-
-      liElement.style.textDecorationLine = 'none'
-    }
-
-    function useScrollTriggerAnimation(trigger: string) {
-      gsap.timeline({
-        scrollTrigger: {
-          trigger,
-          start: 'top-=29px bottom-=208px',
-          end: 'bottom+=29px bottom-=208px',
-          onEnter: () => addTextDecoration(trigger),
-          onLeave: () => removeTextDecoration(trigger),
-          onLeaveBack: () => removeTextDecoration(trigger),
-          onEnterBack: () => addTextDecoration(trigger),
-        },
-      })
-    }
-
-    useScrollTriggerAnimation('#ibm')
-    useScrollTriggerAnimation('#sabido')
-    useScrollTriggerAnimation('#globo')
-    useScrollTriggerAnimation('#talentify')
-    useScrollTriggerAnimation('#age-of-learning')
-
-    const rotationAnimation = gsap.fromTo(
-      modelScene.rotation,
-      {
-        z: Math.PI - Math.PI / 6,
-      },
-      {
-        z: Math.PI - -Math.PI / 6,
-        yoyo: true,
-        repeat: -1,
-        duration: 10,
-        ease: 'Power1.easeInOut',
+        liElement.style.textDecorationLine = 'underline'
       }
-    )
 
-    const worksListItems = document.querySelectorAll('#works-list > li')
+      function removeTextDecoration(trigger: string) {
+        const liElement = document.querySelector(trigger) as HTMLLIElement
 
-    worksListItems.forEach((item) => {
-      item.addEventListener('click', () => {
-        rotationAnimation.pause()
-        gsap.to(modelScene.rotation, {
-          z: Math.PI,
-        })
-        gsap.to(modelScene.position, {
-          y: -1,
-        })
-      })
+        liElement.style.textDecorationLine = 'none'
+      }
 
-      item.addEventListener('contextmenu', () => {
-        gsap.to(modelScene.position, {
-          y: 0,
+      function useScrollTriggerAnimation(trigger: string) {
+        gsap.timeline({
+          scrollTrigger: {
+            trigger,
+            start: 'top-=29px bottom-=208px',
+            end: 'bottom+=29px bottom-=208px',
+            onEnter: () => addTextDecoration(trigger),
+            onLeave: () => removeTextDecoration(trigger),
+            onLeaveBack: () => removeTextDecoration(trigger),
+            onEnterBack: () => addTextDecoration(trigger),
+          },
         })
-        gsap.to(modelScene.rotation, {
+      }
+
+      useScrollTriggerAnimation('#ibm')
+      useScrollTriggerAnimation('#sabido')
+      useScrollTriggerAnimation('#globo')
+      useScrollTriggerAnimation('#talentify')
+      useScrollTriggerAnimation('#age-of-learning')
+
+      const rotationAnimation = gsap.fromTo(
+        modelScene.rotation,
+        {
           z: Math.PI - Math.PI / 6,
+        },
+        {
+          z: Math.PI - -Math.PI / 6,
+          yoyo: true,
+          repeat: -1,
+          duration: 10,
+          ease: 'Power1.easeInOut',
+        }
+      )
+
+      const worksListItems = document.querySelectorAll('#works-list > li')
+
+      worksListItems.forEach((item) => {
+        item.addEventListener('click', () => {
+          rotationAnimation.pause()
+          gsap.to(modelScene.rotation, {
+            z: Math.PI,
+          })
+          gsap.to(modelScene.position, {
+            y: -1,
+          })
         })
-        rotationAnimation.restart()
+
+        item.addEventListener('contextmenu', () => {
+          gsap.to(modelScene.position, {
+            y: 0,
+          })
+          gsap.to(modelScene.rotation, {
+            z: Math.PI - Math.PI / 6,
+          })
+          rotationAnimation.restart()
+        })
       })
     })
+
+    const planeAspect = 29 / 19.5
+    const imageAspect = 1360 / 878
+    const aspect = imageAspect / planeAspect
+
+    ibmVideoTexture.wrapS = THREE.RepeatWrapping
+    ibmVideoTexture.wrapT = THREE.RepeatWrapping
+
+    console.log({ planeAspect, imageAspect, aspect })
+
+    // const offsetX = (1 - 1 / aspect) / 2
+    // const repeatX = 1 / aspect
+
+    const offsetY = 0
+    // const repeatY = 1
+
+    // console.log(ibmVideoTexture)
+
+    const API = {
+      offsetX: -0.38,
+      offsetY,
+      repeatX: 2.94,
+      repeatY: 2.202,
+      rotation: (3 * Math.PI) / 2, // positive is counter-clockwise
+      centerX: 0.5,
+      centerY: 0.5,
+    }
+
+    updateUvTransform(ibmVideoTexture)
+
+    function updateUvTransform(texture: any) {
+      if (texture.matrixAutoUpdate === true) {
+        texture.offset.set(API.offsetX, API.offsetY)
+        texture.repeat.set(API.repeatX, API.repeatY)
+        texture.center.set(API.centerX, API.centerY)
+        texture.rotation = API.rotation // rotation is around [ 0.5, 0.5 ]
+      }
+    }
+
+    gui
+      .add(API, 'offsetX', -3, 3)
+      .name('offset.x')
+      .onChange(() => updateUvTransform(ibmVideoTexture))
+    gui
+      .add(API, 'offsetY', -3, 3)
+      .name('offset.y')
+      .onChange(() => updateUvTransform(ibmVideoTexture))
+    gui
+      .add(API, 'repeatX', -3, 3)
+      .name('repeat.x')
+      .onChange(() => updateUvTransform(ibmVideoTexture))
+    gui
+      .add(API, 'repeatY', -3, 3)
+      .name('repeat.y')
+      .onChange(() => updateUvTransform(ibmVideoTexture))
+    gui
+      .add(API, 'rotation', -3, 3)
+      .name('rotation')
+      .onChange(() => updateUvTransform(ibmVideoTexture))
+    gui
+      .add(API, 'centerX', -3, 3)
+      .name('center.x')
+      .onChange(() => updateUvTransform(ibmVideoTexture))
+    gui
+      .add(API, 'centerY', -3, 3)
+      .name('center.y')
+      .onChange(() => updateUvTransform(ibmVideoTexture))
   })
 
   const renderer = new THREE.WebGLRenderer({
@@ -149,6 +220,10 @@ onMounted(() => {
   light.position.set(0, -2, 0)
 
   scene.add(light)
+
+  const axisHelper = new THREE.AxesHelper(5)
+
+  scene.add(axisHelper)
 
   function tick() {
     controls.update()
@@ -179,7 +254,8 @@ onMounted(() => {
   z-index: 99;
 }
 .container {
-  background: #e3d45a;
+  background: gray;
+  /* background: #e3d45a; */
   border-radius: 15px;
   height: 230px;
   position: relative;
