@@ -163,6 +163,7 @@ onMounted(() => {
       background-color="#1D1D1D"
       color="#E3D45A"
       title="Social Network"
+      title-color="#B9BFC1"
     >
       <template #default>Github</template>
       <template #icon>
