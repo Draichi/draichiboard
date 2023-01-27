@@ -2,8 +2,8 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import GUI from 'lil-gui'
-import laptopModelPath from '@/src/3d-models/mackbook/lucas.glb'
+// import GUI from 'lil-gui'
+import laptopModelPath from '@/src/3d-models/mackbook/scene.glb'
 
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -16,7 +16,7 @@ ScrollTrigger.defaults({
 gsap.registerPlugin(ScrollTrigger)
 
 onMounted(() => {
-  const gui = new GUI()
+  // const gui = new GUI()
 
   const canvas = document.getElementById('webgl-renderer') as HTMLCanvasElement
 
@@ -34,7 +34,7 @@ onMounted(() => {
 
   const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
 
-  camera.position.set(0, -1, 0)
+  camera.position.set(0, -0.6, 0)
 
   const controls = new OrbitControls(camera, canvas)
 
@@ -54,8 +54,6 @@ onMounted(() => {
   const gltfLoader = new GLTFLoader()
 
   gltfLoader.load(laptopModelPath, ({ scene: modelScene }) => {
-    // modelScene.rotation.x = Math.PI\
-
     modelScene.traverse((child: any) => {
       if (child.isMesh && child.name === 'Display') {
         child.material = new THREE.MeshBasicMaterial({
@@ -63,6 +61,8 @@ onMounted(() => {
           side: THREE.DoubleSide,
         })
       }
+
+      modelScene.position.z = -0.05
 
       scene.add(modelScene)
       camera.lookAt(modelScene.position)
@@ -138,29 +138,19 @@ onMounted(() => {
       })
     })
 
-    const planeAspect = 29 / 19.5
-    const imageAspect = 1360 / 878
-    const aspect = imageAspect / planeAspect
+    // const planeAspect = 29 / 19.5
+    // const imageAspect = 1360 / 878
+    // const aspect = imageAspect / planeAspect
 
-    ibmVideoTexture.wrapS = THREE.RepeatWrapping
-    ibmVideoTexture.wrapT = THREE.RepeatWrapping
-
-    console.log({ planeAspect, imageAspect, aspect })
-
-    // const offsetX = (1 - 1 / aspect) / 2
-    // const repeatX = 1 / aspect
-
-    const offsetY = 0
-    // const repeatY = 1
-
-    // console.log(ibmVideoTexture)
+    // ibmVideoTexture.wrapS = THREE.RepeatWrapping
+    // ibmVideoTexture.wrapT = THREE.RepeatWrapping
 
     const API = {
       offsetX: -0.38,
-      offsetY,
+      offsetY: 0.018,
       repeatX: 2.94,
-      repeatY: 2.202,
-      rotation: (3 * Math.PI) / 2, // positive is counter-clockwise
+      repeatY: 2.76,
+      rotation: (3 * Math.PI) / 2,
       centerX: 0.5,
       centerY: 0.5,
     }
@@ -176,34 +166,34 @@ onMounted(() => {
       }
     }
 
-    gui
-      .add(API, 'offsetX', -3, 3)
-      .name('offset.x')
-      .onChange(() => updateUvTransform(ibmVideoTexture))
-    gui
-      .add(API, 'offsetY', -3, 3)
-      .name('offset.y')
-      .onChange(() => updateUvTransform(ibmVideoTexture))
-    gui
-      .add(API, 'repeatX', -3, 3)
-      .name('repeat.x')
-      .onChange(() => updateUvTransform(ibmVideoTexture))
-    gui
-      .add(API, 'repeatY', -3, 3)
-      .name('repeat.y')
-      .onChange(() => updateUvTransform(ibmVideoTexture))
-    gui
-      .add(API, 'rotation', -3, 3)
-      .name('rotation')
-      .onChange(() => updateUvTransform(ibmVideoTexture))
-    gui
-      .add(API, 'centerX', -3, 3)
-      .name('center.x')
-      .onChange(() => updateUvTransform(ibmVideoTexture))
-    gui
-      .add(API, 'centerY', -3, 3)
-      .name('center.y')
-      .onChange(() => updateUvTransform(ibmVideoTexture))
+    // gui
+    //   .add(API, 'offsetX', -3, 3)
+    //   .name('offset.x')
+    //   .onChange(() => updateUvTransform(ibmVideoTexture))
+    // gui
+    //   .add(API, 'offsetY', -3, 3)
+    //   .name('offset.y')
+    //   .onChange(() => updateUvTransform(ibmVideoTexture))
+    // gui
+    //   .add(API, 'repeatX', -3, 3)
+    //   .name('repeat.x')
+    //   .onChange(() => updateUvTransform(ibmVideoTexture))
+    // gui
+    //   .add(API, 'repeatY', -3, 3)
+    //   .name('repeat.y')
+    //   .onChange(() => updateUvTransform(ibmVideoTexture))
+    // gui
+    //   .add(API, 'rotation', -3, 3)
+    //   .name('rotation')
+    //   .onChange(() => updateUvTransform(ibmVideoTexture))
+    // gui
+    //   .add(API, 'centerX', -3, 3)
+    //   .name('center.x')
+    //   .onChange(() => updateUvTransform(ibmVideoTexture))
+    // gui
+    //   .add(API, 'centerY', -3, 3)
+    //   .name('center.y')
+    //   .onChange(() => updateUvTransform(ibmVideoTexture))
   })
 
   const renderer = new THREE.WebGLRenderer({
@@ -220,10 +210,6 @@ onMounted(() => {
   light.position.set(0, -2, 0)
 
   scene.add(light)
-
-  const axisHelper = new THREE.AxesHelper(5)
-
-  scene.add(axisHelper)
 
   function tick() {
     controls.update()

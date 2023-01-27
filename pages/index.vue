@@ -103,7 +103,7 @@ onMounted(() => {
     autoplay
     muted
     playsinline
-    src="/screenshots/IBM/ibm-preview.mov"
+    src="/screenshots/IBM/preview.mov"
     style="display: none"
   ></video>
   <main :class="$style.index">
