@@ -122,7 +122,7 @@ onMounted(() => {
             z: Math.PI,
           })
           gsap.to(modelScene.position, {
-            y: -1,
+            y: -0.2,
           })
         })
 
@@ -130,9 +130,9 @@ onMounted(() => {
           gsap.to(modelScene.position, {
             y: 0,
           })
-          gsap.to(modelScene.rotation, {
-            z: Math.PI - Math.PI / 6,
-          })
+          // gsap.to(modelScene.rotation, {
+          //   z: Math.PI - Math.PI / 6,
+          // })
           rotationAnimation.restart()
         })
       })
@@ -240,8 +240,7 @@ onMounted(() => {
   z-index: 99;
 }
 .container {
-  background: gray;
-  /* background: #e3d45a; */
+  background: #e3d45a;
   border-radius: 15px;
   height: 230px;
   position: relative;

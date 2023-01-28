@@ -158,41 +158,45 @@ onMounted(() => {
       </template>
     </TileCard> -->
 
-    <TileCard
-      id="github-tile"
-      background-color="#1D1D1D"
-      color="#E3D45A"
-      title="Social Network"
-      title-color="#B9BFC1"
-    >
-      <template #default>Github</template>
-      <template #icon>
-        <svg
-          fill="none"
-          height="27"
-          viewBox="0 0 27 27"
-          width="27"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M13.5 27L11.0953 24.6375L20.5453 15.1875H0V11.8125H20.5453L11.0953 2.3625L13.5 0L27 13.5L13.5 27Z"
-            fill="#E3D45A"
-          />
-        </svg>
-      </template>
-    </TileCard>
+    <a href="https://github.com/Draichi" target="_blank">
+      <TileCard
+        id="github-tile"
+        background-color="#1D1D1D"
+        color="#E3D45A"
+        title="Social Network"
+        title-color="#B9BFC1"
+      >
+        <template #default>Github</template>
+        <template #icon>
+          <svg
+            fill="none"
+            height="27"
+            viewBox="0 0 27 27"
+            width="27"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M13.5 27L11.0953 24.6375L20.5453 15.1875H0V11.8125H20.5453L11.0953 2.3625L13.5 0L27 13.5L13.5 27Z"
+              fill="#E3D45A"
+            />
+          </svg>
+        </template>
+      </TileCard>
+    </a>
 
-    <TileCard
-      id="resume-tile"
-      background-color="#8F9A9D"
-      color="#122120"
-      title="125kb"
-    >
-      <template #default>Resume</template>
-      <template #icon>
-        <img alt="" src="/icons/cloud-download.svg" />
-      </template>
-    </TileCard>
+    <a download href="/misc/LucasDraichiResume.pdf">
+      <TileCard
+        id="resume-tile"
+        background-color="#8F9A9D"
+        color="#122120"
+        title="125kb"
+      >
+        <template #default>Resume</template>
+        <template #icon>
+          <img alt="" src="/icons/cloud-download.svg" />
+        </template>
+      </TileCard>
+    </a>
 
     <NuxtLink to="/dashboard">
       <TileCard
