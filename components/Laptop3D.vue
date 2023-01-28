@@ -67,38 +67,6 @@ onMounted(() => {
       scene.add(modelScene)
       camera.lookAt(modelScene.position)
 
-      function addTextDecoration(trigger: string) {
-        const liElement = document.querySelector(trigger) as HTMLLIElement
-
-        liElement.style.textDecorationLine = 'underline'
-      }
-
-      function removeTextDecoration(trigger: string) {
-        const liElement = document.querySelector(trigger) as HTMLLIElement
-
-        liElement.style.textDecorationLine = 'none'
-      }
-
-      function useScrollTriggerAnimation(trigger: string) {
-        gsap.timeline({
-          scrollTrigger: {
-            trigger,
-            start: 'top-=29px bottom-=208px',
-            end: 'bottom+=29px bottom-=208px',
-            onEnter: () => addTextDecoration(trigger),
-            onLeave: () => removeTextDecoration(trigger),
-            onLeaveBack: () => removeTextDecoration(trigger),
-            onEnterBack: () => addTextDecoration(trigger),
-          },
-        })
-      }
-
-      useScrollTriggerAnimation('#ibm')
-      useScrollTriggerAnimation('#sabido')
-      useScrollTriggerAnimation('#globo')
-      useScrollTriggerAnimation('#talentify')
-      useScrollTriggerAnimation('#age-of-learning')
-
       const rotationAnimation = gsap.fromTo(
         modelScene.rotation,
         {

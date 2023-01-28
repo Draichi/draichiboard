@@ -4,6 +4,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const isCopyToclipboardMessageVisible = ref(false)
 
+const isPopupVisible = ref(false)
+
+function onCloseButtonClick() {
+  isPopupVisible.value = false
+}
+
 function onEmailTileClick() {
   navigator.clipboard.writeText('lucasdraichi@gmail.com')
   isCopyToclipboardMessageVisible.value = true
@@ -20,6 +26,46 @@ ScrollTrigger.defaults({
 gsap.registerPlugin(ScrollTrigger)
 
 onMounted(() => {
+  const worksListItems = document.querySelectorAll('#works-list > li')
+
+  worksListItems.forEach((item) => {
+    item.addEventListener('click', () => {
+      isPopupVisible.value = true
+    })
+  })
+
+  function addTextDecoration(trigger: string) {
+    const liElement = document.querySelector(trigger) as HTMLLIElement
+
+    liElement.style.textDecorationLine = 'underline'
+  }
+
+  function removeTextDecoration(trigger: string) {
+    const liElement = document.querySelector(trigger) as HTMLLIElement
+
+    liElement.style.textDecorationLine = 'none'
+  }
+
+  function useScrollTriggerAnimation(trigger: string) {
+    gsap.timeline({
+      scrollTrigger: {
+        trigger,
+        start: 'top-=29px bottom-=208px',
+        end: 'bottom+=29px bottom-=208px',
+        onEnter: () => addTextDecoration(trigger),
+        onLeave: () => removeTextDecoration(trigger),
+        onLeaveBack: () => removeTextDecoration(trigger),
+        onEnterBack: () => addTextDecoration(trigger),
+      },
+    })
+  }
+
+  useScrollTriggerAnimation('#ibm')
+  useScrollTriggerAnimation('#sabido')
+  useScrollTriggerAnimation('#globo')
+  useScrollTriggerAnimation('#talentify')
+  useScrollTriggerAnimation('#age-of-learning')
+
   const introParallax = gsap.timeline()
 
   introParallax.fromTo(
@@ -108,6 +154,10 @@ onMounted(() => {
   ></video>
   <main :class="$style.index">
     <Laptop3D />
+
+    <div v-if="isPopupVisible">
+      <Popup @close-button:click="onCloseButtonClick" />
+    </div>
 
     <p id="works-title" :class="$style.subtitle">Selected Works 2015 - 2023</p>
 
