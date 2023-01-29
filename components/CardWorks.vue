@@ -1,4 +1,5 @@
 <template>
+  <p id="works-title" :class="$style.subtitle">Selected Works 2015 - 2023</p>
   <ul id="works-list" :class="$style.works">
     <li id="ibm" :class="$style['active-item']">IBM</li>
     <li id="sabido">Sabido</li>
@@ -9,6 +10,12 @@
 </template>
 
 <style module>
+.subtitle {
+  font-weight: 400;
+  font-size: 16px;
+  margin-top: calc(100vh - 230px - 208px);
+  color: #919f96;
+}
 .works {
   background-color: #181711;
   color: #ebeae6;

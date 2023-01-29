@@ -153,25 +153,21 @@ onMounted(() => {
     style="display: none"
   ></video>
   <main :class="$style.index">
-    <Laptop3D />
+    <CardWorkPreview />
 
-    <div v-if="isPopupVisible">
-      <Popup @close-button:click="onCloseButtonClick" />
-    </div>
+    <CardPopup v-if="isPopupVisible" @close-button:click="onCloseButtonClick" />
 
-    <p id="works-title" :class="$style.subtitle">Selected Works 2015 - 2023</p>
+    <CardWorks />
 
-    <WorksList />
+    <CardHeading />
 
-    <HeroCard />
+    <CardCTA />
 
-    <CTACard />
+    <CardPhoto />
 
-    <ProfilePhoto />
+    <CardAbout />
 
-    <AboutCard />
-
-    <TileCard
+    <CardLink
       id="email-tile"
       title="lucasdraichi@gmail.com"
       @click="onEmailTileClick"
@@ -187,10 +183,10 @@ onMounted(() => {
           Copied<br />to clipboard!
         </p>
       </template>
-    </TileCard>
+    </CardLink>
 
     <!-- Use Linkedin later? -->
-    <!-- <TileCard background-color="#4FD1C5" color="#122120" title="Social Network">
+    <!-- <CardLink background-color="#4FD1C5" color="#122120" title="Social Network">
       <template #default>Linkedin</template>
       <template #icon>
         <svg
@@ -206,10 +202,10 @@ onMounted(() => {
           />
         </svg>
       </template>
-    </TileCard> -->
+    </CardLink> -->
 
     <a href="https://github.com/Draichi" target="_blank">
-      <TileCard
+      <CardLink
         id="github-tile"
         background-color="#1D1D1D"
         color="#E3D45A"
@@ -231,11 +227,11 @@ onMounted(() => {
             />
           </svg>
         </template>
-      </TileCard>
+      </CardLink>
     </a>
 
     <a download href="/misc/LucasDraichiResume.pdf">
-      <TileCard
+      <CardLink
         id="resume-tile"
         background-color="#8F9A9D"
         color="#122120"
@@ -245,11 +241,11 @@ onMounted(() => {
         <template #icon>
           <img alt="" src="/icons/cloud-download.svg" />
         </template>
-      </TileCard>
+      </CardLink>
     </a>
 
     <NuxtLink to="/dashboard">
-      <TileCard
+      <CardLink
         id="dashboard-tile"
         background-color="#E3D45A"
         color="#302408"
@@ -270,11 +266,11 @@ onMounted(() => {
             />
           </svg>
         </template>
-      </TileCard>
+      </CardLink>
     </NuxtLink>
 
     <NuxtLink to="/blog">
-      <TileCard
+      <CardLink
         id="blog-tile"
         background-color="#CC65FE"
         color="#230830"
@@ -295,7 +291,7 @@ onMounted(() => {
             />
           </svg>
         </template>
-      </TileCard>
+      </CardLink>
     </NuxtLink>
   </main>
 </template>
@@ -306,13 +302,6 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-.subtitle {
-  font-weight: 400;
-  font-size: 16px;
-  margin-top: calc(100vh - 230px - 208px);
-  color: #919f96;
 }
 
 .copied-to-clipboard {
