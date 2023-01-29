@@ -2,8 +2,8 @@
 const props = defineProps({
   backgroundColor: { type: String, default: '#5AE389' },
   color: { type: String, default: '#122117' },
-  titleColor: { type: String, default: null },
-  title: { type: String, default: '' },
+  download: { type: String, default: null },
+  href: { type: String, default: null },
 })
 
 const styleObject = {
@@ -11,23 +11,35 @@ const styleObject = {
   color: props.color,
 }
 
-const titleStyleObject = {
-  color: props.titleColor || props.color,
+const getComponent = () => {
+  if (props.download) {
+    return 'a'
+  }
+
+  if (props.href) {
+    return resolveComponent('NuxtLink')
+  }
+
+  return 'div'
 }
+
+const componentIs = getComponent()
 </script>
 
 <template>
-  <div :class="$style.container" :style="styleObject">
-    <p :class="$style.title" :style="titleStyleObject">
-      {{ title }}
-    </p>
-    <h3 :class="$style.text">
-      <slot />
-      <span :class="$style.icon">
-        <slot name="icon" />
-      </span>
-    </h3>
-  </div>
+  <component :is="componentIs" :download="props.download" :href="props.href">
+    <div :class="$style.container" :style="styleObject">
+      <p :class="$style.title">
+        <slot name="title" />
+      </p>
+      <h3 :class="$style.text">
+        <slot name="text" />
+        <span :class="$style.icon">
+          <slot name="icon" />
+        </span>
+      </h3>
+    </div>
+  </component>
 </template>
 
 <style module>
