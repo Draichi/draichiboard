@@ -13,6 +13,10 @@ ScrollTrigger.defaults({
   scrub: true,
 })
 
+const props = defineProps({
+  workHighlighted: { type: String, default: null },
+})
+
 gsap.registerPlugin(ScrollTrigger)
 
 onMounted(() => {
@@ -193,7 +197,7 @@ onMounted(() => {
   <div id="laptop-3d" :class="$style['laptop3d-container']">
     <div :class="$style.container">
       <canvas id="webgl-renderer" :class="$style.container__canvas"></canvas>
-      <p :class="$style.text">drag to orbit</p>
+      <p :class="$style.text">drag to orbit {{ props.workHighlighted }}</p>
     </div>
   </div>
 </template>

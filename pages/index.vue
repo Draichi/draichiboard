@@ -6,6 +6,11 @@ const isCopyToclipboardMessageVisible = ref(false)
 
 const isPopupVisible = ref(false)
 
+const workHighlighted = ref('#ibm')
+// const workClicked = ref('')
+
+// function onWorkClicked(work: string) {}
+
 function onCloseButtonClick() {
   isPopupVisible.value = false
 }
@@ -46,25 +51,30 @@ onMounted(() => {
     liElement.style.textDecorationLine = 'none'
   }
 
-  function useScrollTriggerAnimation(trigger: string) {
+  function onWorkHighlight(work: string) {
+    addTextDecoration(work)
+    workHighlighted.value = work
+  }
+
+  function useWorksScrollTriggerAnimation(trigger: string) {
     gsap.timeline({
       scrollTrigger: {
         trigger,
         start: 'top-=29px bottom-=208px',
         end: 'bottom+=29px bottom-=208px',
-        onEnter: () => addTextDecoration(trigger),
+        onEnter: () => onWorkHighlight(trigger),
         onLeave: () => removeTextDecoration(trigger),
         onLeaveBack: () => removeTextDecoration(trigger),
-        onEnterBack: () => addTextDecoration(trigger),
+        onEnterBack: () => onWorkHighlight(trigger),
       },
     })
   }
 
-  useScrollTriggerAnimation('#ibm')
-  useScrollTriggerAnimation('#sabido')
-  useScrollTriggerAnimation('#globo')
-  useScrollTriggerAnimation('#talentify')
-  useScrollTriggerAnimation('#age-of-learning')
+  useWorksScrollTriggerAnimation('#ibm')
+  useWorksScrollTriggerAnimation('#sabido')
+  useWorksScrollTriggerAnimation('#globo')
+  useWorksScrollTriggerAnimation('#talentify')
+  useWorksScrollTriggerAnimation('#age-of-learning')
 
   const introParallax = gsap.timeline()
 
@@ -153,7 +163,7 @@ onMounted(() => {
     style="display: none"
   ></video>
   <main :class="$style.index">
-    <CardWorkPreview />
+    <CardWorkPreview :work-highlighted="workHighlighted" />
 
     <CardPopup v-if="isPopupVisible" @close-button:click="onCloseButtonClick" />
 
