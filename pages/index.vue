@@ -267,7 +267,7 @@ onMounted(() => {
     autoplay
     muted
     playsinline
-    src="/screenshots/iPhone 13 Pro/preview.mov"
+    src="/screenshots/iPhone/preview.mov"
     style="display: none"
   ></video>
 </template>
