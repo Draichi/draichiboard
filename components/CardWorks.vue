@@ -17,9 +17,7 @@ function onWorkClick(work: Work) {
     <li id="sabido" @click="onWorkClick('sabido')">Sabido</li>
     <li id="globo" @click="onWorkClick('globo')">Globo</li>
     <li id="talentify" @click="onWorkClick('talentify')">Talentify</li>
-    <li id="age-of-learning" @click="onWorkClick('age-of-learning')">
-      Age of Learning
-    </li>
+    <li id="iphone" @click="onWorkClick('iphone')">iPhone 13 Pro</li>
   </ul>
 </template>
 

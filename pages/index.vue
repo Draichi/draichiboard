@@ -76,7 +76,7 @@ onMounted(() => {
   useWorksScrollTriggerAnimation('sabido')
   useWorksScrollTriggerAnimation('globo')
   useWorksScrollTriggerAnimation('talentify')
-  useWorksScrollTriggerAnimation('age-of-learning')
+  useWorksScrollTriggerAnimation('iphone')
 
   useScrollAnimateXAxis('#lucas-draichi', 0)
   useScrollAnimateXAxis('#CTA', -40)
@@ -244,6 +244,30 @@ onMounted(() => {
     muted
     playsinline
     src="/screenshots/Sabido/preview.mov"
+    style="display: none"
+  ></video>
+  <video
+    id="globo-video"
+    autoplay
+    muted
+    playsinline
+    src="/screenshots/Globo/preview.mov"
+    style="display: none"
+  ></video>
+  <video
+    id="talentify-video"
+    autoplay
+    muted
+    playsinline
+    src="/screenshots/Talentify/preview.mov"
+    style="display: none"
+  ></video>
+  <video
+    id="iphone-video"
+    autoplay
+    muted
+    playsinline
+    src="/screenshots/iPhone 13 Pro/preview.mov"
     style="display: none"
   ></video>
 </template>
