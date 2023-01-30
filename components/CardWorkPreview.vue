@@ -7,15 +7,18 @@ import laptopModelPath from '@/src/3d-models/mackbook/scene.glb'
 
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Work } from '~~/types'
 
 ScrollTrigger.defaults({
   immediateRender: false,
   scrub: true,
 })
 
-const props = defineProps({
-  workHighlighted: { type: String, default: null },
-})
+const props = defineProps<{
+  workHighlighted: Work
+}>()
+
+// const currentVideoTexture = ref<THREE.VideoTexture | null>(null)
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -45,24 +48,78 @@ onMounted(() => {
   controls.enableDamping = true
   controls.dampingFactor = 0.02
 
-  const ibmVideo = document.getElementById('ibm-video') as HTMLVideoElement
-
-  ibmVideo.play()
-  ibmVideo.loop = true
-
-  const ibmVideoTexture = new THREE.VideoTexture(ibmVideo)
-
-  ibmVideoTexture.center.set(0.5, 0.5)
-  ibmVideoTexture.rotation = (3 * Math.PI) / 2
-
   const gltfLoader = new GLTFLoader()
 
   gltfLoader.load(laptopModelPath, ({ scene: modelScene }) => {
     modelScene.traverse((child: any) => {
       if (child.isMesh && child.name === 'Display') {
-        child.material = new THREE.MeshBasicMaterial({
-          map: ibmVideoTexture,
-          side: THREE.DoubleSide,
+        watchEffect(() => {
+          const ibmVideo = document.getElementById(
+            `${props.workHighlighted}-video`
+          ) as HTMLVideoElement
+
+          ibmVideo.play()
+          ibmVideo.loop = true
+
+          const ibmVideoTexture = new THREE.VideoTexture(ibmVideo)
+
+          ibmVideoTexture.center.set(0.5, 0.5)
+          ibmVideoTexture.rotation = (3 * Math.PI) / 2
+
+          const API = {
+            offsetX: -0.38,
+            offsetY: 0.018,
+            repeatX: 2.94,
+            repeatY: 2.76,
+            rotation: (3 * Math.PI) / 2,
+            centerX: 0.5,
+            centerY: 0.5,
+          }
+
+          function updateUvTransform(texture: any) {
+            if (texture.matrixAutoUpdate === true) {
+              texture.offset.set(API.offsetX, API.offsetY)
+              texture.repeat.set(API.repeatX, API.repeatY)
+              texture.center.set(API.centerX, API.centerY)
+              texture.rotation = API.rotation // rotation is around [ 0.5, 0.5 ]
+            }
+          }
+
+          // gui
+          //   .add(API, 'offsetX', -3, 3)
+          //   .name('offset.x')
+          //   .onChange(() => updateUvTransform(currentVideoTexture))
+          // gui
+          //   .add(API, 'offsetY', -3, 3)
+          //   .name('offset.y')
+          //   .onChange(() => updateUvTransform(currentVideoTexture))
+          // gui
+          //   .add(API, 'repeatX', -3, 3)
+          //   .name('repeat.x')
+          //   .onChange(() => updateUvTransform(currentVideoTexture))
+          // gui
+          //   .add(API, 'repeatY', -3, 3)
+          //   .name('repeat.y')
+          //   .onChange(() => updateUvTransform(currentVideoTexture))
+          // gui
+          //   .add(API, 'rotation', -3, 3)
+          //   .name('rotation')
+          //   .onChange(() => updateUvTransform(currentVideoTexture))
+          // gui
+          //   .add(API, 'centerX', -3, 3)
+          //   .name('center.x')
+          //   .onChange(() => updateUvTransform(currentVideoTexture))
+          // gui
+          //   .add(API, 'centerY', -3, 3)
+          //   .name('center.y')
+          //   .onChange(() => updateUvTransform(currentVideoTexture))
+
+          updateUvTransform(ibmVideoTexture)
+
+          child.material = new THREE.MeshBasicMaterial({
+            map: ibmVideoTexture,
+            side: THREE.DoubleSide,
+          })
         })
       }
 
@@ -116,56 +173,6 @@ onMounted(() => {
 
     // ibmVideoTexture.wrapS = THREE.RepeatWrapping
     // ibmVideoTexture.wrapT = THREE.RepeatWrapping
-
-    const API = {
-      offsetX: -0.38,
-      offsetY: 0.018,
-      repeatX: 2.94,
-      repeatY: 2.76,
-      rotation: (3 * Math.PI) / 2,
-      centerX: 0.5,
-      centerY: 0.5,
-    }
-
-    updateUvTransform(ibmVideoTexture)
-
-    function updateUvTransform(texture: any) {
-      if (texture.matrixAutoUpdate === true) {
-        texture.offset.set(API.offsetX, API.offsetY)
-        texture.repeat.set(API.repeatX, API.repeatY)
-        texture.center.set(API.centerX, API.centerY)
-        texture.rotation = API.rotation // rotation is around [ 0.5, 0.5 ]
-      }
-    }
-
-    // gui
-    //   .add(API, 'offsetX', -3, 3)
-    //   .name('offset.x')
-    //   .onChange(() => updateUvTransform(ibmVideoTexture))
-    // gui
-    //   .add(API, 'offsetY', -3, 3)
-    //   .name('offset.y')
-    //   .onChange(() => updateUvTransform(ibmVideoTexture))
-    // gui
-    //   .add(API, 'repeatX', -3, 3)
-    //   .name('repeat.x')
-    //   .onChange(() => updateUvTransform(ibmVideoTexture))
-    // gui
-    //   .add(API, 'repeatY', -3, 3)
-    //   .name('repeat.y')
-    //   .onChange(() => updateUvTransform(ibmVideoTexture))
-    // gui
-    //   .add(API, 'rotation', -3, 3)
-    //   .name('rotation')
-    //   .onChange(() => updateUvTransform(ibmVideoTexture))
-    // gui
-    //   .add(API, 'centerX', -3, 3)
-    //   .name('center.x')
-    //   .onChange(() => updateUvTransform(ibmVideoTexture))
-    // gui
-    //   .add(API, 'centerY', -3, 3)
-    //   .name('center.y')
-    //   .onChange(() => updateUvTransform(ibmVideoTexture))
   })
 
   const renderer = new THREE.WebGLRenderer({
