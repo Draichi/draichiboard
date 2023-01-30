@@ -1,18 +1,30 @@
 <script setup lang="ts">
-import { gsap } from 'gsap'
+import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Work } from '@/types'
+
+ScrollTrigger.defaults({
+  immediateRender: false,
+  scrub: true,
+})
+gsap.registerPlugin(ScrollTrigger)
 
 const isCopyToclipboardMessageVisible = ref(false)
 
 const isPopupVisible = ref(false)
 
-const workHighlighted = ref('#ibm')
+const workHighlighted = ref<Work>('ibm')
 // const workClicked = ref('')
 
 // function onWorkClicked(work: string) {}
 
 function onCloseButtonClick() {
   isPopupVisible.value = false
+}
+
+function onWorkClick(work: string) {
+  console.log({ work })
+  isPopupVisible.value = true
 }
 
 function onEmailTileClick() {
@@ -23,151 +35,68 @@ function onEmailTileClick() {
   }, 3000)
 }
 
-ScrollTrigger.defaults({
-  immediateRender: false,
-  scrub: true,
-})
+function addTextDecoration(work: string) {
+  const elementId = `#${work}`
+  const liElement = document.querySelector(elementId) as HTMLLIElement
 
-gsap.registerPlugin(ScrollTrigger)
+  liElement.style.textDecorationLine = 'underline'
+}
+
+function onWorkHighlight(work: Work) {
+  addTextDecoration(work)
+  workHighlighted.value = work
+}
+
+function removeTextDecoration(work: Work) {
+  const elementId = `#${work}`
+  const liElement = document.querySelector(elementId) as HTMLLIElement
+
+  liElement.style.textDecorationLine = 'none'
+}
+
+function useWorksScrollTriggerAnimation(work: Work) {
+  gsap.timeline({
+    scrollTrigger: {
+      trigger: `#${work}`,
+      start: 'top-=29px bottom-=208px',
+      end: 'bottom+=29px bottom-=208px',
+      onEnter: () => onWorkHighlight(work),
+      onEnterBack: () => onWorkHighlight(work),
+      onLeave: () => removeTextDecoration(work),
+      onLeaveBack: () => removeTextDecoration(work),
+    },
+  })
+}
 
 onMounted(() => {
-  const worksListItems = document.querySelectorAll('#works-list > li')
+  useAboveTheFoldScrollAnimation()
+  useAboveTheFoldIntroAnimation()
 
-  worksListItems.forEach((item) => {
-    item.addEventListener('click', () => {
-      isPopupVisible.value = true
-    })
-  })
+  useWorksScrollTriggerAnimation('ibm')
+  useWorksScrollTriggerAnimation('sabido')
+  useWorksScrollTriggerAnimation('globo')
+  useWorksScrollTriggerAnimation('talentify')
+  useWorksScrollTriggerAnimation('age-of-learning')
 
-  function addTextDecoration(trigger: string) {
-    const liElement = document.querySelector(trigger) as HTMLLIElement
-
-    liElement.style.textDecorationLine = 'underline'
-  }
-
-  function removeTextDecoration(trigger: string) {
-    const liElement = document.querySelector(trigger) as HTMLLIElement
-
-    liElement.style.textDecorationLine = 'none'
-  }
-
-  function onWorkHighlight(work: string) {
-    addTextDecoration(work)
-    workHighlighted.value = work
-  }
-
-  function useWorksScrollTriggerAnimation(trigger: string) {
-    gsap.timeline({
-      scrollTrigger: {
-        trigger,
-        start: 'top-=29px bottom-=208px',
-        end: 'bottom+=29px bottom-=208px',
-        onEnter: () => onWorkHighlight(trigger),
-        onLeave: () => removeTextDecoration(trigger),
-        onLeaveBack: () => removeTextDecoration(trigger),
-        onEnterBack: () => onWorkHighlight(trigger),
-      },
-    })
-  }
-
-  useWorksScrollTriggerAnimation('#ibm')
-  useWorksScrollTriggerAnimation('#sabido')
-  useWorksScrollTriggerAnimation('#globo')
-  useWorksScrollTriggerAnimation('#talentify')
-  useWorksScrollTriggerAnimation('#age-of-learning')
-
-  const introParallax = gsap.timeline()
-
-  introParallax.fromTo(
-    '#laptop-3d',
-    {
-      yPercent: -100,
-    },
-    {
-      yPercent: 0,
-    }
-  )
-  introParallax.fromTo(
-    '#works-list',
-    {
-      xPercent: -100,
-    },
-    {
-      xPercent: 0,
-    }
-  )
-  introParallax.fromTo(
-    '#works-title',
-    {
-      yPercent: 100,
-      opacity: 0,
-    },
-    {
-      yPercent: 0,
-      opacity: 1,
-    }
-  )
-
-  const worksAndLaptopInteraction = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#works-list',
-      start: 'bottom center',
-      end: '+=230',
-      scrub: true,
-    },
-    defaults: {
-      ease: 'Power1.easeIn',
-    },
-  })
-
-  worksAndLaptopInteraction.fromTo(
-    '#laptop-3d',
-    {
-      y: 0,
-    },
-    {
-      y: '-238',
-    }
-  )
-
-  worksAndLaptopInteraction.fromTo(
-    '#works-list',
-    {
-      opacity: 1,
-    },
-    {
-      opacity: 0,
-    },
-    '<'
-  )
-
-  useScrollAnimation('#lucas-draichi', 0)
-  useScrollAnimation('#CTA', -40)
-  useScrollAnimation('#profile-photo', -30)
-  useScrollAnimation('#about', -20)
-  useScrollAnimation('#email-tile', -5)
-  useScrollAnimation('#github-tile', -5)
-  useScrollAnimation('#resume-tile', -5)
-  useScrollAnimation('#dashboard-tile', -5)
-  useScrollAnimation('#blog-tile', -5)
+  useScrollAnimateXAxis('#lucas-draichi', 0)
+  useScrollAnimateXAxis('#CTA', -40)
+  useScrollAnimateXAxis('#profile-photo', -30)
+  useScrollAnimateXAxis('#about', -20)
+  useScrollAnimateXAxis('#email-tile', -5)
+  useScrollAnimateXAxis('#github-tile', -5)
+  useScrollAnimateXAxis('#resume-tile', -5)
+  useScrollAnimateXAxis('#dashboard-tile', -5)
+  useScrollAnimateXAxis('#blog-tile', -5)
 })
 </script>
 
 <template>
-  <video
-    id="ibm-video"
-    autoplay
-    muted
-    playsinline
-    src="/screenshots/IBM/preview.mov"
-    style="display: none"
-  ></video>
   <main :class="$style.index">
     <CardWorkPreview :work-highlighted="workHighlighted" />
 
     <CardPopup v-if="isPopupVisible" @close-button:click="onCloseButtonClick" />
 
-    <CardWorks />
+    <CardWorks @work:click="onWorkClick" />
 
     <CardHeading />
 
@@ -301,6 +230,22 @@ onMounted(() => {
       </template>
     </LazyCardLink>
   </main>
+  <video
+    id="ibm-video"
+    autoplay
+    muted
+    playsinline
+    src="/screenshots/IBM/preview.mov"
+    style="display: none"
+  ></video>
+  <video
+    id="sabido-video"
+    autoplay
+    muted
+    playsinline
+    src="/screenshots/Sabido/preview.mov"
+    style="display: none"
+  ></video>
 </template>
 
 <style module>

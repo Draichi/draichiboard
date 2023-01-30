@@ -25,3 +25,9 @@ declare module '*.gltf' {
 
   export default src
 }
+
+declare module '*.gql' {
+  const content: any
+
+  export default content
+}
