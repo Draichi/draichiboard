@@ -9,29 +9,27 @@ ScrollTrigger.defaults({
 })
 gsap.registerPlugin(ScrollTrigger)
 
-const isCopyToclipboardMessageVisible = ref(false)
-
+const isCopyToClipboardMessageVisible = ref(false)
 const isPopupVisible = ref(false)
-
 const workHighlighted = ref<Work>('ibm')
-// const workClicked = ref('')
-
-// function onWorkClicked(work: string) {}
+const workClicked = ref<Work>('ibm')
 
 function onCloseButtonClick() {
   isPopupVisible.value = false
+  document.body.style.overflow = 'scroll'
 }
 
-function onWorkClick(work: string) {
-  console.log({ work })
+function onWorkClick(work: Work) {
+  workClicked.value = work
   isPopupVisible.value = true
+  document.body.style.overflow = 'hidden'
 }
 
 function onEmailTileClick() {
   navigator.clipboard.writeText('lucasdraichi@gmail.com')
-  isCopyToclipboardMessageVisible.value = true
+  isCopyToClipboardMessageVisible.value = true
   setTimeout(() => {
-    isCopyToclipboardMessageVisible.value = false
+    isCopyToClipboardMessageVisible.value = false
   }, 3000)
 }
 
@@ -94,7 +92,11 @@ onMounted(() => {
   <main :class="$style.index">
     <CardWorkPreview :work-highlighted="workHighlighted" />
 
-    <CardPopup v-if="isPopupVisible" @close-button:click="onCloseButtonClick" />
+    <CardPopup
+      v-if="isPopupVisible"
+      :work-clicked="workClicked"
+      @close-button:click="onCloseButtonClick"
+    />
 
     <CardWorks @work:click="onWorkClick" />
 
@@ -111,7 +113,7 @@ onMounted(() => {
       <template #text>Email</template>
       <template #icon>
         <svg
-          v-if="!isCopyToclipboardMessageVisible"
+          v-if="!isCopyToClipboardMessageVisible"
           fill="none"
           height="28"
           viewBox="0 0 23 28"
