@@ -63,8 +63,9 @@ const componentIs = getComponent()
 .text {
   width: 100%;
   display: flex;
-  font-size: 3.125rem;
+  font-size: 2.85rem;
   align-items: center;
+  font-weight: 500;
 }
 
 .icon {
