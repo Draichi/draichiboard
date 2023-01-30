@@ -1,11 +1,25 @@
+<script setup lang="ts">
+import { Work } from '@/types'
+
+const emit = defineEmits(['work:click'])
+
+function onWorkClick(work: Work) {
+  emit('work:click', work)
+}
+</script>
+
 <template>
   <p id="works-title" :class="$style.subtitle">Selected Works 2015 - 2023</p>
   <ul id="works-list" :class="$style.works">
-    <li id="ibm" :class="$style['active-item']">IBM</li>
-    <li id="sabido">Sabido</li>
-    <li id="globo">Globo</li>
-    <li id="talentify">Talentify</li>
-    <li id="age-of-learning">Age of Learning</li>
+    <li id="ibm" :class="$style['active-item']" @click="onWorkClick('ibm')">
+      IBM
+    </li>
+    <li id="sabido" @click="onWorkClick('sabido')">Sabido</li>
+    <li id="globo" @click="onWorkClick('globo')">Globo</li>
+    <li id="talentify" @click="onWorkClick('talentify')">Talentify</li>
+    <li id="age-of-learning" @click="onWorkClick('age-of-learning')">
+      Age of Learning
+    </li>
   </ul>
 </template>
 
