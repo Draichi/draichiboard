@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import { Work } from '~~/types'
-
 const emit = defineEmits(['close-button:click'])
-const props = defineProps<{
-  workClicked: Work
-}>()
-
-const title = useTransformedTitle(props.workClicked)
 
 function onButtonClick() {
   emit('close-button:click')
@@ -16,7 +9,9 @@ function onButtonClick() {
 <template>
   <div :class="$style.container">
     <div :class="$style.header">
-      <h3 :class="$style.title">{{ title }}</h3>
+      <h3 :class="$style.title">
+        <slot name="title" />
+      </h3>
       <button :class="$style.button" @click="onButtonClick">
         <svg
           fill="none"
@@ -32,17 +27,8 @@ function onButtonClick() {
         </svg>
       </button>
     </div>
-    <div v-if="props.workClicked === 'ibm'">
-      <p>
-        At 2015 I worked at IBM Brasil as a Web Builder, working at the
-        development team, side by side with the design team to implement the new
-        IBM layouts.
-        <br />
-        <br />
-
-        It was great opportunity to learn how the workflow of a distributed team
-        is.
-      </p>
+    <div>
+      <slot name="description" />
     </div>
   </div>
 </template>
@@ -75,5 +61,7 @@ function onButtonClick() {
 
 .button {
   background-color: #181711;
+  cursor: pointer;
+  padding: 0.5rem;
 }
 </style>

@@ -14,6 +14,22 @@ const isPopupVisible = ref(false)
 const workHighlighted = ref<Work>('ibm')
 const workClicked = ref<Work>('ibm')
 
+const isIBMPopupVisible = computed(
+  () => isPopupVisible.value && workClicked.value === 'ibm'
+)
+const isSabidoPopupVisible = computed(
+  () => isPopupVisible.value && workClicked.value === 'sabido'
+)
+const isGloboPopupVisible = computed(
+  () => isPopupVisible.value && workClicked.value === 'globo'
+)
+const isTalentifyPopupVisible = computed(
+  () => isPopupVisible.value && workClicked.value === 'talentify'
+)
+const isIphonePopupVisible = computed(
+  () => isPopupVisible.value && workClicked.value === 'iphone'
+)
+
 function onCloseButtonClick() {
   isPopupVisible.value = false
   document.body.style.overflow = 'scroll'
@@ -91,12 +107,6 @@ onMounted(() => {
 <template>
   <main :class="$style.index">
     <CardWorkPreview :work-highlighted="workHighlighted" />
-
-    <CardPopup
-      v-if="isPopupVisible"
-      :work-clicked="workClicked"
-      @close-button:click="onCloseButtonClick"
-    />
 
     <CardWorks @work:click="onWorkClick" />
 
@@ -231,6 +241,104 @@ onMounted(() => {
         </svg>
       </template>
     </LazyCardLink>
+
+    <CardPopup
+      v-if="isIBMPopupVisible"
+      @close-button:click="onCloseButtonClick"
+    >
+      <template #title>IBM</template>
+      <template #description>
+        <p>
+          At 2015 I worked at IBM Brasil as a Web Builder, working at the
+          development team, side by side with the design team to implement the
+          new IBM layouts.
+          <br />
+          <br />
+          It was great opportunity to learn how the workflow of a distributed
+          team is.
+        </p>
+      </template>
+    </CardPopup>
+
+    <CardPopup
+      v-if="isSabidoPopupVisible"
+      @close-button:click="onCloseButtonClick"
+    >
+      <template #title>Sabido</template>
+      <template #description>
+        <p>
+          Sabido is a micro-learning product created in 2020 to help people
+          share knowledge and learn while navigating.
+          <br />
+          <br />
+          I am one the founders of Sabido, and I worked as the front-end lead
+          developer.
+          <br />
+          <br />
+          The stack chosen is Nuxt + Typescript + Tailwind + Firebase
+        </p>
+      </template>
+    </CardPopup>
+
+    <CardPopup
+      v-if="isGloboPopupVisible"
+      @close-button:click="onCloseButtonClick"
+    >
+      <template #title>Globo</template>
+      <template #description>
+        <p>
+          Sabido is a micro-learning product created in 2020 to help people
+          share knowledge and learn while navigating.
+          <br />
+          <br />
+          I am one the founders of Sabido, and I worked as the front-end lead
+          developer.
+          <br />
+          <br />
+          The stack chosen is Nuxt + Typescript + Tailwind + Firebase
+        </p>
+      </template>
+    </CardPopup>
+
+    <CardPopup
+      v-if="isTalentifyPopupVisible"
+      @close-button:click="onCloseButtonClick"
+    >
+      <template #title>Talentify</template>
+      <template #description>
+        <p>
+          Sabido is a micro-learning product created in 2020 to help people
+          share knowledge and learn while navigating.
+          <br />
+          <br />
+          I am one the founders of Sabido, and I worked as the front-end lead
+          developer.
+          <br />
+          <br />
+          The stack chosen is Nuxt + Typescript + Tailwind + Firebase
+        </p>
+      </template>
+    </CardPopup>
+
+    <CardPopup
+      v-if="isIphonePopupVisible"
+      @close-button:click="onCloseButtonClick"
+    >
+      <template #title>iPhone 13 Pro</template>
+      <template #description>
+        <p>
+          Sabido is a micro-learning product created in 2020 to help people
+          share knowledge and learn while navigating.
+          <br />
+          <br />
+          I am one the founders of Sabido, and I worked as the front-end lead
+          developer.
+          <br />
+          <br />
+          The stack chosen is Nuxt + Typescript + Tailwind + Firebase
+        </p>
+      </template>
+    </CardPopup>
   </main>
   <video
     id="ibm-video"

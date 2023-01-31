@@ -11,13 +11,29 @@ function onWorkClick(work: Work) {
 <template>
   <p id="works-title" :class="$style.subtitle">Selected Works 2015 - 2023</p>
   <ul id="works-list" :class="$style.works">
-    <li id="ibm" :class="$style['active-item']" @click="onWorkClick('ibm')">
+    <li
+      id="ibm"
+      :class="[$style['active-item'], $style['work-item']]"
+      @click="onWorkClick('ibm')"
+    >
       IBM
     </li>
-    <li id="sabido" @click="onWorkClick('sabido')">Sabido</li>
-    <li id="globo" @click="onWorkClick('globo')">Globo</li>
-    <li id="talentify" @click="onWorkClick('talentify')">Talentify</li>
-    <li id="iphone" @click="onWorkClick('iphone')">iPhone 13 Pro</li>
+    <li id="sabido" :class="$style['work-item']" @click="onWorkClick('sabido')">
+      Sabido
+    </li>
+    <li id="globo" :class="$style['work-item']" @click="onWorkClick('globo')">
+      Globo
+    </li>
+    <li
+      id="talentify"
+      :class="$style['work-item']"
+      @click="onWorkClick('talentify')"
+    >
+      Talentify
+    </li>
+    <li id="iphone" :class="$style['work-item']" @click="onWorkClick('iphone')">
+      iPhone 13 Pro
+    </li>
   </ul>
 </template>
 
@@ -38,6 +54,10 @@ function onWorkClick(work: Work) {
   flex-direction: column;
   padding: 3.875rem 0.8125rem;
   list-style: none;
+}
+
+.work-item {
+  cursor: pointer;
 }
 
 .active-item {
