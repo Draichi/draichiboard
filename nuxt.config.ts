@@ -18,6 +18,8 @@ export default defineNuxtConfig({
         {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/css2?family=Lacquer&family=Poppins:wght@400;500&display=swap',
+          media: 'print',
+          onload: "this.media='all'",
         },
         {
           rel: 'icon',
