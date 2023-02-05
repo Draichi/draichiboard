@@ -4,6 +4,9 @@ import viteEslintPlugin from 'vite-plugin-eslint'
 export default defineNuxtConfig({
   app: {
     head: {
+      htmlAttrs: {
+        lang: 'en',
+      },
       title: 'Draichiboard',
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -31,7 +34,7 @@ export default defineNuxtConfig({
       meta: [
         {
           name: 'theme-color',
-          content: '#36A2EB',
+          content: '#0B0F0F',
         },
         {
           property: 'og:title',
@@ -39,7 +42,13 @@ export default defineNuxtConfig({
         },
         {
           property: 'og:description',
-          content: 'I make people buy your stuff',
+          content:
+            "I'm a software engineer since 2015, front-end developer and web designer. Focused in performance, user experience and SEO.",
+        },
+        {
+          name: 'description',
+          content:
+            "I'm a software engineer since 2015, front-end developer and web designer. Focused in performance, user experience and SEO.",
         },
         {
           property: 'og:type',
@@ -59,15 +68,15 @@ export default defineNuxtConfig({
         },
         {
           property: 'og:image',
-          content: '/imgs/site-cover.png',
+          content: '/imgs/profile-photo.png',
         },
         {
           property: 'og:image:height',
-          content: '700',
+          content: '290',
         },
         {
           property: 'og:image:width',
-          content: '1152',
+          content: '374',
         },
       ],
     },
