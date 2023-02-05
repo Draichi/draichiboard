@@ -2,8 +2,12 @@
   <div id="about" :class="$style.container">
     <h3 :class="$style.title">About</h3>
     <p :class="$style.text">
-      I'm a software engineer since 2015, front-end developer and web designer.
-      Focused in performance, user experience and SEO.
+      I'm a <span itemprop="jobTitle">software engineer</span> since 2015,
+      <span itemprop="jobTitle">front-end developer</span> and
+      <span itemprop="jobTitle">web designer</span>. Focused in
+      <span itemprop="knowsAbout">performance</span>,
+      <span itemprop="knowsAbout">user experience</span> and
+      <span itemprop="knowsAbout">SEO</span>.
     </p>
   </div>
 </template>

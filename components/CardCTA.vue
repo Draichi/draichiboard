@@ -1,6 +1,8 @@
 <template>
   <div id="CTA" :class="$style['CTA-card']">
-    <h2 :class="$style['CTA-card__text']">I make people buy your stuff</h2>
+    <h2 :class="$style['CTA-card__text']" itemprop="description">
+      I make people buy your stuff
+    </h2>
     <div :class="$style['CTA-card__button-wrapper']">
       <a :class="$style['CTA-card__button']" href="#email-tile">
         <svg

@@ -105,7 +105,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <main :class="$style.index">
+  <main :class="$style.index" itemscope itemtype="https://schema.org/Person">
     <CardWorkPreview :work-highlighted="workHighlighted" />
 
     <CardWorks @work:click="onWorkClick" />
@@ -119,7 +119,9 @@ onMounted(() => {
     <CardAbout />
 
     <LazyCardLink id="email-tile" @click="onEmailTileClick">
-      <template #title>lucasdraichi@gmail.com</template>
+      <template #title
+        ><span itemprop="email">lucasdraichi@gmail.com</span></template
+      >
       <template #text>Email</template>
       <template #icon>
         <svg
@@ -147,6 +149,7 @@ onMounted(() => {
       background-color="#1D1D1D"
       color="#E3D45A"
       href="https://github.com/Draichi"
+      itemprop="sameAs"
       target="_blank"
     >
       <template #title
@@ -242,13 +245,15 @@ onMounted(() => {
       </template>
     </LazyCardLink>
 
-    <CardPopup
-      v-if="isIBMPopupVisible"
+    <LazyCardPopup
+      v-show="isIBMPopupVisible"
+      itemscope
+      itemtype="https://schema.org/WebSite"
       @close-button:click="onCloseButtonClick"
     >
-      <template #title>IBM</template>
+      <template #title><span itemprop="name">IBM</span></template>
       <template #description>
-        <p>
+        <p itemprop="abstract">
           At 2015 I worked at IBM Brasil as a Web Builder, working at the
           development team, side by side with the design team to implement the
           new IBM layouts.
@@ -257,8 +262,13 @@ onMounted(() => {
           It was great opportunity to learn how the workflow of a distributed
           team is.
         </p>
+        <link
+          href="https://www.ibm.com/artificial-intelligence"
+          itemprop="url"
+        />
+        <link href="https://github.com/Draichi" itemprop="author" />
       </template>
-    </CardPopup>
+    </LazyCardPopup>
 
     <CardPopup
       v-if="isSabidoPopupVisible"

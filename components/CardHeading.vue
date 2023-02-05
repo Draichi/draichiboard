@@ -1,6 +1,6 @@
 <template>
   <div id="lucas-draichi" :class="$style['hero-card']">
-    <h1 :class="$style['hero-card__text']">Lucas Draichi</h1>
+    <h1 :class="$style['hero-card__text']" itemprop="name">Lucas Draichi</h1>
   </div>
 </template>
 
