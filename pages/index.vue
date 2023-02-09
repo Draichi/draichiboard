@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger)
 const isCopyToClipboardMessageVisible = ref(false)
 const isPopupVisible = ref(false)
 const workHighlighted = ref<Work>('ibm')
+const workHighlightedBeforeClick = ref<Work>('ibm')
 const workClicked = ref<Work>('ibm')
 
 const isIBMPopupVisible = computed(
@@ -30,14 +31,17 @@ const isIphonePopupVisible = computed(
   () => isPopupVisible.value && workClicked.value === 'iphone'
 )
 
-function onCloseButtonClick() {
+function onPopupCloseButtonClick() {
   isPopupVisible.value = false
   document.body.style.overflow = 'scroll'
+  workHighlighted.value = workHighlightedBeforeClick.value
 }
 
 function onWorkClick(work: Work) {
   workClicked.value = work
   isPopupVisible.value = true
+  workHighlightedBeforeClick.value = workHighlighted.value
+  workHighlighted.value = work
   document.body.style.overflow = 'hidden'
 }
 
@@ -249,7 +253,7 @@ onMounted(() => {
       v-show="isIBMPopupVisible"
       itemscope
       itemtype="https://schema.org/WebSite"
-      @close-button:click="onCloseButtonClick"
+      @close-button:click="onPopupCloseButtonClick"
     >
       <template #title><span itemprop="name">IBM</span></template>
       <template #description>
@@ -272,7 +276,7 @@ onMounted(() => {
 
     <CardPopup
       v-if="isSabidoPopupVisible"
-      @close-button:click="onCloseButtonClick"
+      @close-button:click="onPopupCloseButtonClick"
     >
       <template #title>Sabido</template>
       <template #description>
@@ -292,7 +296,7 @@ onMounted(() => {
 
     <CardPopup
       v-if="isGloboPopupVisible"
-      @close-button:click="onCloseButtonClick"
+      @close-button:click="onPopupCloseButtonClick"
     >
       <template #title>Globo</template>
       <template #description>
@@ -312,7 +316,7 @@ onMounted(() => {
 
     <CardPopup
       v-if="isTalentifyPopupVisible"
-      @close-button:click="onCloseButtonClick"
+      @close-button:click="onPopupCloseButtonClick"
     >
       <template #title>Talentify</template>
       <template #description>
@@ -332,7 +336,7 @@ onMounted(() => {
 
     <CardPopup
       v-if="isIphonePopupVisible"
-      @close-button:click="onCloseButtonClick"
+      @close-button:click="onPopupCloseButtonClick"
     >
       <template #title>iPhone 13 Pro</template>
       <template #description>
