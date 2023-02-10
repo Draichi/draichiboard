@@ -287,25 +287,24 @@ onMounted(() => {
           <a
             :class="$style['work-link']"
             href="https://www.ibm.com/artificial-intelligence"
+            itemprop="url"
             target="_blank"
             >here</a
           >
         </p>
-        <link
-          href="https://www.ibm.com/artificial-intelligence"
-          itemprop="url"
-        />
         <link href="https://github.com/Draichi" itemprop="author" />
       </template>
     </LazyCardPopup>
 
-    <CardPopup
-      v-if="isSabidoPopupVisible"
+    <LazyCardPopup
+      v-show="isSabidoPopupVisible"
+      itemscope
+      itemtype="https://schema.org/WebSite"
       @close-button:click="onPopupCloseButtonClick"
     >
-      <template #title>Sabido</template>
+      <template #title><span itemprop="name">Sabido</span></template>
       <template #description>
-        <p>
+        <p itemprop="abstract">
           Sabido is a micro-learning product created in 2020 to help people
           share knowledge and learn while navigating.
           <br />
@@ -315,69 +314,128 @@ onMounted(() => {
           <br />
           <br />
           The stack chosen is Nuxt + Typescript + Tailwind + Firebase
+          <br />
+          <br />
+          You can check this one online
+          <a
+            :class="$style['work-link']"
+            href="https://sabido.com/discover"
+            itemprop="url"
+            target="_blank"
+            >here</a
+          >
         </p>
+        <link href="https://github.com/Draichi" itemprop="author" />
       </template>
-    </CardPopup>
+    </LazyCardPopup>
 
-    <CardPopup
-      v-if="isGloboPopupVisible"
+    <LazyCardPopup
+      v-show="isGloboPopupVisible"
+      itemscope
+      itemtype="https://schema.org/WebSite"
       @close-button:click="onPopupCloseButtonClick"
     >
-      <template #title>Globo</template>
+      <template #title><span itemprop="name">Globo</span></template>
       <template #description>
-        <p>
-          Sabido is a micro-learning product created in 2020 to help people
-          share knowledge and learn while navigating.
+        <p itemprop="abstract">
+          Globo is the biggest brazilian television channel. At 2015 I created
+          their news website called Glamour.
           <br />
           <br />
-          I am one the founders of Sabido, and I worked as the front-end lead
-          developer.
+          At the time I was working at TagView, a brazilian startup.
           <br />
           <br />
-          The stack chosen is Nuxt + Typescript + Tailwind + Firebase
+          The stack is React + SCSS
+          <br />
+          <br />
+          You can check this one online
+          <a
+            :class="$style['work-link']"
+            href="https://glamour.globo.com/"
+            itemprop="url"
+            target="_blank"
+            >here</a
+          >
         </p>
+        <link href="https://github.com/Draichi" itemprop="author" />
       </template>
-    </CardPopup>
+    </LazyCardPopup>
 
-    <CardPopup
-      v-if="isTalentifyPopupVisible"
+    <LazyCardPopup
+      v-show="isTalentifyPopupVisible"
+      itemscope
+      itemtype="https://schema.org/WebSite"
       @close-button:click="onPopupCloseButtonClick"
     >
-      <template #title>Talentify</template>
+      <template #title><span itemprop="name">Talentify</span></template>
       <template #description>
-        <p>
-          Sabido is a micro-learning product created in 2020 to help people
-          share knowledge and learn while navigating.
+        <p itemprop="abstract">
+          Since 2019 I work at Talentify. A job advertising startup.
           <br />
           <br />
-          I am one the founders of Sabido, and I worked as the front-end lead
-          developer.
+          I created landing pages, job boards, client dashboards and everything
+          related to front-end development.
           <br />
           <br />
-          The stack chosen is Nuxt + Typescript + Tailwind + Firebase
+          The stack chosen on most of these modules is Nuxt + Typescript +
+          GraphQL + TailwindCSS
+          <br />
+          <br />
+          You can check this one online
+          <a
+            :class="$style['work-link']"
+            href="https://www.talentify.io/"
+            itemprop="url"
+            target="_blank"
+            >here</a
+          >
         </p>
+        <link href="https://github.com/Draichi" itemprop="author" />
       </template>
-    </CardPopup>
+    </LazyCardPopup>
 
-    <CardPopup
-      v-if="isIphonePopupVisible"
+    <LazyCardPopup
+      v-show="isIphonePopupVisible"
+      itemscope
+      itemtype="https://schema.org/WebSite"
       @close-button:click="onPopupCloseButtonClick"
     >
-      <template #title>iPhone 13 Pro</template>
+      <template #title><span itemprop="name">iPhone 13 Pro</span></template>
       <template #description>
-        <p>
-          Sabido is a micro-learning product created in 2020 to help people
-          share knowledge and learn while navigating.
+        <p itemprop="abstract">
+          At 2021 I challenged myself to create a state-of-the-art landing page.
+          So I cloned one of the most beautiful web sites: The iPhone landing
+          page.
           <br />
           <br />
-          I am one the founders of Sabido, and I worked as the front-end lead
-          developer.
+          Starting from zero I tried to implement the most similar web page from
+          the original.
           <br />
           <br />
-          The stack chosen is Nuxt + Typescript + Tailwind + Firebase
+          The stack used is Vite + Typescript + GSAP
+          <br />
+          <br />
+          The codebase is open-source at my
+          <a
+            :class="$style['work-link']"
+            href="https://github.com/Draichi"
+            target="_blank"
+            >github</a
+          >.
+          <br />
+          <br />
+          You can check this one online
+          <a
+            :class="$style['work-link']"
+            href="https://iphone-13.vercel.app/"
+            itemprop="url"
+            target="_blank"
+            >here</a
+          >
         </p>
+        <link href="https://github.com/Draichi" itemprop="author" />
       </template>
-    </CardPopup>
+    </LazyCardPopup>
   </main>
   <video
     id="ibm-video"
