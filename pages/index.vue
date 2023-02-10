@@ -114,8 +114,8 @@ onMounted(() => {
 <template>
   <main :class="$style.index" itemscope itemtype="https://schema.org/Person">
     <CardWorkPreview
+      :is-work-clicked="isPopupVisible"
       :work-highlighted="workHighlighted"
-      @click="onPopupCloseButtonClick"
     />
 
     <CardWorks @work:click="onWorkClick" />

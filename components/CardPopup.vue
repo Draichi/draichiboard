@@ -12,7 +12,11 @@ function onButtonClick() {
       <h3 :class="$style.title">
         <slot name="title" />
       </h3>
-      <button :class="$style.button" @click="onButtonClick">
+      <button
+        id="popup-close-button"
+        :class="$style.button"
+        @click="onButtonClick"
+      >
         <svg
           fill="none"
           height="16"

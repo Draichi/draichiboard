@@ -16,6 +16,7 @@ ScrollTrigger.defaults({
 
 const props = defineProps<{
   workHighlighted: Work
+  isWorkClicked: boolean
 }>()
 
 // const currentVideoTexture = ref<THREE.VideoTexture | null>(null)
@@ -142,37 +143,27 @@ onMounted(() => {
         }
       )
 
-      const worksListItems = document.querySelectorAll('#works-list > li')
-
-      worksListItems.forEach((item) => {
-        item.addEventListener('click', () => {
-          rotationAnimation.pause()
-          gsap.to(modelScene.rotation, {
-            z: Math.PI,
-          })
-          gsap.to(modelScene.position, {
-            y: -0.2,
-          })
-        })
-
-        item.addEventListener('contextmenu', () => {
+      watchEffect(() => {
+        if (!props.isWorkClicked) {
           gsap.to(modelScene.position, {
             y: 0,
+            z: -0.05,
           })
-          // gsap.to(modelScene.rotation, {
-          //   z: Math.PI - Math.PI / 6,
-          // })
-          rotationAnimation.restart()
+          rotationAnimation.play()
+
+          return
+        }
+
+        gsap.to(modelScene.rotation, {
+          z: Math.PI,
         })
+        gsap.to(modelScene.position, {
+          y: -0.25,
+          z: -0.1,
+        })
+        rotationAnimation.pause()
       })
     })
-
-    // const planeAspect = 29 / 19.5
-    // const imageAspect = 1360 / 878
-    // const aspect = imageAspect / planeAspect
-
-    // ibmVideoTexture.wrapS = THREE.RepeatWrapping
-    // ibmVideoTexture.wrapT = THREE.RepeatWrapping
   })
 
   const renderer = new THREE.WebGLRenderer({
@@ -238,5 +229,6 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   position: relative;
+  z-index: 9;
 }
 </style>
