@@ -384,7 +384,7 @@ onMounted(() => {
     autoplay
     muted
     playsinline
-    src="/screenshots/IBM/preview.mov"
+    src="/videos/IBM/preview.mov"
     style="display: none"
   ></video>
   <video
@@ -392,7 +392,7 @@ onMounted(() => {
     autoplay
     muted
     playsinline
-    src="/screenshots/Sabido/preview.mov"
+    src="/videos/Sabido/preview.mov"
     style="display: none"
   ></video>
   <video
@@ -400,7 +400,7 @@ onMounted(() => {
     autoplay
     muted
     playsinline
-    src="/screenshots/Globo/preview.mov"
+    src="/videos/Globo/preview.mov"
     style="display: none"
   ></video>
   <video
@@ -408,7 +408,7 @@ onMounted(() => {
     autoplay
     muted
     playsinline
-    src="/screenshots/Talentify/preview.mov"
+    src="/videos/Talentify/preview.mov"
     style="display: none"
   ></video>
   <video
@@ -416,7 +416,7 @@ onMounted(() => {
     autoplay
     muted
     playsinline
-    src="/screenshots/iPhone/preview.mov"
+    src="/videos/iPhone/preview.mov"
     style="display: none"
   ></video>
 </template>
