@@ -38,13 +38,14 @@ function onButtonClick() {
   position: fixed;
   top: 238px;
   left: 8px;
-  min-height: calc(100vh - 238px);
+  height: calc(100vh - 238px);
   right: 8px;
   z-index: 99;
   background-color: #181711;
   color: #ebeae6;
   border-radius: 20px;
   padding: 1.5rem;
+  overflow-y: scroll;
 }
 
 .header {
