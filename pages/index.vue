@@ -32,6 +32,9 @@ const isIphonePopupVisible = computed(
 )
 
 function onPopupCloseButtonClick() {
+  if (!isPopupVisible.value) {
+    return
+  }
   isPopupVisible.value = false
   document.body.style.overflow = 'scroll'
   workHighlighted.value = workHighlightedBeforeClick.value
@@ -110,7 +113,10 @@ onMounted(() => {
 
 <template>
   <main :class="$style.index" itemscope itemtype="https://schema.org/Person">
-    <CardWorkPreview :work-highlighted="workHighlighted" />
+    <CardWorkPreview
+      :work-highlighted="workHighlighted"
+      @click="onPopupCloseButtonClick"
+    />
 
     <CardWorks @work:click="onWorkClick" />
 
@@ -265,7 +271,33 @@ onMounted(() => {
           <br />
           It was great opportunity to learn how the workflow of a distributed
           team is.
+          <br />
+          <br />
+          Most of the pages I've worked are related to Watson (IBM's AI) and
+          internal report pages.
+          <br />
+          <br />
+          Some pages that I help build are online today.
+          <br />
+          <br />
+          I left IBM Brasil at 2016 to work at a startup called Tagview.
         </p>
+        <div :class="$style['works-images-container']">
+          <img alt="ibm page screenshot" src="/imgs/works/ibm/1.png" />
+          <img alt="ibm page screenshot" src="/imgs/works/ibm/2.png" />
+          <img alt="ibm page screenshot" src="/imgs/works/ibm/3.png" />
+          <img alt="ibm page screenshot" src="/imgs/works/ibm/4.png" />
+          <img alt="ibm page screenshot" src="/imgs/works/ibm/5.png" />
+          <img alt="ibm page screenshot" src="/imgs/works/ibm/6.png" />
+          <img alt="ibm page screenshot" src="/imgs/works/ibm/7.png" />
+          <img alt="ibm page screenshot" src="/imgs/works/ibm/8.png" />
+        </div>
+        <button
+          :class="$style['close-popup-button']"
+          @click="onPopupCloseButtonClick"
+        >
+          Close popup
+        </button>
         <link
           href="https://www.ibm.com/artificial-intelligence"
           itemprop="url"
@@ -406,5 +438,25 @@ onMounted(() => {
 
 .copied-to-clipboard {
   font-size: 1rem;
+}
+
+.works-images-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 55px;
+  margin: 55px 0;
+}
+
+.close-popup-button {
+  display: block;
+  padding: 1rem;
+  margin-right: 0;
+  margin-left: auto;
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 18px;
+  background: #181711;
+  color: #ebeae6;
 }
 </style>
