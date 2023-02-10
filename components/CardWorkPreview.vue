@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 // import GUI from 'lil-gui'
-import laptopModelPath from '@/src/3d-models/mackbook/scene.glb'
+import laptopModelPath from '@/src/macbook-3d-model.glb'
 
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
