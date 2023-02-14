@@ -10,6 +10,7 @@
   border-radius: 20px;
   padding: 2.5rem 0;
   margin-top: calc(100vh - 230px);
+  grid-area: heading;
 }
 
 .hero-card__text {
@@ -17,5 +18,11 @@
   text-align: center;
   font-family: 'Lacquer', fantasy;
   letter-spacing: -0.045em;
+}
+
+@media (min-width: 600px) {
+  .hero-card {
+    margin-top: 0;
+  }
 }
 </style>

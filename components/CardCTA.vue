@@ -30,6 +30,7 @@
   background-color: #36a2eb;
   color: #1d1d1d;
   padding: 25px;
+  grid-area: cta;
 }
 
 .CTA-card__text {

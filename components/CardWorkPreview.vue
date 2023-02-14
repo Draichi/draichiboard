@@ -193,6 +193,7 @@ onMounted(() => {
 
 <template>
   <div id="laptop-3d" :class="$style['laptop3d-container']">
+    <p :class="$style.subtitle">Preview</p>
     <div :class="$style.container">
       <canvas id="webgl-renderer" :class="$style.container__canvas"></canvas>
       <p :class="$style.text">drag to orbit {{ props.workHighlighted }}</p>
@@ -208,6 +209,14 @@ onMounted(() => {
   top: 0;
   width: 100%;
   z-index: 99;
+  grid-area: preview;
+}
+
+.subtitle {
+  font-weight: 400;
+  font-size: 16px;
+  color: #919f96;
+  display: none;
 }
 .container {
   background: #e3d45a;
@@ -230,5 +239,16 @@ onMounted(() => {
   height: 100%;
   position: relative;
   z-index: 9;
+}
+
+@media (min-width: 600px) {
+  .subtitle {
+    display: inline-block;
+  }
+
+  .laptop3d-container {
+    padding-top: 0;
+    position: relative;
+  }
 }
 </style>

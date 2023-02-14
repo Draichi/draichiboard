@@ -17,6 +17,7 @@
   background-color: #b9bfc1;
   border-radius: 20px;
   padding: 23px;
+  grid-area: about;
 }
 
 .title {
