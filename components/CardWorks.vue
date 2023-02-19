@@ -78,6 +78,9 @@ function onWorkClick(work: Work) {
 }
 
 @media (min-width: 600px) {
+  .container {
+    height: calc(100% - 16px);
+  }
   .subtitle {
     margin-top: 0;
   }
@@ -85,6 +88,8 @@ function onWorkClick(work: Work) {
   .works {
     gap: 0;
     padding: 0.8125rem;
+    height: calc(100% - 16px);
+    justify-content: space-around;
   }
 
   .work-item {

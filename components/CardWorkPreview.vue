@@ -249,6 +249,11 @@ onMounted(() => {
   .laptop3d-container {
     padding-top: 0;
     position: relative;
+    height: calc(100% - 16px);
+  }
+
+  .container {
+    height: calc(100% - 16px);
   }
 }
 </style>

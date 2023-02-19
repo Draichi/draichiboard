@@ -98,7 +98,8 @@
   }
 
   .text {
-    font-size: 92px;
+    font-size: 91px;
+    letter-spacing: -0.045em;
   }
 
   .line-breaker,

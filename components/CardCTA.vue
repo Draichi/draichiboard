@@ -58,4 +58,12 @@
 .CTA-card__button-text {
   margin-left: 13px;
 }
+
+@media (min-width: 600px) {
+  .CTA-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
 </style>
