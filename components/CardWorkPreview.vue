@@ -193,7 +193,7 @@ onMounted(() => {
 
 <template>
   <div id="laptop-3d" :class="$style['laptop3d-container']">
-    <p :class="$style.subtitle">Preview</p>
+    <p id="laptop-3d-title" :class="$style.subtitle">Preview</p>
     <div :class="$style.container">
       <canvas id="webgl-renderer" :class="$style.container__canvas"></canvas>
       <p :class="$style.text">drag to orbit {{ props.workHighlighted }}</p>

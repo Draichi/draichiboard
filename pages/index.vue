@@ -75,7 +75,7 @@ function removeTextDecoration(work: Work) {
   liElement.style.textDecorationLine = 'none'
 }
 
-function useWorksMobileScrollTriggerAnimation(work: Work) {
+function useWorksMobileScrollAnimation(work: Work) {
   gsap.timeline({
     scrollTrigger: {
       trigger: `#${work}`,
@@ -89,29 +89,47 @@ function useWorksMobileScrollTriggerAnimation(work: Work) {
   })
 }
 
+function useWorksDesktopHoverAnimation(work: Work) {
+  document
+    .getElementById(work)
+    ?.addEventListener('mouseenter', () => onWorkHighlight(work))
+
+  document
+    .getElementById(work)
+    ?.addEventListener('mouseleave', () => removeTextDecoration(work))
+}
+
 onMounted(() => {
-  if (window.innerWidth > 600) {
+  if (window.innerWidth < 600) {
+    useAboveTheFoldMobileScrollAnimation()
+    useAboveTheFoldMobileIntroAnimation()
+
+    useWorksMobileScrollAnimation('ibm')
+    useWorksMobileScrollAnimation('sabido')
+    useWorksMobileScrollAnimation('globo')
+    useWorksMobileScrollAnimation('talentify')
+    useWorksMobileScrollAnimation('iphone')
+
+    useScrollAnimateXAxis('#lucas-draichi', 0)
+    useScrollAnimateXAxis('#CTA', -40)
+    useScrollAnimateXAxis('#profile-photo', -30)
+    useScrollAnimateXAxis('#about', -20)
+    useScrollAnimateXAxis('#email-tile', -5)
+    useScrollAnimateXAxis('#github-tile', -5)
+    useScrollAnimateXAxis('#resume-tile', -5)
+    useScrollAnimateXAxis('#dashboard-tile', -5)
+    useScrollAnimateXAxis('#blog-tile', -5)
+
     return
   }
 
-  useAboveTheFoldMobileScrollAnimation()
-  useAboveTheFoldMobileIntroAnimation()
+  useAboveTheFoldDesktopIntroAnimation()
 
-  useWorksMobileScrollTriggerAnimation('ibm')
-  useWorksMobileScrollTriggerAnimation('sabido')
-  useWorksMobileScrollTriggerAnimation('globo')
-  useWorksMobileScrollTriggerAnimation('talentify')
-  useWorksMobileScrollTriggerAnimation('iphone')
-
-  useScrollAnimateXAxis('#lucas-draichi', 0)
-  useScrollAnimateXAxis('#CTA', -40)
-  useScrollAnimateXAxis('#profile-photo', -30)
-  useScrollAnimateXAxis('#about', -20)
-  useScrollAnimateXAxis('#email-tile', -5)
-  useScrollAnimateXAxis('#github-tile', -5)
-  useScrollAnimateXAxis('#resume-tile', -5)
-  useScrollAnimateXAxis('#dashboard-tile', -5)
-  useScrollAnimateXAxis('#blog-tile', -5)
+  useWorksDesktopHoverAnimation('ibm')
+  useWorksDesktopHoverAnimation('sabido')
+  useWorksDesktopHoverAnimation('globo')
+  useWorksDesktopHoverAnimation('talentify')
+  useWorksDesktopHoverAnimation('iphone')
 })
 </script>
 
