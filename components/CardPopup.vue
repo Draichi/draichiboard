@@ -69,4 +69,13 @@ function onButtonClick() {
   cursor: pointer;
   padding: 0.5rem;
 }
+
+@media (min-width: 600px) {
+  .container {
+    width: calc(50vw - 16px);
+    height: 100vh;
+    top: 0;
+    left: 0;
+  }
+}
 </style>
