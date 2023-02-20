@@ -1,7 +1,7 @@
 import gsap from 'gsap'
 
 /**
- * Animate the elements above the fold on a timeline
+ * Animate the elements above the fold on a mobile device
  */
 export default function () {
   gsap

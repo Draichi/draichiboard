@@ -75,7 +75,7 @@ function removeTextDecoration(work: Work) {
   liElement.style.textDecorationLine = 'none'
 }
 
-function useWorksScrollTriggerAnimation(work: Work) {
+function useWorksMobileScrollTriggerAnimation(work: Work) {
   gsap.timeline({
     scrollTrigger: {
       trigger: `#${work}`,
@@ -90,14 +90,18 @@ function useWorksScrollTriggerAnimation(work: Work) {
 }
 
 onMounted(() => {
-  useAboveTheFoldScrollAnimation()
-  useAboveTheFoldIntroAnimation()
+  if (window.innerWidth > 600) {
+    return
+  }
 
-  useWorksScrollTriggerAnimation('ibm')
-  useWorksScrollTriggerAnimation('sabido')
-  useWorksScrollTriggerAnimation('globo')
-  useWorksScrollTriggerAnimation('talentify')
-  useWorksScrollTriggerAnimation('iphone')
+  useAboveTheFoldMobileScrollAnimation()
+  useAboveTheFoldMobileIntroAnimation()
+
+  useWorksMobileScrollTriggerAnimation('ibm')
+  useWorksMobileScrollTriggerAnimation('sabido')
+  useWorksMobileScrollTriggerAnimation('globo')
+  useWorksMobileScrollTriggerAnimation('talentify')
+  useWorksMobileScrollTriggerAnimation('iphone')
 
   useScrollAnimateXAxis('#lucas-draichi', 0)
   useScrollAnimateXAxis('#CTA', -40)

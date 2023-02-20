@@ -1,7 +1,7 @@
 import gsap from 'gsap'
 
 /**
- * Animate the items above the fold when scrolling
+ * Animate the items above the fold on a mobile device when scrolling
  */
 export default function () {
   gsap
