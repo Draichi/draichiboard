@@ -63,12 +63,12 @@ const componentIs = getComponent()
 .text {
   width: 100%;
   display: flex;
-  font-size: 2.85rem;
+  font-size: 2.5rem;
   align-items: center;
   font-weight: 500;
 }
 
 .icon {
-  margin-left: 1.5rem;
+  margin-left: 1rem;
 }
 </style>
