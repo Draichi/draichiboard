@@ -1,6 +1,6 @@
 <template>
   <div id="lucas-draichi" :class="$style['container']">
-    <nav :class="$style.navbar">
+    <!-- <nav :class="$style.navbar">
       <ul :class="$style['navbar-list']">
         <li>
           <RouterLink :class="$style['navbar-item']" to="/">
@@ -58,7 +58,7 @@
           </RouterLink>
         </li>
       </ul>
-    </nav>
+    </nav> -->
 
     <h1 :class="$style['text']" itemprop="name">
       Lucas <br :class="$style['line-breaker']" />Draichi

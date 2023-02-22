@@ -232,7 +232,7 @@ onMounted(() => {
         </template>
       </LazyCardLink>
 
-      <LazyCardLink
+      <!-- <LazyCardLink
         id="dashboard-tile"
         background-color="#E3D45A"
         color="#302408"
@@ -254,9 +254,9 @@ onMounted(() => {
             />
           </svg>
         </template>
-      </LazyCardLink>
+      </LazyCardLink> -->
 
-      <LazyCardLink
+      <!-- <LazyCardLink
         id="blog-tile"
         background-color="#CC65FE"
         color="#230830"
@@ -278,7 +278,7 @@ onMounted(() => {
             />
           </svg>
         </template>
-      </LazyCardLink>
+      </LazyCardLink> -->
     </div>
 
     <LazyCardPopup
