@@ -150,7 +150,7 @@ onMounted(() => {
 
     <CardAbout />
 
-    <div style="grid-area: email">
+    <div :class="$style['grid-links']" style="grid-area: email">
       <LazyCardLink id="email-tile" @click="onEmailTileClick">
         <template #title
           ><span itemprop="email">lucasdraichi@gmail.com</span></template
@@ -206,7 +206,7 @@ onMounted(() => {
       </LazyCardLink>
     </div>
 
-    <div style="grid-area: links">
+    <div :class="$style['grid-links']" style="grid-area: links">
       <LazyCardLink
         id="resume-tile"
         background-color="#8F9A9D"
@@ -519,6 +519,12 @@ onMounted(() => {
 
 .work-link {
   color: #67bffb;
+}
+
+.grid-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 @media (min-width: 600px) {
