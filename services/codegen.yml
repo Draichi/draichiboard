@@ -1,0 +1,12 @@
+overwrite: true
+schema:
+  - https://api.github.com/graphql:
+      headers:
+        Authorization: bearer ${GH_TOKEN}
+documents: "apollo/**/*.gql"
+generates:
+  types/graphql.d.ts:
+    - typescript-graphql-files-modules
+  types/graphql-types.ts:
+    - typescript
+    - typescript-operations
