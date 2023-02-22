@@ -31,7 +31,7 @@ function onButtonClick() {
         </svg>
       </button>
     </div>
-    <div>
+    <div :class="$style.text">
       <slot name="description" />
     </div>
   </div>
@@ -64,6 +64,11 @@ function onButtonClick() {
   font-weight: 400;
 }
 
+.text {
+  font-weight: 400;
+  font-size: 18px;
+}
+
 .button {
   background-color: #181711;
   cursor: pointer;
@@ -72,10 +77,19 @@ function onButtonClick() {
 
 @media (min-width: 600px) {
   .container {
-    width: calc(50vw - 16px);
+    width: calc(50vw - 4px);
     height: 100vh;
     top: 0;
     left: 0;
+  }
+
+  .title {
+    font-size: 3.75rem;
+  }
+
+  .text {
+    font-size: 1.3125rem;
+    line-height: 168%;
   }
 }
 </style>
