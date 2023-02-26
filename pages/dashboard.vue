@@ -93,11 +93,31 @@ onMounted(() => {
 
 <template>
   <main :class="$style.main">
-    <section :class="$style.section">
+    <section>
       <div :class="$style.container">
         <canvas id="commits-time-series" :class="$style.canvas"></canvas>
       </div>
       <h1 :class="$style.title">draichiboard</h1>
+    </section>
+    <section :class="$style['cards-container']">
+      <CardStats
+        background-color="#242B32"
+        text-color="#C7D0D6"
+        title="Last month contributions"
+        :value="109"
+      />
+      <CardStats
+        background-color="#C7D0D6"
+        text-color="#242B32"
+        title="Stars"
+        :value="109"
+      />
+      <CardStats
+        background-color="#CC65FE"
+        text-color="#230830"
+        title="Repositories created"
+        :value="109"
+      />
     </section>
   </main>
 </template>
@@ -136,5 +156,12 @@ onMounted(() => {
   font-family: 'Lacquer', fantasy;
   letter-spacing: -0.11em;
   color: #4fd1c5;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4px;
+  margin: 4px;
 }
 </style>
