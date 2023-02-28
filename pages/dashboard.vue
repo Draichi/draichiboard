@@ -118,6 +118,44 @@ onMounted(() => {
         title="Repositories created"
         :value="109"
       />
+
+      <CardStats
+        background-color="#36A2EB"
+        text-color="#041B2A"
+        title="Opened issues"
+        :value="109"
+      />
+      <CardStats
+        background-color="#5AE389"
+        text-color="#243229"
+        title="Repositories with contribution"
+        :value="109"
+      />
+      <CardStats
+        background-color="#FFCE56"
+        text-color="#302408"
+        title="Opened pull requests"
+        :value="109"
+      />
+
+      <CardStats
+        background-color="#FD5D93"
+        text-color="#250912"
+        title="Reviews"
+        :value="109"
+      />
+      <CardStats
+        background-color="#4FD1C5"
+        text-color="#243231"
+        title="Commits"
+        :value="109"
+      />
+      <CardStats
+        background-color="#242B32"
+        text-color="#C7D0D6"
+        title="Followers"
+        :value="109"
+      />
     </section>
   </main>
 </template>
@@ -134,7 +172,7 @@ onMounted(() => {
   /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
 }
 .container {
-  height: 230px;
+  height: 170px;
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -162,6 +200,6 @@ onMounted(() => {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 4px;
-  margin: 4px;
+  margin: 46px 4px 4px 4px;
 }
 </style>

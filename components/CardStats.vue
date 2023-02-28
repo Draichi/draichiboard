@@ -14,7 +14,7 @@ const props = defineProps<{
     :style="{ backgroundColor: props.backgroundColor, color: props.textColor }"
   >
     <div>
-      <div>
+      <div :class="$style['svg-container']">
         <svg
           fill="none"
           height="12"
@@ -32,7 +32,7 @@ const props = defineProps<{
         <slot name="graph" />
       </div>
     </div>
-    <div>
+    <div :class="$style['title-value-container']">
       <h4 :class="$style.title">{{ props.title }}</h4>
       <p :class="$style.value">{{ props.value }}</p>
     </div>
@@ -48,9 +48,19 @@ const props = defineProps<{
   border-radius: 20px;
 }
 
+.svg-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.75rem 0.75rem 0 0;
+}
+
 .graph-container {
-  height: 52px;
+  max-height: 52px;
   width: 100%;
+}
+
+.title-value-container {
+  padding: 0.5rem;
 }
 
 .title {
