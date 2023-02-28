@@ -57,6 +57,7 @@ const props = defineProps<{
 .graph-container {
   max-height: 52px;
   width: 100%;
+  position: relative;
 }
 
 .title-value-container {
