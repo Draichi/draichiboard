@@ -112,12 +112,11 @@ function createLastMonthCommitsChart() {
 
   const context = canvas.getContext('2d')
 
-  const height = canvas.height
+  const gradient = context?.createLinearGradient(0, 0, 100, 0)
 
-  const gradient = context?.createLinearGradient(0, 0, 0, height)
-
-  gradient?.addColorStop(0, 'rgba(79, 209, 197, 0.24)')
-  gradient?.addColorStop(1, 'rgba(79, 209, 197, 0)')
+  gradient?.addColorStop(0, 'rgba(253, 93, 147, 1)')
+  gradient?.addColorStop(0.5, 'rgba(204, 101, 254, 1)')
+  gradient?.addColorStop(1, 'rgba(79, 209, 197, 1)')
 
   new Chart(canvas, {
     type: 'line',
@@ -128,19 +127,19 @@ function createLastMonthCommitsChart() {
       datasets: [
         {
           data: data.map((row) => row.count),
-          backgroundColor: gradient,
-          fill: true,
+          // backgroundColor: 'transparent',
+          fill: false,
           tension: 0.5,
-          borderColor: '#42b883',
-          borderWidth: 2.5,
+          borderColor: gradient,
+          borderWidth: 1.5,
           borderDash: [],
           borderDashOffset: 0,
-          pointBackgroundColor: '#42b883',
-          pointBorderColor: 'rgba(255,255,255,0)',
+          pointBackgroundColor: 'transparent',
+          pointBorderColor: 'transparent',
           pointBorderWidth: 20,
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
-          pointRadius: 2.5 / 2,
+          pointRadius: 1.5 / 2,
         },
       ],
     },
@@ -275,9 +274,9 @@ onMounted(() => {
 }
 
 .last-month-commits {
-  width: calc(100% + 50px) !important;
-  left: -25px;
-  right: -25px;
+  width: calc(100% + 70px) !important;
+  left: -35px;
+  right: -35px;
   position: absolute;
   height: 130px !important;
   top: -43px;
