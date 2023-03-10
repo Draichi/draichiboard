@@ -1,5 +1,5 @@
-import VueGTag from 'vue-gtag'
-import { defineNuxtPlugin } from '#imports'
+import VueGTag, { trackRouter } from 'vue-gtag'
+import { defineNuxtPlugin, useRouter } from '#imports'
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(VueGTag, {
@@ -10,4 +10,5 @@ export default defineNuxtPlugin((nuxtApp) => {
       },
     },
   })
+  trackRouter(useRouter())
 })
