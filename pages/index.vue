@@ -42,6 +42,7 @@ function onPopupCloseButtonClick() {
 }
 
 function onWorkClick(work: Work) {
+  event('work_clicked', { work })
   workClicked.value = work
   isPopupVisible.value = true
   workHighlightedBeforeClick.value = workHighlighted.value
@@ -50,6 +51,7 @@ function onWorkClick(work: Work) {
 }
 
 function onEmailTileClick() {
+  event('email_copied')
   navigator.clipboard.writeText('lucasdraichi@gmail.com')
   isCopyToClipboardMessageVisible.value = true
   setTimeout(() => {
@@ -101,7 +103,6 @@ function useWorksDesktopHoverAnimation(work: Work) {
 }
 
 onMounted(() => {
-  event('page_view')
   if (window.innerWidth < 600) {
     useAboveTheFoldMobileScrollAnimation()
     useAboveTheFoldMobileIntroAnimation()
