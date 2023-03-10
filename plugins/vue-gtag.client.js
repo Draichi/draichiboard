@@ -9,8 +9,5 @@ export default defineNuxtPlugin((nuxtApp) => {
         send_page_view: true,
       },
     },
-    property: {
-      id: 'G-PFFDM9Q014',
-    },
   })
 })
