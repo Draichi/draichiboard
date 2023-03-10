@@ -2,6 +2,7 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Work } from '@/types'
+import { event } from 'vue-gtag'
 
 ScrollTrigger.defaults({
   immediateRender: false,
@@ -100,6 +101,7 @@ function useWorksDesktopHoverAnimation(work: Work) {
 }
 
 onMounted(() => {
+  event('page_view')
   if (window.innerWidth < 600) {
     useAboveTheFoldMobileScrollAnimation()
     useAboveTheFoldMobileIntroAnimation()

@@ -23,7 +23,8 @@
   "dependencies": {
     "gsap": "^3.11.4",
     "lil-gui": "^0.17.0",
-    "three": "^0.148.0"
+    "three": "^0.148.0",
+    "vue-gtag": "^2.0.1"
   },
   "engines": {
     "node": "^18",
