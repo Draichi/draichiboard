@@ -4,7 +4,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 // import GUI from 'lil-gui'
 import laptopModelPath from '@/src/macbook-3d-model.glb'
-
+import { event } from 'vue-gtag'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Work } from '~~/types'
@@ -27,6 +27,8 @@ onMounted(() => {
   // const gui = new GUI()
 
   const canvas = document.getElementById('webgl-renderer') as HTMLCanvasElement
+
+  canvas.addEventListener('mousedown', () => event('work_preview_interaction'))
 
   const sizes = {
     width: canvas.getBoundingClientRect().width,

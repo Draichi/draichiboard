@@ -2,6 +2,7 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Work } from '@/types'
+import { event } from 'vue-gtag'
 
 ScrollTrigger.defaults({
   immediateRender: false,
@@ -41,6 +42,7 @@ function onPopupCloseButtonClick() {
 }
 
 function onWorkClick(work: Work) {
+  event('work_clicked', { work })
   workClicked.value = work
   isPopupVisible.value = true
   workHighlightedBeforeClick.value = workHighlighted.value
@@ -49,6 +51,7 @@ function onWorkClick(work: Work) {
 }
 
 function onEmailTileClick() {
+  event('email_copied')
   navigator.clipboard.writeText('lucasdraichi@gmail.com')
   isCopyToClipboardMessageVisible.value = true
   setTimeout(() => {
@@ -66,6 +69,7 @@ function addTextDecoration(work: string) {
 function onWorkHighlight(work: Work) {
   addTextDecoration(work)
   workHighlighted.value = work
+  event('work_highlighted', { work })
 }
 
 function removeTextDecoration(work: Work) {
@@ -184,6 +188,7 @@ onMounted(() => {
         href="https://github.com/Draichi"
         itemprop="sameAs"
         target="_blank"
+        @click="event('github_clicked')"
       >
         <template #title
           ><span style="color: #b9bfc1">Social Network</span></template
@@ -213,6 +218,7 @@ onMounted(() => {
         color="#122120"
         download="Lucas Draichi Resume.pdf"
         href="/misc/LucasDraichiResume.pdf"
+        @click="event('resume_clicked')"
       >
         <template #title>125kb</template>
         <template #text>Resume</template>
@@ -315,6 +321,7 @@ onMounted(() => {
             href="https://www.ibm.com/artificial-intelligence"
             itemprop="url"
             target="_blank"
+            @click="event('work_link_clicked', { work: 'ibm' })"
             >here</a
           >
         </p>
@@ -348,6 +355,7 @@ onMounted(() => {
             href="https://sabido.com/discover"
             itemprop="url"
             target="_blank"
+            @click="event('work_link_clicked', { work: 'sabido' })"
             >here</a
           >
         </p>
@@ -380,6 +388,7 @@ onMounted(() => {
             href="https://glamour.globo.com/"
             itemprop="url"
             target="_blank"
+            @click="event('work_link_clicked', { work: 'globo' })"
             >here</a
           >
         </p>
@@ -413,6 +422,7 @@ onMounted(() => {
             href="https://www.talentify.io/"
             itemprop="url"
             target="_blank"
+            @click="event('work_link_clicked', { work: 'talentify' })"
             >here</a
           >
         </p>
@@ -446,6 +456,7 @@ onMounted(() => {
             :class="$style['work-link']"
             href="https://github.com/Draichi"
             target="_blank"
+            @click="event('work_link_clicked', { work: 'iphone' })"
             >github</a
           >.
           <br />
@@ -456,6 +467,7 @@ onMounted(() => {
             href="https://iphone-13.vercel.app/"
             itemprop="url"
             target="_blank"
+            @click="event('work_link_clicked', { work: 'iphone' })"
             >here</a
           >
         </p>

@@ -2,6 +2,11 @@ import viteEslintPlugin from 'vite-plugin-eslint'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      analyticsId: process.env.NUXT_ANALYTICS_ID,
+    },
+  },
   app: {
     head: {
       htmlAttrs: {
