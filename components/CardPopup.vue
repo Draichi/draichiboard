@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import { event } from 'vue-gtag'
+
 const emit = defineEmits(['close-button:click'])
 
 function onButtonClick() {
   emit('close-button:click')
+  event('popup_closed')
 }
 </script>
 
