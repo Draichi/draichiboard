@@ -245,11 +245,11 @@ onMounted(() => {
       />
     </section>
   </main>
+  <Navbar />
 </template>
 
 <style module>
 .main {
-  min-height: 100vh;
   background: #0b0f0f;
   background: radial-gradient(
     88.21% 14.29% at 9.87% 31.58%,
