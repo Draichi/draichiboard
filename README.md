@@ -19,6 +19,8 @@
 
 My portfolio and personal dashboard.
 
+Full design files in [Figma](https://www.figma.com/file/EqOWp6LXEIl808ZtiIOapW/Draichiboard?node-id=478%3A44&t=LH2joCCGq4umuUjc-1)
+
 ## Prerequisites
 
 - Node 18.xx
