@@ -14,7 +14,7 @@
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 
 <div align="center">
-  <img src="./src/draichiboard-mondrian-layout.png" />
+  <img src="./docs/draichiboard-mondrian-layout.png" />
 </div>
 
 My portfolio and personal dashboard.
