@@ -216,8 +216,8 @@ onMounted(() => {
         id="resume-tile"
         background-color="#8F9A9D"
         color="#122120"
-        download="Lucas Draichi Resume.pdf"
-        href="/misc/LucasDraichiResume.pdf"
+        download="Resume - Lucas Draichi.pdf"
+        href="/misc/Resume - Lucas Draichi.pdf"
         @click="event('resume_clicked')"
       >
         <template #title>125kb</template>
