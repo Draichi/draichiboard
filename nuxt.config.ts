@@ -1,10 +1,19 @@
 import viteEslintPlugin from 'vite-plugin-eslint'
+import '@nuxtjs/apollo'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       analyticsId: process.env.NUXT_ANALYTICS_ID,
+    },
+  },
+  modules: ['@nuxtjs/apollo'],
+  apollo: {
+    clients: {
+      default: {
+        httpEndpoint: 'https://api.github.com/graphql',
+      },
     },
   },
   app: {

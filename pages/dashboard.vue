@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import Chart from 'chart.js/auto'
+import query from '@/services/apollo/queries/query.gql'
+
+const data = await useAsyncQuery(query)
+
+console.log({ data })
 
 function createTimeSeriesChart() {
   const data = [
