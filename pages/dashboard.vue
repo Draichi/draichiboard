@@ -4,6 +4,26 @@ import { Query, ContributionsCollection } from 'types/graphql-types'
 import contributionsCollectionQuery from '@/services/apollo/queries/contributionsCollection.gql'
 import loginQuery from '@/services/apollo/queries/query.gql'
 
+enum Month {
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+}
+
+interface TimelineCommit {
+  contributionCount: number
+  date: string
+}
+
 const contributionsCollection = ref<ContributionsCollection | undefined>(
   undefined
 )
@@ -13,6 +33,23 @@ const followers = ref(0)
 const repositoriesCreated = ref(0)
 
 const isLoading = ref(true)
+
+// const totalContributions = ref(0)
+
+const commitsTimeline = reactive<TimelineCommit[]>([
+  { date: 'Jan', contributionCount: 0 },
+  { date: 'Feb', contributionCount: 0 },
+  { date: 'Mar', contributionCount: 0 },
+  { date: 'Apr', contributionCount: 0 },
+  { date: 'May', contributionCount: 0 },
+  { date: 'Jun', contributionCount: 0 },
+  { date: 'Jul', contributionCount: 0 },
+  { date: 'Aug', contributionCount: 0 },
+  { date: 'Sep', contributionCount: 0 },
+  { date: 'Oct', contributionCount: 0 },
+  { date: 'Nov', contributionCount: 0 },
+  { date: 'Dec', contributionCount: 0 },
+])
 
 onMounted(async () => {
   await useAsyncQuery<Query>(loginQuery)
@@ -52,26 +89,33 @@ onMounted(async () => {
   followers.value = user?.followers?.totalCount || 0
   repositoriesCreated.value = user?.repositories?.totalCount || 0
 
-console.log({ data })
+  const foo: TimelineCommit[] = []
+
+  user?.contributionsCollection.contributionCalendar.weeks
+    .flatMap((week) => {
+      return week.contributionDays
+    })
+    .flatMap((contributionDay) => {
+      foo.push(contributionDay)
+    })
+
+  foo.forEach(({ date, contributionCount }) => {
+    const monthNumber = new Date(date).getMonth()
+    const monthName = Month[monthNumber]
+
+    const index = commitsTimeline.findIndex((month) => month.date == monthName)
+
+    if (!commitsTimeline[index]) {
+      return
+    }
+
+    commitsTimeline[index].contributionCount += contributionCount
+  })
+
+  createTimeSeriesChart()
+})
 
 function createTimeSeriesChart() {
-  const data = [
-    { year: 2010, count: 10 },
-    { year: 2011, count: 20 },
-    { year: 2012, count: 15 },
-    { year: 2013, count: 25 },
-    { year: 2014, count: 22 },
-    { year: 2015, count: 40 },
-    { year: 2015, count: 30 },
-    { year: 2015, count: 14 },
-    { year: 2015, count: 35 },
-    { year: 2015, count: 38 },
-    { year: 2015, count: 4 },
-    { year: 2016, count: 9 },
-    { year: 2017, count: 3 },
-    { year: 2018, count: 28 },
-  ]
-
   const canvas = document.getElementById(
     'commits-time-series'
   ) as HTMLCanvasElement
@@ -88,12 +132,12 @@ function createTimeSeriesChart() {
   new Chart(canvas, {
     type: 'line',
     data: {
-      labels: data.map(
-        (row) => `In ${row.year} there was ${row.count} commits`
+      labels: commitsTimeline.map(
+        (row) => `In ${row.date} there was ${row.contributionCount} commits`
       ),
       datasets: [
         {
-          data: data.map((row) => row.count),
+          data: commitsTimeline.map((row) => row.contributionCount),
           backgroundColor: gradient,
           fill: true,
           tension: 0.5,
@@ -161,8 +205,6 @@ function createLastMonthCommitsChart() {
     'last-month-commits'
   ) as HTMLCanvasElement
 
-  console.log({ canvas })
-
   const context = canvas.getContext('2d')
 
   const gradient = context?.createLinearGradient(0, 0, 100, 0)
@@ -219,7 +261,7 @@ function createLastMonthCommitsChart() {
 }
 
 onMounted(() => {
-  createTimeSeriesChart()
+  // createTimeSeriesChart()
   createLastMonthCommitsChart()
 })
 </script>
@@ -249,8 +291,8 @@ onMounted(() => {
       <CardStats
         background-color="#C7D0D6"
         text-color="#242B32"
-        title="Stars"
-        :value="109"
+        title="-"
+        :value="0"
       />
       <CardStats
         background-color="#CC65FE"
@@ -268,8 +310,8 @@ onMounted(() => {
       <CardStats
         background-color="#5AE389"
         text-color="#243229"
-        title="Repositories with contribution"
-        :value="109"
+        title="-"
+        :value="isLoading ? 999999 : 0"
       />
       <CardStats
         background-color="#FFCE56"
