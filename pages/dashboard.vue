@@ -1,8 +1,56 @@
 <script setup lang="ts">
 import Chart from 'chart.js/auto'
-import query from '@/services/apollo/queries/query.gql'
+import { Query, ContributionsCollection } from 'types/graphql-types'
+import contributionsCollectionQuery from '@/services/apollo/queries/contributionsCollection.gql'
+import loginQuery from '@/services/apollo/queries/query.gql'
 
-const data = await useAsyncQuery(query)
+const contributionsCollection = ref<ContributionsCollection | undefined>(
+  undefined
+)
+
+const followers = ref(0)
+
+const repositoriesCreated = ref(0)
+
+const isLoading = ref(true)
+
+onMounted(async () => {
+  await useAsyncQuery<Query>(loginQuery)
+
+  const from = new Date()
+
+  from.setFullYear(2022)
+  from.setDate(1)
+  from.setMonth(0)
+
+  const to = new Date()
+
+  to.setFullYear(2022)
+  to.setDate(31)
+  to.setMonth(11)
+
+  const { data, pending, error } = await useAsyncQuery<Query>(
+    contributionsCollectionQuery,
+    {
+      login: 'Draichi',
+      from,
+      to,
+    }
+  )
+
+  isLoading.value = pending.value
+
+  if (error.value) {
+    console.error(error.value)
+
+    return
+  }
+
+  const user = data.value?.user
+
+  contributionsCollection.value = user?.contributionsCollection
+  followers.value = user?.followers?.totalCount || 0
+  repositoriesCreated.value = user?.repositories?.totalCount || 0
 
 console.log({ data })
 
@@ -208,7 +256,7 @@ onMounted(() => {
         background-color="#CC65FE"
         text-color="#230830"
         title="Repositories created"
-        :value="109"
+        :value="repositoriesCreated"
       />
 
       <CardStats
@@ -246,7 +294,7 @@ onMounted(() => {
         background-color="#242B32"
         text-color="#C7D0D6"
         title="Followers"
-        :value="109"
+        :value="followers"
       />
     </section>
   </main>
