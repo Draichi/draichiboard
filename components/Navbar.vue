@@ -15,7 +15,7 @@
               fill="#919F96"
             />
           </svg>
-          <span>Home</span>
+          <span :class="$style.text">Home</span>
         </NuxtLink>
       </li>
       <li :class="$style['list-item']">
@@ -32,7 +32,7 @@
               fill="#919F96"
             />
           </svg>
-          <span>Dashboard</span>
+          <span :class="$style.text">Dashboard</span>
         </NuxtLink>
       </li>
       <li :class="$style['list-item']">
@@ -49,7 +49,7 @@
               fill="#919F96"
             />
           </svg>
-          <span> Blog </span>
+          <span :class="$style.text"> Blog </span>
         </NuxtLink>
       </li>
     </ul>
@@ -75,5 +75,10 @@
   color: #919f96;
   padding: 1rem;
   gap: 0.4rem;
+}
+
+.text {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
 }
 </style>
