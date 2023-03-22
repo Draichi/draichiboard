@@ -1,5 +1,7 @@
 import { Query } from 'types/graphql-types'
 
+type Viewer = Partial<Pick<Query, 'viewer'>>
+
 const query = `
   query {
     viewer {
@@ -8,8 +10,9 @@ const query = `
   }
 `
 
-type Viewer = Partial<Pick<Query, 'viewer'>>
-
+/**
+ * Used before any other API calls to login the viewer
+ */
 export default defineEventHandler(async (): Promise<Viewer> => {
   try {
     const request = await fetch('https://api.github.com/graphql', {
