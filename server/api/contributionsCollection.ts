@@ -167,6 +167,8 @@ export default defineEventHandler(
 
         const user = await fetchContributionsCollectionAPI(from, to)
 
+        console.log({ user })
+
         if (!user) {
           return {} as ContributionsCollection
         }
