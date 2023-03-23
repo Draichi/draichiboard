@@ -1,6 +1,9 @@
-import { Query } from 'types/graphql-types'
-
-type User = Pick<Query, 'user'>
+interface UserData {
+  followers: number
+  following: number
+  repositories: number
+  issueComments: number
+}
 
 const query = `
   query ($login: String!) {
@@ -24,7 +27,7 @@ const query = `
 /**
  * Fetch the basic information related to the user
  */
-export default defineEventHandler(async (): Promise<User> => {
+export default defineEventHandler(async (): Promise<UserData> => {
   try {
     const request = await fetch('https://api.github.com/graphql', {
       method: 'POST',
@@ -37,10 +40,15 @@ export default defineEventHandler(async (): Promise<User> => {
 
     const response = await request.json()
 
-    return response.data as User
+    return {
+      followers: response.data?.user?.followers?.totalCount,
+      following: response.data?.user?.following?.totalCount,
+      repositories: response.data?.user?.repositories?.totalCount,
+      issueComments: response.data?.user?.issueComments?.totalCount,
+    }
   } catch (error) {
     console.error(error)
 
-    return {} as User
+    return {} as UserData
   }
 })

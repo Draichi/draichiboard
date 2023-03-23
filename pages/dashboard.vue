@@ -1,23 +1,5 @@
 <script setup lang="ts">
 import Chart from 'chart.js/auto'
-import { Query } from 'types/graphql-types'
-import contributionsCollectionQuery from '@/services/apollo/queries/contributionsCollection.gql'
-import loginQuery from '@/services/apollo/queries/query.gql'
-
-enum Month {
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec',
-}
 
 interface TimelineCommit {
   contributionCount: number
@@ -43,198 +25,6 @@ const totalCommits = ref(0)
 const isLoading = ref(true)
 
 const commitsTimeline = ref<TimelineCommit[]>([] as TimelineCommit[])
-
-async function fetchCommitsTimeSeries(): Promise<{
-  commitsTimeline: TimelineCommit[]
-  totalCommitContributions: number
-  totalIssuesContributions: number
-  totalPullRequestContributions: number
-  totalPullRequestReviewContributions: number
-  followersData: number
-  repositoriesCreatedData: number
-  followingData: number
-  issuesCommentsData: number
-}> {
-  await useAsyncQuery<Query>(loginQuery)
-
-  const years = [17, 18, 19, 20, 21, 22, 23]
-
-  const from = new Date()
-
-  from.setDate(1)
-  from.setMonth(0)
-
-  const commitsTimeline: TimelineCommit[] = []
-
-  let totalCommitContributions = 0
-  let totalIssuesContributions = 0
-  let totalPullRequestContributions = 0
-  let totalPullRequestReviewContributions = 0
-  let followersData = 0
-  let repositoriesCreatedData = 0
-  let followingData = 0
-  let issuesCommentsData = 0
-
-  for (const year of years) {
-    // create `tempCommits` array
-    let tempCommitsTimeline: TimelineCommit[] = []
-    const to = new Date()
-
-    if (to.getFullYear() === +`20${year}`) {
-      const actualMonth = to.getMonth()
-      const monthsList = Object.values(Month).filter((v) => isNaN(Number(v)))
-
-      for (const month in monthsList) {
-        if (+month <= actualMonth) {
-          tempCommitsTimeline.push({
-            date: monthsList[month] as string,
-            contributionCount: 0,
-          })
-        }
-      }
-    } else {
-      tempCommitsTimeline = [
-        { date: 'Jan', contributionCount: 0 },
-        { date: 'Feb', contributionCount: 0 },
-        { date: 'Mar', contributionCount: 0 },
-        { date: 'Apr', contributionCount: 0 },
-        { date: 'May', contributionCount: 0 },
-        { date: 'Jun', contributionCount: 0 },
-        { date: 'Jul', contributionCount: 0 },
-        { date: 'Aug', contributionCount: 0 },
-        { date: 'Sep', contributionCount: 0 },
-        { date: 'Oct', contributionCount: 0 },
-        { date: 'Nov', contributionCount: 0 },
-        { date: 'Dec', contributionCount: 0 },
-      ]
-    }
-
-    from.setFullYear(+`20${year}`)
-
-    if (to.getFullYear() !== +`20${year}`) {
-      to.setDate(31)
-      to.setMonth(11)
-    }
-
-    to.setFullYear(+`20${year}`)
-
-    const { data, error } = await useAsyncQuery<Query>(
-      contributionsCollectionQuery,
-      {
-        login: 'Draichi',
-        from,
-        to,
-      }
-    )
-
-    if (error.value) {
-      console.error(error.value)
-
-      return {
-        commitsTimeline: [],
-        totalCommitContributions: 0,
-        totalIssuesContributions: 0,
-        totalPullRequestContributions: 0,
-        totalPullRequestReviewContributions: 0,
-        followersData: 0,
-        repositoriesCreatedData: 0,
-        followingData: 0,
-        issuesCommentsData: 0,
-      }
-    }
-
-    // save the data in the temporary commits array
-    const tempCommits: TimelineCommit[] = []
-
-    // user related data
-    followersData = data.value?.user?.followers?.totalCount || 0
-    repositoriesCreatedData = data.value?.user?.repositories?.totalCount || 0
-    followingData = data.value?.user?.following.totalCount || 0
-    issuesCommentsData = data.value?.user?.issueComments.totalCount || 0
-
-    const commitContributions =
-      data.value?.user?.contributionsCollection?.totalCommitContributions
-    const issuesCotributions =
-      data.value?.user?.contributionsCollection?.totalIssueContributions
-    const pullRequestsOpened =
-      data.value?.user?.contributionsCollection?.totalPullRequestContributions
-    const reviews =
-      data.value?.user?.contributionsCollection
-        ?.totalPullRequestReviewContributions
-
-    if (commitContributions) {
-      totalCommitContributions += commitContributions
-    }
-    if (issuesCotributions) {
-      totalIssuesContributions += issuesCotributions
-    }
-    if (pullRequestsOpened) {
-      totalPullRequestContributions += pullRequestsOpened
-    }
-    if (reviews) {
-      totalPullRequestReviewContributions += reviews
-    }
-
-    data.value?.user?.contributionsCollection.contributionCalendar.weeks
-      .flatMap((week) => {
-        return week.contributionDays
-      })
-      .flatMap((contributionDay) => {
-        tempCommits.push(contributionDay)
-      })
-
-    // organize the data in months
-    tempCommits.forEach(({ date, contributionCount }) => {
-      const monthNumber = new Date(date).getMonth()
-      const monthName = Month[monthNumber]
-
-      const index = tempCommitsTimeline.findIndex(
-        (month) => month.date == monthName
-      )
-
-      if (tempCommitsTimeline[index]) {
-        tempCommitsTimeline[index].contributionCount += contributionCount
-      }
-    })
-
-    // save the current year in the `date` key
-    tempCommitsTimeline.forEach(
-      (month) => (month.date = `${month.date} ${year}`)
-    )
-
-    commitsTimeline.push(...tempCommitsTimeline)
-  }
-
-  return {
-    commitsTimeline,
-    totalCommitContributions,
-    totalIssuesContributions,
-    totalPullRequestContributions,
-    totalPullRequestReviewContributions,
-    followersData,
-    repositoriesCreatedData,
-    followingData,
-    issuesCommentsData,
-  }
-}
-
-onMounted(async () => {
-  const response = await fetchCommitsTimeSeries()
-
-  commitsTimeline.value = response.commitsTimeline
-  totalCommits.value = response.totalCommitContributions
-  issuesOpened.value = response.totalIssuesContributions
-  pullRequestsOpened.value = response.totalPullRequestContributions
-  reviews.value = response.totalPullRequestReviewContributions
-  followers.value = response.followersData
-  repositoriesCreated.value = response.repositoriesCreatedData
-  following.value = response.followingData
-  issuesComments.value = response.issuesCommentsData
-
-  createTimeSeriesChart()
-
-  isLoading.value = false
-})
 
 function createTimeSeriesChart() {
   const canvas = document.getElementById(
@@ -381,9 +171,29 @@ function createLastMonthCommitsChart() {
   })
 }
 
-onMounted(() => {
-  // createTimeSeriesChart()
+await useFetch('/api/login')
+
+const { data: userData } = await useFetch('/api/user')
+
+followers.value = userData.value?.followers || 0
+following.value = userData.value?.following || 0
+repositoriesCreated.value = userData.value?.repositories || 0
+issuesComments.value = userData.value?.issueComments || 0
+
+const { data: contributionsData } = await useFetch(
+  '/api/contributionsCollection'
+)
+
+onMounted(async () => {
+  issuesOpened.value = contributionsData.value?.issues || 0
+  totalCommits.value = contributionsData.value?.commits || 0
+  pullRequestsOpened.value = contributionsData.value?.pullRequests || 0
+  reviews.value = contributionsData.value?.reviews || 0
+  commitsTimeline.value = contributionsData.value?.commitsTimeline || []
+  createTimeSeriesChart()
   createLastMonthCommitsChart()
+
+  isLoading.value = false
 })
 </script>
 

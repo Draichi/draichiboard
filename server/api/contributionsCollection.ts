@@ -53,6 +53,12 @@ const query = `
   }
 `
 
+/**
+ * Fetch Github API and returns the user info
+ * @param from from which date to fetch the data
+ * @param to to the date to fetch the data
+ * @returns the user object
+ */
 async function fetchContributionsCollectionAPI(
   from: Date,
   to: Date
@@ -74,8 +80,6 @@ async function fetchContributionsCollectionAPI(
       }),
     })
 
-    console.log(from, to)
-
     const response = await request.json()
 
     return response.data.user as User
@@ -86,6 +90,12 @@ async function fetchContributionsCollectionAPI(
   }
 }
 
+/**
+ * Creates the base array with the month and the contributions
+ * @param isTheYearThisYear `true` if the year in the for loop is the same as the current year
+ * @param actualMonthNumber the number of the month
+ * @returns array of objects containing the month and the contributions
+ */
 function createCommitsTimelineOfTheYear(
   isTheYearThisYear: boolean,
   actualMonthNumber: number
