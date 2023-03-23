@@ -82,6 +82,8 @@ async function fetchContributionsCollectionAPI(
 
     const response = await request.json()
 
+    console.log({ response })
+
     return response.data.user as User
   } catch (error) {
     console.error(error)
