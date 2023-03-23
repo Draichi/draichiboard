@@ -170,18 +170,16 @@ function createLastMonthCommitsChart() {
     },
   })
 }
+await useFetch('/api/login')
+
+const { data: userData } = await useFetch('/api/user')
+
+followers.value = userData.value?.followers || 0
+following.value = userData.value?.following || 0
+repositoriesCreated.value = userData.value?.repositories || 0
+issuesComments.value = userData.value?.issueComments || 0
+
 onMounted(async () => {
-  const { data: loginData } = await useFetch('/api/login')
-
-  console.log({ loginData })
-
-  const { data: userData } = await useFetch('/api/user')
-
-  followers.value = userData.value?.followers || 0
-  following.value = userData.value?.following || 0
-  repositoriesCreated.value = userData.value?.repositories || 0
-  issuesComments.value = userData.value?.issueComments || 0
-
   const { data: contributionsData } = await useFetch(
     '/api/contributionsCollection'
   )

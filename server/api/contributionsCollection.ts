@@ -64,8 +64,6 @@ async function fetchContributionsCollectionAPI(
   to: Date
 ): Promise<User> {
   try {
-    console.log('env:', process.env.NUXT_GITHUB_TOKEN)
-
     const request = await fetch('https://api.github.com/graphql', {
       method: 'POST',
       headers: {
@@ -83,8 +81,6 @@ async function fetchContributionsCollectionAPI(
     })
 
     const response = await request.json()
-
-    console.log({ response })
 
     if (response.message) {
       throw Error(response.message)
