@@ -27,7 +27,8 @@ const query = `
 /**
  * Fetch the basic information related to the user
  */
-export default defineEventHandler(async (): Promise<UserData> => {
+export default defineEventHandler(async (event): Promise<UserData> => {
+  console.info({ event })
   try {
     const request = await fetch('https://api.github.com/graphql', {
       method: 'POST',
