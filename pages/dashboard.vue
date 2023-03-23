@@ -171,7 +171,9 @@ function createLastMonthCommitsChart() {
   })
 }
 onMounted(async () => {
-  await useFetch('/api/login')
+  const { data: loginData } = await useFetch('/api/login')
+
+  console.log({ loginData })
 
   const { data: userData } = await useFetch('/api/user')
 
