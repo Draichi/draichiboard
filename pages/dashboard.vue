@@ -180,15 +180,18 @@ repositoriesCreated.value = userData.value?.repositories || 0
 issuesComments.value = userData.value?.issueComments || 0
 
 onMounted(async () => {
-  const { data: contributionsData } = await useFetch(
-    '/api/contributionsCollection'
-  )
+  await nextTick(async () => {
+    const { data: contributionsData } = await useFetch(
+      '/api/contributionsCollection'
+    )
 
-  issuesOpened.value = contributionsData.value?.issues || 0
-  totalCommits.value = contributionsData.value?.commits || 0
-  pullRequestsOpened.value = contributionsData.value?.pullRequests || 0
-  reviews.value = contributionsData.value?.reviews || 0
-  commitsTimeline.value = contributionsData.value?.commitsTimeline || []
+    issuesOpened.value = contributionsData.value?.issues || 0
+    totalCommits.value = contributionsData.value?.commits || 0
+    pullRequestsOpened.value = contributionsData.value?.pullRequests || 0
+    reviews.value = contributionsData.value?.reviews || 0
+    commitsTimeline.value = contributionsData.value?.commitsTimeline || []
+  })
+
   createTimeSeriesChart()
   createLastMonthCommitsChart()
 
