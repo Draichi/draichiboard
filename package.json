@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "chart.js": "^4.2.1",
+    "firebase": "^9.18.0",
     "gsap": "^3.11.4",
     "lil-gui": "^0.17.0",
     "three": "^0.148.0",
