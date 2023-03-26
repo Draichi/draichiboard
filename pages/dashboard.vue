@@ -44,7 +44,8 @@ function createTimeSeriesChart() {
     type: 'line',
     data: {
       labels: commitsTimeline.value.map(
-        (row) => `In ${row.date} there was ${row.contributionCount} commits`
+        (row) =>
+          `In ${row.date} there were ${row.contributionCount} contributions`
       ),
       datasets: [
         {
@@ -182,7 +183,7 @@ issuesComments.value = userData.value?.issueComments || 0
 onMounted(async () => {
   await nextTick(async () => {
     const { data: contributionsData } = await useFetch(
-      '/api/contributionsCollection'
+      '/api/contributions-timeline'
     )
 
     issuesOpened.value = contributionsData.value?.issues || 0
