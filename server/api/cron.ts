@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getDatabase, ref, push } from 'firebase/database'
+import { getDatabase, ref, get, set } from 'firebase/database'
 
 export default defineEventHandler(async () => {
   const firebaseConfig = {
@@ -19,15 +19,15 @@ export default defineEventHandler(async () => {
   // Initialize Cloud Firestore and get a reference to the service
   const db = getDatabase(app)
 
-  const commitsTimelineRef = ref(db, '/apagar')
+  const apagarRef = ref(db, '/apagar')
 
-  push(commitsTimelineRef, { foo: 'bar' + new Date().toISOString() })
+  const cat = await get(apagarRef)
 
-  // const data = await get(commitsTimelineRef)
+  const baz = cat.val()
 
-  // const response = data.val()
+  const length = baz.length
 
-  // return {
-  //   response,
-  // }
+  console.log({ length, baz })
+
+  await set(apagarRef, { ...baz, [length]: { foo: 5 } })
 })
