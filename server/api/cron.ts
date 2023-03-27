@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app'
 import { getDatabase, ref, get, set } from 'firebase/database'
 
-export default async function handler(_: any, res: any) {
+export default defineEventHandler(async () => {
   const firebaseConfig = {
     apiKey: process.env.NUXT_FIREBASE_API_KEY || '',
     authDomain: process.env.NUXT_FIREBASE_AUTH_DOMAIN || '',
@@ -29,7 +29,5 @@ export default async function handler(_: any, res: any) {
 
   console.log({ length, baz })
 
-  await set(apagarRef, { ...baz, [length]: { foo: 10 } })
-
-  res.end('foo bar')
-}
+  await set(apagarRef, { ...baz, [length]: { foo: 5 } })
+})

@@ -1,9 +1,5 @@
 import { fetchContributionsCollectionAPI } from '@/server/utils'
-
-interface TimelineCommit {
-  contributionCount: number
-  date: string
-}
+import { TimelineCommit } from '@/types'
 
 interface ContributionsCollection {
   commits: number
