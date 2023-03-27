@@ -1,10 +1,6 @@
 <script setup lang="ts">
+import { TimelineCommit } from '@/types'
 import Chart from 'chart.js/auto'
-
-interface TimelineCommit {
-  contributionCount: number
-  date: string
-}
 
 const followers = ref(0)
 
@@ -25,6 +21,8 @@ const totalCommits = ref(0)
 const isLoading = ref(true)
 
 const commitsTimeline = ref<TimelineCommit[]>([] as TimelineCommit[])
+
+const lastMonthContributions = ref<TimelineCommit[]>([] as TimelineCommit[])
 
 function createTimeSeriesChart() {
   const canvas = document.getElementById(
@@ -96,23 +94,6 @@ function createTimeSeriesChart() {
 }
 
 function createLastMonthCommitsChart() {
-  const data = [
-    { year: 2010, count: 10 },
-    { year: 2011, count: 20 },
-    { year: 2012, count: 15 },
-    { year: 2013, count: 25 },
-    { year: 2014, count: 22 },
-    { year: 2015, count: 40 },
-    { year: 2015, count: 30 },
-    { year: 2015, count: 14 },
-    { year: 2015, count: 35 },
-    { year: 2015, count: 38 },
-    { year: 2015, count: 4 },
-    { year: 2016, count: 9 },
-    { year: 2017, count: 3 },
-    { year: 2018, count: 28 },
-  ]
-
   const canvas = document.getElementById(
     'last-month-commits'
   ) as HTMLCanvasElement
@@ -128,12 +109,14 @@ function createLastMonthCommitsChart() {
   new Chart(canvas, {
     type: 'line',
     data: {
-      labels: data.map(
-        (row) => `In ${row.year} there was ${row.count} commits`
+      labels: lastMonthContributions.value.map(
+        (row) => `${row.date} - ${row.contributionCount} contributions`
       ),
       datasets: [
         {
-          data: data.map((row) => row.count),
+          data: lastMonthContributions.value.map(
+            (row) => row.contributionCount
+          ),
           // backgroundColor: 'transparent',
           fill: false,
           tension: 0.5,
@@ -157,7 +140,16 @@ function createLastMonthCommitsChart() {
         legend: {
           display: false,
         },
-        tooltip: {},
+        // tooltip: {
+        //   intersect: false,
+        //   titleSpacing: 3,
+        //   callbacks: {
+        //     label: () => '',
+        //   },
+        //   titleFont: {
+        //     size: 8,
+        //   },
+        // },
       },
 
       scales: {
@@ -194,6 +186,13 @@ onMounted(async () => {
   })
 
   createTimeSeriesChart()
+
+  const { data: lastMonthData } = await useFetch(
+    '/api/last-month-contributions'
+  )
+
+  lastMonthContributions.value = lastMonthData.value || []
+
   createLastMonthCommitsChart()
 
   isLoading.value = false
@@ -308,7 +307,7 @@ onMounted(async () => {
   right: -35px;
   position: absolute;
   height: 130px !important;
-  top: -43px;
+  top: -60px;
 }
 
 .title {

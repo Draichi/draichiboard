@@ -1,4 +1,5 @@
 import { fetchContributionsCollectionAPI } from '@/server/utils'
+import { TimelineCommit } from '@/types'
 
 const query = `
   query ($login: String!, $from: DateTime, $to: DateTime) {
@@ -22,13 +23,17 @@ const to = new Date()
 const from = new Date(now.setDate(now.getDate() - 30))
 
 export default defineEventHandler(async () => {
-  const res = await fetchContributionsCollectionAPI(from, to, query)
+  try {
+    const res = await fetchContributionsCollectionAPI(from, to, query)
 
-  const foo = res?.contributionsCollection.contributionCalendar.weeks
-    .flatMap((week) => week.contributionDays)
-    .flatMap((contributionDay) => contributionDay)
+    const foo = res?.contributionsCollection.contributionCalendar.weeks
+      .flatMap((week) => week.contributionDays)
+      .flatMap((contributionDay) => contributionDay)
 
-  return {
-    foo,
+    return foo as TimelineCommit[]
+  } catch (error) {
+    console.error('Unable to fetch last month contributions')
+
+    return [] as TimelineCommit[]
   }
 })

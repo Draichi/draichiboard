@@ -1,4 +1,4 @@
-import { Query } from 'types/graphql-types'
+import { Query } from '@/types'
 
 type User = Query['user']
 

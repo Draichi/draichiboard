@@ -1,1 +1,2 @@
-export type Work = 'ibm' | 'sabido' | 'globo' | 'talentify' | 'iphone'
+export * from './githubAPISchema'
+export * from './shared'
