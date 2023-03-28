@@ -50,6 +50,7 @@ onMounted(() => {
 
   controls.enableDamping = true
   controls.dampingFactor = 0.02
+  controls.enableZoom = false
 
   const gltfLoader = new GLTFLoader()
 
