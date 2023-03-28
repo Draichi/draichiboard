@@ -5,13 +5,22 @@ import gsap from 'gsap'
  * @param trigger the scrollTrigger trigger element
  * @param xPercent the percentage on the `x` axis to animate
  */
-export default function (trigger: string, xPercent: number) {
+export default function (
+  trigger: string,
+  xPercent: number = 0,
+  yPercent: number = 0,
+  delay: number = 0,
+  start: string = 'top top',
+  end: string = 'bottom top',
+  markers: boolean = false
+) {
   const timeline = gsap.timeline({
     scrollTrigger: {
       trigger: trigger,
-      start: 'top bottom',
-      end: 'bottom bottom',
+      start,
+      end,
       scrub: true,
+      markers,
     },
     defaults: {
       ease: 'Power3.easeIn',
@@ -21,12 +30,15 @@ export default function (trigger: string, xPercent: number) {
   timeline.fromTo(
     trigger,
     {
-      opacity: 0,
-      xPercent: xPercent,
-    },
-    {
       opacity: 1,
       xPercent: 0,
+      yPercent: 0,
+    },
+    {
+      opacity: 0,
+      xPercent,
+      yPercent,
+      delay,
     }
   )
 }
