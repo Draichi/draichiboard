@@ -128,6 +128,7 @@ onMounted(() => {
   }
 
   useAboveTheFoldDesktopIntroAnimation()
+  useDesktopScrollAnimation()
 
   useWorksDesktopHoverAnimation('ibm')
   useWorksDesktopHoverAnimation('sabido')
