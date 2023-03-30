@@ -114,20 +114,35 @@ onMounted(() => {
     useWorksMobileScrollAnimation('talentify')
     useWorksMobileScrollAnimation('iphone')
 
-    useScrollAnimateXAxis('#lucas-draichi', 0)
-    useScrollAnimateXAxis('#CTA', -40)
-    useScrollAnimateXAxis('#profile-photo', -30)
-    useScrollAnimateXAxis('#about', -20)
-    useScrollAnimateXAxis('#email-tile', -5)
-    useScrollAnimateXAxis('#github-tile', -5)
-    useScrollAnimateXAxis('#resume-tile', -5)
-    useScrollAnimateXAxis('#dashboard-tile', -5)
-    useScrollAnimateXAxis('#blog-tile', -5)
+    useScrollAnimate('#lucas-draichi', 0)
+    useScrollAnimate('#CTA', -40)
+    useScrollAnimate('#profile-photo', -30)
+    useScrollAnimate('#about', -20)
+    useScrollAnimate('#email-tile', -5)
+    useScrollAnimate('#github-tile', -5)
+    useScrollAnimate('#resume-tile', -5)
+    useScrollAnimate('#dashboard-tile', -5)
+    useScrollAnimate('#blog-tile', -5)
 
     return
   }
 
   useAboveTheFoldDesktopIntroAnimation()
+  useBelowTheFoldDesktopScrollAnimation(
+    '#lucas-draichi',
+    0,
+    -70,
+    0,
+    'top top',
+    '+=150'
+  )
+  useBelowTheFoldDesktopScrollAnimation('#CTA', 0, -100, 0, 'top top', '+=200')
+
+  useScrollAnimate('#profile-photo', 0, -10, 2)
+  useScrollAnimate('#email-tile', 25)
+  useScrollAnimate('#github-tile', 0, 10)
+  useScrollAnimate('#about', 0, -10)
+  useScrollAnimate('#resume-tile', -25)
 
   useWorksDesktopHoverAnimation('ibm')
   useWorksDesktopHoverAnimation('sabido')
