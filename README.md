@@ -1,5 +1,6 @@
 # :rage1: Draichiboard :hurtrealbad:
 
+![GitHub release](https://img.shields.io/github/release/Draichi/draichiboard.svg?style=for-the-badge)]
 ![Nuxtjs](https://img.shields.io/badge/Nuxt-002E3B?style=for-the-badge&logo=nuxtdotjs&logoColor=#00DC82)
 ![Threejs](https://img.shields.io/badge/threejs-black?style=for-the-badge&logo=three.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
