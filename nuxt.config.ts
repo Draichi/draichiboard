@@ -5,6 +5,19 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       analyticsId: process.env.NUXT_ANALYTICS_ID,
+      githubToken: process.env.NUXT_GITHUB_TOKEN,
+    },
+  },
+  modules: ['@nuxtjs/apollo'],
+  apollo: {
+    authType: 'Bearer',
+    authHeader: 'Authorization',
+    tokenStorage: 'cookie',
+    clients: {
+      default: {
+        tokenName: 'github-token',
+        httpEndpoint: 'https://api.github.com/graphql',
+      },
     },
   },
   app: {

@@ -28,4 +28,12 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+a.router-link-active {
+  color: #4fd1c5;
+}
+
+a.router-link-active svg path {
+  fill: #4fd1c5 !important;
+}
 </style>
